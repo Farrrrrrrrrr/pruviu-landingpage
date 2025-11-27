@@ -13,8 +13,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pruviu - Solusi Modern untuk Bisnis Anda",
-  description: "Platform terpadu untuk mengelola operasional, keuangan, dan analitik bisnis dengan aman dan efisien",
+  title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+  description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Koperasi Checking, SLIK OJK, dan Credit Scoring dalam satu sistem.",
+  keywords: ["koperasi", "credit scoring", "SLIK OJK", "anti fraud", "koperasi checking", "verifikasi kredit"],
+  openGraph: {
+    title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+    description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Koperasi Checking, SLIK OJK, dan Credit Scoring.",
+    type: "website",
+    locale: "id_ID",
+    siteName: "Pruviu",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Pruviu - Platform Anti Fraud Koperasi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+    description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi.",
+    images: ["/logo.png"],
+  },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
