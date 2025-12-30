@@ -242,6 +242,11 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
             <p>&copy; 2025 Pruviu. Hak Cipta Dilindungi.</p>
+            <div className="mt-2 space-x-4">
+              <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+              <span>•</span>
+              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
+            </div>
           </div>
         </div>
       </footer>
