@@ -1,31 +1,33 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header/Navbar */}
-      <header className="bg-white shadow-sm">
-        <nav className="container mx-auto px-6 py-4">
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <nav className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Image
                 src="/logo.png"
                 alt="Pruviu Logo"
-                width={210}
-                height={110}
+                width={150}
+                height={79}
+                className="md:w-[210px] md:h-[110px] w-[150px] h-auto"
                 priority
               />
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#beranda" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Beranda</a>
-              {/* <a href="#fitur" className="text-gray-600 hover:text-navy-600 transition-colors">Fitur</a> */}
-              {/* <a href="#tentang" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang</a> */}
               <Link href="/kontak" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Kontak</Link>
               <a href="/privacy-policy" className="text-gray-600 hover:text-navy-600 font-bold transition-colors">Kebijakan Privasi</a>
-
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4">
               <Link href="/coming-soon" className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
                 Masuk
               </Link>
@@ -33,54 +35,81 @@ export default function Home() {
                 Daftar
               </Link>
             </div>
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-gray-600 hover:text-navy-600"
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-4">
+              <a href="#beranda" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Beranda</a>
+              <Link href="/kontak" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Kontak</Link>
+              <a href="/privacy-policy" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Kebijakan Privasi</a>
+              <div className="pt-4 space-y-2">
+                <Link href="/coming-soon" className="block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg">
+                  Masuk
+                </Link>
+                <Link href="/coming-soon" className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
+                  Daftar
+                </Link>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section id="beranda" className="container mx-auto px-6 py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex-1 space-y-6">
-            {/* <div className="inline-block px-4 py-2 bg-blue-50 text-navy-600 rounded-full text-sm font-medium">
-              ✨ Platform Verifikasi Kredit Koperasi
-            </div> */}
-            <h1 className="text-5xl lg:text-6xl font-bold text-navy-700 leading-none tracking-widest">
+      <section id="beranda" className="container mx-auto px-4 md:px-6 py-10 md:py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
+          <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
               Sistem Mitigasi Risiko Terpadu <span className="bg-clip-text text-red-600">Pertama di Indonesia</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
               Platform digital yang dilengkapi fitur-fitur informasi perkreditan terpercaya untuk koperasi sektor jasa keuangan.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="https://staging.pruviu.com" className="px-8 py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-lg shadow-lg text-center">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+              <Link href="https://staging.pruviu.com" className="px-6 md:px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-base md:text-lg shadow-lg text-center">
                 Daftar
               </Link>
-              <button className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-lg border-2 border-navy-600">
+              <button className="px-6 md:px-8 py-3 md:py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base md:text-lg border-2 border-navy-600">
                 Masuk
               </button>
             </div>
-            <div className="flex items-center space-x-8 pt-4">
-              <div>
-                <p className="text-3xl font-bold text-navy-700">500+</p>
-                <p className="text-gray-600">Proyeksi Koperasi Terdaftar 2026</p>
+            <div className="grid grid-cols-3 gap-4 md:gap-8 pt-4">
+              <div className="text-center lg:text-left">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">500+</p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">Proyeksi Koperasi Terdaftar 2026</p>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-navy-700">50K+</p>
-                <p className="text-gray-600">Proyeksi Pengecekan perbulan</p>
+              <div className="text-center lg:text-left">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">50K+</p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">Proyeksi Pengecekan perbulan</p>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-navy-700">99.9%</p>
-                <p className="text-gray-600">Akurasi Data</p>
+              <div className="text-center lg:text-left">
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">99.9%</p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">Akurasi Data</p>
               </div>
             </div>
           </div>
-          <div className="flex-1">
-            <div className="relative -mt-40">
+          <div className="flex-1 w-full">
+            <div className="relative mt-0 lg:-mt-40">
               <Image
                 src="/ImageContent - Hero.png"
                 alt="Pruviu Dashboard Preview"
                 width={800}
                 height={533}
-                className="w-full h-auto scale-125"
+                className="w-full h-auto scale-110 lg:scale-125"
                 priority
               />
             </div>
@@ -171,9 +200,9 @@ export default function Home() {
       </section> */}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+      <footer className="bg-gray-900 text-gray-300 py-8 md:py-12">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8">
             <div>
               <Image
                 src="/Pruviu.svg"
@@ -182,39 +211,37 @@ export default function Home() {
                 height={33}
                 className="mb-4 brightness-200"
               />
-              <p className="text-gray-400">Platform Anti Fraud untuk Koperasi Indonesia</p>
+              <p className="text-sm md:text-base text-gray-400">Platform Anti Fraud untuk Koperasi Indonesia</p>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-4">Produk</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Produk</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors">Fitur</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Harga</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Keamanan</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Fitur</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Harga</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Keamanan</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-4">Perusahaan</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Perusahaan</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors">Tentang Kami</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Karir</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Tentang Kami</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Karir</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Blog</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-4">Dukungan</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Dukungan</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors">Bantuan</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Dokumentasi</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Kontak</a></li>
-                                <li><a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a></li>
-
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Bantuan</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Dokumentasi</a></li>
+                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Kontak</a></li>
+                <li><a href="/privacy-policy" className="hover:text-white transition-colors text-sm md:text-base">Kebijakan Privasi</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.</p>
-            <div className="mt-2 space-x-4">
+          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400">
+            <p className="text-sm md:text-base">&copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.</p>
+            <div className="mt-2 flex flex-wrap justify-center gap-2 text-sm md:text-base">
               <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
               <span>•</span>
               <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
