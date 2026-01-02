@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,14 +22,16 @@ export default function Home() {
               <a href="#fitur" className="text-gray-600 hover:text-navy-600 transition-colors">Fitur</a>
               <a href="#tentang" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang</a>
               <a href="#kontak" className="text-gray-600 hover:text-navy-600 transition-colors">Kontak</a>
+              <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+
             </div>
             <div className="flex items-center space-x-4">
-              <button className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
+              <Link href="/coming-soon" className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
                 Masuk
-              </button>
-              <button className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
+              </Link>
+              <Link href="/coming-soon" className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
                 Daftar
-              </button>
+              </Link>
             </div>
           </div>
         </nav>
@@ -48,9 +51,9 @@ export default function Home() {
               Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Lindungi koperasi Anda dari risiko kredit macet dengan teknologi modern.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-lg shadow-lg">
+              <Link href="/coming-soon" className="px-8 py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-lg shadow-lg text-center">
                 Mulai Gratis
-              </button>
+              </Link>
               <button className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-lg border-2 border-navy-600">
                 Pelajari Lebih Lanjut
               </button>
@@ -58,11 +61,11 @@ export default function Home() {
             <div className="flex items-center space-x-8 pt-4">
               <div>
                 <p className="text-3xl font-bold text-navy-700">500+</p>
-                <p className="text-gray-600">Koperasi Terdaftar</p>
+                <p className="text-gray-600">Proyeksi Koperasi Terdaftar 2026</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-navy-700">50K+</p>
-                <p className="text-gray-600">Pengecekan/Bulan</p>
+                <p className="text-gray-600">Proyeksi Pengecekan perbulan</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-navy-700">99.9%</p>
@@ -71,49 +74,15 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1">
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-navy-700">Status Pruviu</p>
-                      <p className="text-sm text-green-600 font-medium">Aktif</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
-                    <p className="text-2xl font-bold text-navy-700">1</p>
-                    <p className="text-sm text-gray-600">Total Pengecekan</p>
-                  </div>
-                  <div className="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
-                    <p className="text-2xl font-bold text-navy-700">1</p>
-                    <p className="text-sm text-gray-600">Pengecekan Hari Ini</p>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="p-4 bg-gray-50 rounded-lg border-l-4 border-navy-600">
-                    <div className="flex items-start space-x-3">
-                      <svg className="w-5 h-5 text-navy-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <p className="text-sm font-semibold text-navy-700">Koperasi Checking</p>
-                          <span className="text-xs text-gray-500">19:43</span>
-                        </div>
-                        <p className="text-xs text-gray-600">NIK: 3275011005900001</p>
-                        <p className="text-xs text-gray-500 mt-1">oleh Evriani</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="relative">
+              <Image
+                src="/dashboard-preview.png"
+                alt="Pruviu Dashboard Preview"
+                width={600}
+                height={400}
+                className="rounded-2xl shadow-2xl w-full h-auto"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -191,12 +160,12 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-white mb-4">Lindungi Koperasi Anda Sekarang</h2>
           <p className="text-xl text-blue-100 mb-8">Bergabunglah dengan 500+ koperasi yang telah menggunakan Pruviu untuk meminimalkan risiko kredit</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg">
-              Coba Gratis 14 Hari
-            </button>
-            <button className="px-8 py-4 bg-navy-700 text-white rounded-lg hover:bg-navy-800 transition-colors font-medium text-lg border-2 border-white">
-              Hubungi Sales
-            </button>
+            <Link href="/coming-soon" className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg">
+              Mulai Sekarang
+            </Link>
+            <Link href="/coming-soon" className="px-8 py-4 bg-navy-700 text-white rounded-lg hover:bg-navy-800 transition-colors font-medium text-lg border-2 border-white">
+              Hubungi Bantuan
+            </Link>
           </div>
         </div>
       </section>
@@ -229,6 +198,7 @@ export default function Home() {
                 <li><a href="#" className="hover:text-white transition-colors">Tentang Kami</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Karir</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                
               </ul>
             </div>
             <div>
@@ -237,11 +207,13 @@ export default function Home() {
                 <li><a href="#" className="hover:text-white transition-colors">Bantuan</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Dokumentasi</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Kontak</a></li>
+                                <li><a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a></li>
+
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Pruviu. Hak Cipta Dilindungi.</p>
+            <p>&copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.</p>
             <div className="mt-2 space-x-4">
               <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
               <span>•</span>

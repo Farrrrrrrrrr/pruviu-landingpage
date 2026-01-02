@@ -288,7 +288,7 @@ export default function PrivacyPolicy() {
       <footer className="bg-navy-700 text-white mt-16">
         <div className="container mx-auto px-6 py-8">
           <div className="text-center text-gray-300">
-            <p>&copy; 2025 Pruviu. Semua hak cipta dilindungi.</p>
+            <p>&copy; 2025 Pruden Visi Utama. Semua hak cipta dilindungi.</p>
           </div>
         </div>
       </footer>
