@@ -22,7 +22,7 @@ export default function Home() {
               {/* <a href="#fitur" className="text-gray-600 hover:text-navy-600 transition-colors">Fitur</a> */}
               {/* <a href="#tentang" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang</a> */}
               <Link href="/kontak" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Kontak</Link>
-              <a href="/privacy-policy" className="hover:text-white font-bold hover:text-navy-600 transition-colors">Kebijakan Privasi</a>
+              <a href="/privacy-policy" className="text-gray-600 hover:text-navy-600 font-bold transition-colors">Kebijakan Privasi</a>
 
             </div>
             <div className="flex items-center space-x-4">
