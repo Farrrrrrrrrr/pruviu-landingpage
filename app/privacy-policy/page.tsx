@@ -239,7 +239,7 @@ export default function PrivacyPolicy() {
             </p>
             <div className="bg-gray-50 p-6 rounded-lg space-y-2">
               <p className="text-gray-700"><strong>Pruviu</strong></p>
-              <p className="text-gray-700">Email: privacy@pruviu.com</p>
+              <p className="text-gray-700">Email: bantuan@pruviu.com</p>
               <p className="text-gray-700">Telepon: +62 21 1234 5678</p>
               <p className="text-gray-700">Alamat: Jakarta, Indonesia</p>
               <p className="text-gray-700">Jam Operasional: Senin - Jumat, 09:00 - 17:00 WIB</p>

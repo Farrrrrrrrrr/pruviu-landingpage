@@ -9,7 +9,7 @@ export default function ComingSoon() {
         <div className="flex justify-center mb-8">
           <Link href="/">
             <Image
-              src="/logo.png"
+              src="/Pruviu.svg"
               alt="Pruviu Logo"
               width={180}
               height={60}

@@ -12,17 +12,17 @@ export default function Home() {
               <Image
                 src="/logo.png"
                 alt="Pruviu Logo"
-                width={120}
-                height={40}
+                width={210}
+                height={110}
                 priority
               />
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#beranda" className="text-gray-600 hover:text-navy-600 transition-colors">Beranda</a>
-              <a href="#fitur" className="text-gray-600 hover:text-navy-600 transition-colors">Fitur</a>
-              <a href="#tentang" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang</a>
-              <a href="#kontak" className="text-gray-600 hover:text-navy-600 transition-colors">Kontak</a>
-              <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+              <a href="#beranda" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Beranda</a>
+              {/* <a href="#fitur" className="text-gray-600 hover:text-navy-600 transition-colors">Fitur</a> */}
+              {/* <a href="#tentang" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang</a> */}
+              <Link href="/kontak" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Kontak</Link>
+              <a href="/privacy-policy" className="hover:text-white font-bold hover:text-navy-600 transition-colors">Kebijakan Privasi</a>
 
             </div>
             <div className="flex items-center space-x-4">
@@ -41,21 +41,21 @@ export default function Home() {
       <section id="beranda" className="container mx-auto px-6 py-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="flex-1 space-y-6">
-            <div className="inline-block px-4 py-2 bg-blue-50 text-navy-600 rounded-full text-sm font-medium">
+            {/* <div className="inline-block px-4 py-2 bg-blue-50 text-navy-600 rounded-full text-sm font-medium">
               ✨ Platform Verifikasi Kredit Koperasi
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-navy-700 leading-tight">
-              Sistem Anti Fraud untuk Koperasi Anda
+            </div> */}
+            <h1 className="text-5xl lg:text-6xl font-bold text-navy-700 leading-none tracking-widest">
+              Sistem Mitigasi Risiko Terpadu <span className="bg-clip-text text-red-600">Pertama di Indonesia</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Lindungi koperasi Anda dari risiko kredit macet dengan teknologi modern.
+              Platform digital yang dilengkapi fitur-fitur informasi perkreditan terpercaya untuk koperasi sektor jasa keuangan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/coming-soon" className="px-8 py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-lg shadow-lg text-center">
-                Mulai Gratis
+              <Link href="https://staging.pruviu.com" className="px-8 py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-lg shadow-lg text-center">
+                Daftar
               </Link>
               <button className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-lg border-2 border-navy-600">
-                Pelajari Lebih Lanjut
+                Masuk
               </button>
             </div>
             <div className="flex items-center space-x-8 pt-4">
@@ -74,13 +74,13 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1">
-            <div className="relative">
+            <div className="relative -mt-40">
               <Image
-                src="/dashboard-preview.png"
+                src="/ImageContent - Hero.png"
                 alt="Pruviu Dashboard Preview"
-                width={600}
-                height={400}
-                className="rounded-2xl shadow-2xl w-full h-auto"
+                width={800}
+                height={533}
+                className="w-full h-auto scale-125"
                 priority
               />
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="fitur" className="bg-white py-20">
+      {/* <section id="fitur" className="bg-white py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-700 mb-4">Fitur Lengkap Anti Fraud</h2>
@@ -152,23 +152,23 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="bg-navy-600 py-20">
+      {/* <section className="bg-navy-600 py-20">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Lindungi Koperasi Anda Sekarang</h2>
-          <p className="text-xl text-blue-100 mb-8">Bergabunglah dengan 500+ koperasi yang telah menggunakan Pruviu untuk meminimalkan risiko kredit</p>
+          <p className="text-xl text-blue-100 mb-8">Bergabunglah bersama Pruviu untuk melindungi koperasi seluruh Indonesia</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/coming-soon" className="px-8 py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg">
-              Mulai Sekarang
+              Daftar Sekarang
             </Link>
             <Link href="/coming-soon" className="px-8 py-4 bg-navy-700 text-white rounded-lg hover:bg-navy-800 transition-colors font-medium text-lg border-2 border-white">
-              Hubungi Bantuan
+              Kontak Pruviu
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12">
@@ -176,7 +176,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <Image
-                src="/logo.png"
+                src="/Pruviu.svg"
                 alt="Pruviu Logo"
                 width={100}
                 height={33}

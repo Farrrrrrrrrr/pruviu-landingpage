@@ -13,18 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+  title: "Pruviu - Sistem Mitigasi Risiko Terpadu Pertama di Indonesia",
   description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Koperasi Checking, SLIK OJK, dan Credit Scoring dalam satu sistem.",
   keywords: ["koperasi", "credit scoring", "SLIK OJK", "anti fraud", "koperasi checking", "verifikasi kredit"],
   openGraph: {
-    title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+    title: "Pruviu - Sistem Mitigasi Risiko Terpadu Pertama di Indonesia",
     description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Koperasi Checking, SLIK OJK, dan Credit Scoring.",
     type: "website",
     locale: "id_ID",
     siteName: "Pruviu",
     images: [
       {
-        url: "/logo.png",
+        url: "/Pruviu.svg",
         width: 1200,
         height: 630,
         alt: "Pruviu - Platform Anti Fraud Koperasi",
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pruviu - Sistem Anti Fraud untuk Koperasi Indonesia",
+    title: "Pruviu - Sistem Mitigasi Risiko Terpadu Pertama di Indonesia",
     description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi.",
-    images: ["/logo.png"],
+    images: ["/Pruviu.svg"],
   },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/Pruviu.svg",
+    apple: "/Pruviu.svg",
   },
 };
 
