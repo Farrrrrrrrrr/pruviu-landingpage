@@ -18,34 +18,76 @@ export default function Home() {
                 alt="Pruviu Logo"
                 width={150}
                 height={79}
-                className="md:w-[210px] md:h-[110px] w-[150px] h-auto"
+                className="w-32 md:w-40 h-auto"
                 priority
               />
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#beranda" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Beranda</a>
-              <Link href="/kontak" className="text-gray-600 font-bold hover:text-navy-600 transition-colors">Kontak</Link>
-              <a href="/privacy-policy" className="text-gray-600 hover:text-navy-600 font-bold transition-colors">Kebijakan Privasi</a>
+              <a
+                href="#beranda"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Beranda
+              </a>
+              <a
+                href="#pengaduan"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Pengaduan
+              </a>
+              <Link
+                href="/kontak"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Kontak
+              </Link>
+              <a
+                href="/privacy-policy"
+                className="text-gray-600 hover:text-navy-600 font-bold transition-colors"
+              >
+                Kebijakan Privasi
+              </a>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/coming-soon" className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
+              <Link
+                href="/coming-soon"
+                className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
+              >
                 Masuk
               </Link>
-              <Link href="/coming-soon" className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
+              <Link
+                href="/coming-soon"
+                className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+              >
                 Daftar
               </Link>
             </div>
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-navy-600"
               aria-label="Toggle menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -53,14 +95,41 @@ export default function Home() {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden mt-4 pb-4 space-y-4">
-              <a href="#beranda" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Beranda</a>
-              <Link href="/kontak" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Kontak</Link>
-              <a href="/privacy-policy" className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2">Kebijakan Privasi</a>
+              <a
+                href="#beranda"
+                className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
+              >
+                Beranda
+              </a>
+              <a
+                href="#pengaduan"
+                className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
+              >
+                Pengaduan
+              </a>
+              <Link
+                href="/kontak"
+                className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
+              >
+                Kontak
+              </Link>
+              <a
+                href="/privacy-policy"
+                className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
+              >
+                Kebijakan Privasi
+              </a>
               <div className="pt-4 space-y-2">
-                <Link href="/coming-soon" className="block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg">
+                <Link
+                  href="/coming-soon"
+                  className="block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg"
+                >
                   Masuk
                 </Link>
-                <Link href="/coming-soon" className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
+                <Link
+                  href="/coming-soon"
+                  className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+                >
                   Daftar
                 </Link>
               </div>
@@ -70,17 +139,28 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="beranda" className="container mx-auto px-4 md:px-6 py-10 md:py-20">
+      <section
+        id="beranda"
+        className="container mx-auto px-4 md:px-6 py-10 md:py-20"
+      >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
-              Sistem Mitigasi Risiko Terpadu <span className="bg-clip-text text-red-600">Pertama di Indonesia</span>
+              Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu{" "}
+              <span className="bg-clip-text text-red-600">
+                Pertama di Indonesia
+              </span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-              Platform digital yang dilengkapi fitur-fitur informasi perkreditan terpercaya untuk koperasi sektor jasa keuangan.
+              Platform digital yang dilengkapi berbagai fitur infomasi
+              perkreditan terpercaya serta analitik berbasis kecerdasan buatan
+              untuk koperasi dan anggota koperasi
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-              <Link href="https://staging.pruviu.com" className="px-6 md:px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-base md:text-lg shadow-lg text-center">
+              <Link
+                href="https://staging.pruviu.com"
+                className="px-6 md:px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-base md:text-lg shadow-lg text-center"
+              >
                 Daftar
               </Link>
               <button className="px-6 md:px-8 py-3 md:py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base md:text-lg border-2 border-navy-600">
@@ -89,20 +169,32 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-3 gap-4 md:gap-8 pt-4">
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">500+</p>
-                <p className="text-xs sm:text-sm md:text-base text-gray-600">Proyeksi Koperasi Terdaftar 2026</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">
+                  500+
+                </p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                  Koperasi User Web
+                </p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">50K+</p>
-                <p className="text-xs sm:text-sm md:text-base text-gray-600">Proyeksi Pengecekan perbulan</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">
+                  50K+
+                </p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                  Anggota Koperasi User Mobile
+                </p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">99.9%</p>
-                <p className="text-xs sm:text-sm md:text-base text-gray-600">Akurasi Data</p>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">
+                  99.9%
+                </p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">
+                  Akurasi Data
+                </p>
               </div>
             </div>
           </div>
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full hidden lg:block">
             <div className="relative mt-0 lg:-mt-40">
               <Image
                 src="/ImageContent - Hero.png"
@@ -112,6 +204,301 @@ export default function Home() {
                 className="w-full h-auto scale-110 lg:scale-125"
                 priority
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase Section */}
+      <section className="bg-white py-20 md:py-32">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16 md:mb-20 lg:mb-32 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-navy-700 mb-4 md:mb-6 tracking-tight leading-tight">
+              Solusi Lengkap untuk Koperasi & Anggota
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+              Platform terintegrasi dengan dashboard web untuk admin koperasi
+              dan aplikasi mobile untuk kemudahan anggota
+            </p>
+          </div>
+
+          {/* Desktop Dashboard Section */}
+          <div className="mb-32 md:mb-40">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
+                Pruviu Web
+              </h2>
+             
+            </div>
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-7xl mx-auto">
+              <div className="flex-1 lg:order-2">
+                <Image
+                  src="/Laptop - ImageContent.png"
+                  alt="Pruviu Web"
+                  width={1200}
+                  height={675}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+              <div className="flex-1 lg:order-1 text-center lg:text-left space-y-6">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight">
+                  Tingkatkan Kualitas Pinjaman Koperasi Anda
+                </h3>
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
+                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan
+                  menerapkan prinsip kehati-hatian, meningkatkan kualitas
+                  penyaluran pinjaman kepada anggota{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile App Section */}
+          <div>
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
+                Pruviu Mobile
+              </h2>
+            
+            </div>
+            <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
+              <div className="flex-1 flex justify-center w-full">
+                <div className="w-64 sm:w-72 md:w-80 lg:max-w-sm">
+                  <Image
+                    src="/Mobile - ImageContent.png"
+                    alt="Aplikasi Mobile untuk Anggota"
+                    width={375}
+                    height={812}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+              <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 px-6 md:px-8">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
+                  Monitor Risiko Keuangan Keluarga Anda
+                </h3>
+                <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-light">
+                  Dirancang untuk menjembatani interaksi antara koperasi dengan
+                  anggota. Memungkinkan anggota memonitor risiko keuangan
+                  pribadi dan keluarga melalui akses konsultasi dengan koperasi
+                  tempat bernaung{" "}
+                </p>
+
+                <div className="space-y-2">
+                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                    Khusus untuk anggota koperasi
+                  </div>
+                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                    Daftarkan diri anda ke koperasi terdekat untuk mengakses
+                    layanan Pruviu Mobile
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pengaduan Section */}
+      <section id="pengaduan" className="bg-gray-50 py-12 md:py-16 lg:py-20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 mb-3 md:mb-4 tracking-tight">
+              Form Pengaduan
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-light">
+              Sampaikan keluhan atau laporan Anda kepada kami
+            </p>
+          </div>
+
+          <div className="bg-white shadow-sm p-6 md:p-8 lg:p-12 rounded-xl">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const nama = formData.get("nama");
+                const nik = formData.get("nik");
+                const email = formData.get("email");
+                const noTelpon = formData.get("noTelpon");
+                const pengaduan = formData.get("pengaduan");
+
+                const emailBody = `
+Nama: ${nama}
+NIK: ${nik}
+Email: ${email}
+No. Telepon: ${noTelpon}
+
+Pengaduan:
+${pengaduan}
+                `.trim();
+
+                const mailtoLink = `mailto:support@pruviu.com?subject=Pengaduan%20dari%20${encodeURIComponent(
+                  nama as string
+                )}&body=${encodeURIComponent(emailBody)}`;
+                window.location.href = mailtoLink;
+              }}
+              className="space-y-5 md:space-y-6"
+            >
+              {/* First Row: Nama and NIK */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {/* Nama */}
+                <div>
+                  <label
+                    htmlFor="nama"
+                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                  >
+                    Nama Lengkap <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    required
+                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
+                    placeholder="Masukkan nama lengkap Anda"
+                  />
+                </div>
+
+                {/* NIK */}
+                <div>
+                  <label
+                    htmlFor="nik"
+                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                  >
+                    NIK <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="nik"
+                    name="nik"
+                    required
+                    pattern="[0-9]{16}"
+                    maxLength={16}
+                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
+                    placeholder="16 digit NIK"
+                  />
+                </div>
+              </div>
+
+              {/* Second Row: Email and No Telepon */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Email */}
+                <div>
+                  <label
+                    htmlFor="email-pengaduan"
+                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                  >
+                    Email <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email-pengaduan"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
+                    placeholder="contoh@email.com"
+                  />
+                </div>
+
+                {/* No Telepon */}
+                <div>
+                  <label
+                    htmlFor="noTelpon"
+                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                  >
+                    No. Telepon <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="noTelpon"
+                    name="noTelpon"
+                    required
+                    pattern="[0-9+\-\s()]+"
+                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
+                    placeholder="08123456789"
+                  />
+                </div>
+              </div>
+
+              {/* Pengaduan - Full Width */}
+              <div>
+                <label
+                  htmlFor="pengaduan"
+                  className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                >
+                  Isi Pengaduan <span className="text-red-600">*</span>
+                </label>
+                <textarea
+                  id="pengaduan"
+                  name="pengaduan"
+                  required
+                  rows={5}
+                  minLength={20}
+                  className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all resize-vertical text-gray-800 text-base"
+                  placeholder="Jelaskan pengaduan Anda secara detail..."
+                />
+                <p className="text-xs md:text-sm text-gray-500 mt-2">
+                  Minimal 20 karakter
+                </p>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  className="w-full px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 active:bg-navy-800 transition-colors font-medium text-base md:text-lg shadow-sm"
+                >
+                  Kirim Pengaduan
+                </button>
+                <p className="text-xs md:text-sm text-center text-gray-500 mt-3 md:mt-4 leading-relaxed">
+                  Dengan menekan tombol ini, aplikasi email Anda akan terbuka
+                  dengan pengaduan yang telah Anda isi
+                </p>
+              </div>
+            </form>
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-8 md:mt-12 bg-blue-50 p-6 md:p-8 rounded-xl">
+            <div className="flex items-start space-x-3 md:space-x-4">
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 text-navy-600 flex-shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <div>
+                <h3 className="text-base md:text-lg font-semibold text-navy-700 mb-3">
+                  Informasi Penting
+                </h3>
+                <ul className="text-sm md:text-base text-gray-600 space-y-2 md:space-y-3">
+                  <li>
+                    • Semua pengaduan akan ditindaklanjuti dalam waktu maksimal
+                    3x24 jam kerja
+                  </li>
+                  <li>• Pastikan data yang Anda masukkan benar dan valid</li>
+                  <li>
+                    • Pengaduan akan dikirim melalui aplikasi email default Anda
+                  </li>
+                  <li>
+                    • Untuk pertanyaan lebih lanjut, hubungi{" "}
+                    <Link
+                      href="/kontak"
+                      className="text-navy-600 font-semibold hover:underline"
+                    >
+                      layanan kontak kami
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -211,40 +598,127 @@ export default function Home() {
                 height={33}
                 className="mb-4 brightness-200"
               />
-              <p className="text-sm md:text-base text-gray-400">Platform Anti Fraud untuk Koperasi Indonesia</p>
+              <p className="text-sm md:text-base text-gray-400">
+                Platform Anti Fraud untuk Koperasi Indonesia
+              </p>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Produk</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+                Produk
+              </h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Fitur</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Harga</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Keamanan</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Fitur
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Harga
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Keamanan
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Perusahaan</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+                Perusahaan
+              </h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Tentang Kami</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Karir</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Blog</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Tentang Kami
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Karir
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Blog
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">Dukungan</h4>
+              <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+                Dukungan
+              </h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Bantuan</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Dokumentasi</a></li>
-                <li><a href="#" className="hover:text-white transition-colors text-sm md:text-base">Kontak</a></li>
-                <li><a href="/privacy-policy" className="hover:text-white transition-colors text-sm md:text-base">Kebijakan Privasi</a></li>
+                <li>
+                  <Link
+                    href="/kontak"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Kontak
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="#pengaduan"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Pengaduan
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Dokumentasi
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/privacy-policy"
+                    className="hover:text-white transition-colors text-sm md:text-base"
+                  >
+                    Kebijakan Privasi
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400">
-            <p className="text-sm md:text-base">&copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.</p>
+            <p className="text-sm md:text-base">
+              &copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.
+            </p>
             <div className="mt-2 flex flex-wrap justify-center gap-2 text-sm md:text-base">
-              <a href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+              <a
+                href="/privacy-policy"
+                className="hover:text-white transition-colors"
+              >
+                Kebijakan Privasi
+              </a>
               <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
+              <a href="#" className="hover:text-white transition-colors">
+                Syarat & Ketentuan
+              </a>
             </div>
           </div>
         </div>
