@@ -49,7 +49,6 @@ export default function PrivacyPolicy() {
               <li>Alamat tempat tinggal</li>
               <li>Informasi pekerjaan dan penghasilan</li>
               <li>Foto profil dan dokumen identitas (KTP, KK)</li>
-              <li>Data biometrik (foto wajah untuk verifikasi identitas)</li>
             </ul>
 
             <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">2.2 Informasi Keuangan</h3>

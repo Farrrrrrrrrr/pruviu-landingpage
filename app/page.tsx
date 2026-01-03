@@ -145,7 +145,7 @@ export default function Home() {
       >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
               Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu{" "}
               <span className="bg-clip-text text-red-600">
                 Pertama di Indonesia
@@ -212,15 +212,6 @@ export default function Home() {
       {/* Product Showcase Section */}
       <section className="bg-white py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16 md:mb-20 lg:mb-32 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-navy-700 mb-4 md:mb-6 tracking-tight leading-tight">
-              Solusi Lengkap untuk Koperasi & Anggota
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-              Platform terintegrasi dengan dashboard web untuk admin koperasi
-              dan aplikasi mobile untuk kemudahan anggota
-            </p>
-          </div>
 
           {/* Desktop Dashboard Section */}
           <div className="mb-32 md:mb-40">
@@ -246,10 +237,17 @@ export default function Home() {
                   Tingkatkan Kualitas Pinjaman Koperasi Anda
                 </h3>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
-                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan
-                  menerapkan prinsip kehati-hatian, meningkatkan kualitas
-                  penyaluran pinjaman kepada anggota{" "}
+                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan menerapkan prinsip kehati-hatian, <i className="italic">know-your-customer</i>, serta memininalisir risiko pinjaman bermasalah yang disalurkan kepada anggota{" "}
                 </p>
+
+                <div className="space-y-2 font-style: italic">
+                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                    Didukung sumber data dan analitik lengkap dan terpercaya
+                  </div>
+                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                    Dilengkapi fitur konfigurasi pengaturan Pruviu Mobile
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -262,16 +260,36 @@ export default function Home() {
               </h2>
             
             </div>
-            <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center lg:gap-16 max-w-7xl mx-auto">
               <div className="flex-1 flex justify-center w-full">
-                <div className="w-64 sm:w-72 md:w-80 lg:max-w-sm">
-                  <Image
-                    src="/Mobile - ImageContent.png"
-                    alt="Aplikasi Mobile untuk Anggota"
-                    width={375}
-                    height={812}
-                    className="w-full h-auto"
-                  />
+                <div className="flex -space-x-20 items-center justify-center">
+                  <div className="w-44 sm:w-48 md:w-44">
+                    <Image
+                      src="/mobile-1.png"
+                      alt="Pruviu Mobile Screen 1"
+                      width={195}
+                      height={400}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="w-68 sm:w-96 md:w-104">
+                    <Image
+                      src="/Mobile - ImageContent.png"
+                      alt="Aplikasi Mobile untuk Anggota"
+                      width={800}
+                      height={1300}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="w-44 sm:w-48 md:w-44">
+                    <Image
+                      src="/mobile-3.png"
+                      alt="Pruviu Mobile Screen 3"
+                      width={195}
+                      height={400}
+                      className="w-full h-auto"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 px-6 md:px-8">
@@ -285,7 +303,7 @@ export default function Home() {
                   tempat bernaung{" "}
                 </p>
 
-                <div className="space-y-2">
+                <div className="space-y-2 font-style: italic">
                   <div className="bg-navy-50 text-navy-700 text-sm font-medium">
                     Khusus untuk anggota koperasi
                   </div>
@@ -307,9 +325,9 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 mb-3 md:mb-4 tracking-tight">
               Form Pengaduan
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-light">
+            {/* <p className="text-base sm:text-lg md:text-xl text-gray-600 font-light">
               Sampaikan keluhan atau laporan Anda kepada kami
-            </p>
+            </p> */}
           </div>
 
           <div className="bg-white shadow-sm p-6 md:p-8 lg:p-12 rounded-xl">
@@ -460,7 +478,7 @@ ${pengaduan}
           </div>
 
           {/* Additional Info */}
-          <div className="mt-8 md:mt-12 bg-blue-50 p-6 md:p-8 rounded-xl">
+          {/* <div className="mt-8 md:mt-12 bg-blue-50 p-6 md:p-8 rounded-xl">
             <div className="flex items-start space-x-3 md:space-x-4">
               <svg
                 className="w-5 h-5 md:w-6 md:h-6 text-navy-600 flex-shrink-0 mt-0.5"
@@ -475,7 +493,7 @@ ${pengaduan}
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <div>
+               <div>
                 <h3 className="text-base md:text-lg font-semibold text-navy-700 mb-3">
                   Informasi Penting
                 </h3>
@@ -498,9 +516,9 @@ ${pengaduan}
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> 
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
