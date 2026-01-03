@@ -217,7 +217,7 @@ export default function Home() {
           <div className="mb-32 md:mb-40">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
-                Pruviu Web
+                Pruviu <span className="text-red-600">Web</span>
               </h2>
              
             </div>
@@ -256,7 +256,7 @@ export default function Home() {
           <div>
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
-                Pruviu Mobile
+                Pruviu <span className="text-red-600">Mobile</span>
               </h2>
             
             </div>
@@ -617,7 +617,7 @@ ${pengaduan}
                 className="mb-4 brightness-200"
               />
               <p className="text-sm md:text-base text-gray-400">
-                Platform Anti Fraud untuk Koperasi Indonesia
+                Platform Monitoring dan Mitigasi Risiko Keuangan untuk Koperasi dan Anggota Koperasi
               </p>
             </div>
             <div>
@@ -724,7 +724,7 @@ ${pengaduan}
           </div>
           <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400">
             <p className="text-sm md:text-base">
-              &copy; 2025 Pruden Visi Utama. Hak Cipta Dilindungi.
+              &copy; 2025 PT Pruden Visi Utama. Hak Cipta Dilindungi.
             </p>
             <div className="mt-2 flex flex-wrap justify-center gap-2 text-sm md:text-base">
               <a
