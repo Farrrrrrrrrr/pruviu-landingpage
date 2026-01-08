@@ -50,13 +50,13 @@ export default function Home() {
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <Link
-                href="/coming-soon"
+                href="https://app.pruviu.com"
                 className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
               >
                 Masuk
               </Link>
               <Link
-                href="/coming-soon"
+                href="https://app.pruviu.com"
                 className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
               >
                 Daftar
@@ -121,13 +121,13 @@ export default function Home() {
               </a>
               <div className="pt-4 space-y-2">
                 <Link
-                  href="/coming-soon"
+                  href="https://app.pruviu.com"
                   className="block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg"
                 >
                   Masuk
                 </Link>
                 <Link
-                  href="/coming-soon"
+                  href="https://app.pruviu.com"
                   className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
                 >
                   Daftar
@@ -158,14 +158,17 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
               <Link
-                href="https://staging.pruviu.com"
+                href="https://app.pruviu.com"
                 className="px-6 md:px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-base md:text-lg shadow-lg text-center"
               >
                 Daftar
               </Link>
-              <button className="px-6 md:px-8 py-3 md:py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base md:text-lg border-2 border-navy-600">
+              <Link
+                href="https://app.pruviu.com"
+                className="px-6 md:px-8 py-3 md:py-4 bg-white text-navy-600 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base md:text-lg border-2 border-navy-600 text-center"
+              >
                 Masuk
-              </button>
+              </Link>
             </div>
             <div className="grid grid-cols-3 gap-4 md:gap-8 pt-4">
               <div className="text-center lg:text-left">

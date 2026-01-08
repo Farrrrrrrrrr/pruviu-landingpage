@@ -28,10 +28,10 @@ export default function Kontak() {
               <Link href="/privacy-policy" className="text-gray-600 hover:text-navy-600 transition-colors">Kebijakan Privasi</Link>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/coming-soon" className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
+              <Link href="https://app.pruviu.com" className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium">
                 Masuk
               </Link>
-              <Link href="/coming-soon" className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
+              <Link href="https://app.pruviu.com" className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium">
                 Daftar
               </Link>
             </div>
@@ -55,10 +55,10 @@ export default function Kontak() {
               <Link href="/kontak" className="block text-navy-600 font-semibold transition-colors py-2">Kontak</Link>
               <Link href="/privacy-policy" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Kebijakan Privasi</Link>
               <div className="pt-4 space-y-2">
-                <Link href="/coming-soon" className="block text-center px-6 py-2 text-navy-600 border border-navy-600 rounded-lg">
+                <Link href="https://app.pruviu.com" className="block text-center px-6 py-2 text-navy-600 border border-navy-600 rounded-lg">
                   Masuk
                 </Link>
-                <Link href="/coming-soon" className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg">
+                <Link href="https://app.pruviu.com" className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg">
                   Daftar
                 </Link>
               </div>
@@ -157,23 +157,23 @@ export default function Kontak() {
               <h4 className="font-bold text-white mb-4">Produk</h4>
               <ul className="space-y-2">
                 <li><Link href="/#fitur" className="hover:text-white transition-colors">Fitur</Link></li>
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Harga</Link></li>
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Keamanan</Link></li>
+                <li><Link href="/coming-soon-harga" className="hover:text-white transition-colors">Harga</Link></li>
+                <li><Link href="/coming-soon-keamanan" className="hover:text-white transition-colors">Keamanan</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-white mb-4">Perusahaan</h4>
               <ul className="space-y-2">
                 <li><Link href="/coming-soon" className="hover:text-white transition-colors">Tentang Kami</Link></li>
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Karir</Link></li>
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/coming-soon-karir" className="hover:text-white transition-colors">Karir</Link></li>
+                <li><Link href="/coming-soon-blog" className="hover:text-white transition-colors">Blog</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-white mb-4">Dukungan</h4>
               <ul className="space-y-2">
                 <li><Link href="/kontak" className="hover:text-white transition-colors">Kontak</Link></li>
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Dokumentasi</Link></li>
+                <li><Link href="/coming-soon-dokumentasi" className="hover:text-white transition-colors">Dokumentasi</Link></li>
                 <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</Link></li>
               </ul>
             </div>
@@ -183,7 +183,7 @@ export default function Kontak() {
             <div className="mt-2 space-x-4">
               <Link href="/privacy-policy" className="hover:text-white transition-colors">Kebijakan Privasi</Link>
               <span>•</span>
-              <Link href="/coming-soon" className="hover:text-white transition-colors">Syarat & Ketentuan</Link>
+              <Link href="/coming-soon-sk" className="hover:text-white transition-colors">Syarat & Ketentuan</Link>
             </div>
           </div>
         </div>
