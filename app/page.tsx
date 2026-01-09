@@ -677,7 +677,7 @@ ${pengaduan}
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/pt-pruden-visi-utama/jobs/"
                     className="hover:text-white transition-colors text-sm md:text-base"
                   >
                     Blog
