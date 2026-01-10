@@ -5,6 +5,30 @@ import { useState } from "react";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const [currentSlide2, setCurrentSlide2] = useState(1);
+
+  const mobileImages = [
+    { src: "/Onboarding.png", alt: "Pruviu Mobile Onboarding" },
+    { src: "/SelamatDatang.png", alt: "Pruviu Mobile Welcome" },
+    { src: "/Homepage.png", alt: "Pruviu Mobile Homepage" },
+  ];
+
+  const mobileImages2 = [
+    { src: "/konsul.png", alt: "Pruviu Mobile Konsultasi" },
+    { src: "/pencatatan.png", alt: "Pruviu Mobile Pencatatan" },
+    { src: "/tren.png", alt: "Pruviu Mobile Tren" },
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % mobileImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(
+      (prev) => (prev - 1 + mobileImages.length) % mobileImages.length
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -184,15 +208,15 @@ export default function Home() {
                   50K+
                 </p>
                 <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                  Anggota Koperasi User Mobile
+                  User Mobile untuk Anggota Koperasi
                 </p>
               </div>
               <div className="text-center lg:text-left">
                 <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-700">
-                  99.9%
+                  75K+
                 </p>
                 <p className="text-xs sm:text-sm md:text-base text-gray-600">
-                  Akurasi Data
+                  User Mobile untuk Umum
                 </p>
               </div>
             </div>
@@ -215,14 +239,12 @@ export default function Home() {
       {/* Product Showcase Section */}
       <section className="bg-white py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
-
           {/* Desktop Dashboard Section */}
           <div className="mb-32 md:mb-40">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
                 Pruviu <span className="text-red-600">Web</span>
               </h2>
-             
             </div>
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-7xl mx-auto">
               <div className="flex-1 lg:order-2">
@@ -240,14 +262,18 @@ export default function Home() {
                   Tingkatkan Kualitas Pinjaman Koperasi Anda
                 </h3>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
-                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan menerapkan prinsip kehati-hatian, <i className="italic">know-your-customer</i>, serta memininalisir risiko pinjaman bermasalah yang disalurkan kepada anggota{" "}
+                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan
+                  menerapkan prinsip kehati-hatian,{" "}
+                  <i className="italic">know-your-customer</i>, serta
+                  memininalisir risiko pinjaman bermasalah yang disalurkan
+                  kepada anggota{" "}
                 </p>
 
                 <div className="space-y-2 font-style: italic">
-                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
-                    Didukung sumber data dan analitik lengkap dan terpercaya
+                  <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
+                    Didukung sumber data serta analitik lengkap dan terpercaya
                   </div>
-                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                  <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
                     Dilengkapi fitur konfigurasi pengaturan Pruviu Mobile
                   </div>
                 </div>
@@ -257,45 +283,101 @@ export default function Home() {
 
           {/* Mobile App Section */}
           <div>
-            <div className="text-center mb-12 md:mb-16">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
                 Pruviu <span className="text-red-600">Mobile</span>
               </h2>
-            
             </div>
-            <div className="flex flex-col lg:flex-row items-center lg:gap-16 max-w-7xl mx-auto">
-              <div className="flex-1 flex justify-center w-full">
-                <div className="flex -space-x-20 items-center justify-center">
-                  <div className="w-44 sm:w-48 md:w-44">
-                    <Image
-                      src="/mobile-1.png"
-                      alt="Pruviu Mobile Screen 1"
-                      width={195}
-                      height={400}
-                      className="w-full h-auto"
-                    />
+            <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
+              <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
+                {/* Carousel Container */}
+                <div className="relative w-full max-w-2xl">
+                  {/* Images Container with 3D Perspective */}
+                  <div
+                    className="relative h-[400px] sm:h-[450px] md:h-[500px]"
+                    style={{ perspective: "1200px" }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center gap-4">
+                      {mobileImages.map((image, index) => {
+                        const isActive = index === currentSlide;
+                        const isPrev =
+                          index ===
+                          (currentSlide - 1 + mobileImages.length) %
+                            mobileImages.length;
+                        const isNext =
+                          index === (currentSlide + 1) % mobileImages.length;
+                        const isVisible = isActive || isPrev || isNext;
+
+                        let transformStyle = "";
+                        if (isActive) {
+                          transformStyle =
+                            "translateX(0) rotateY(0deg) scale(1)";
+                        } else if (isPrev) {
+                          transformStyle =
+                            "translateX(-80%) rotateY(25deg) scale(0.75)";
+                        } else if (isNext) {
+                          transformStyle =
+                            "translateX(80%) rotateY(-25deg) scale(0.75)";
+                        }
+
+                        return (
+                          <div
+                            key={index}
+                            onClick={() => setCurrentSlide(index)}
+                            className={`
+                              absolute transition-all duration-700 ease-in-out cursor-pointer
+                              ${
+                                !isVisible
+                                  ? "opacity-0 pointer-events-none"
+                                  : "opacity-100"
+                              }
+                              ${
+                                isActive
+                                  ? "w-40 sm:w-48 md:w-56 z-20"
+                                  : "w-32 sm:w-40 md:w-48 z-10"
+                              }
+                            `}
+                            style={{
+                              transform: transformStyle,
+                              transformStyle: "preserve-3d",
+                            }}
+                          >
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              width={800}
+                              height={1300}
+                              className={`w-full h-auto rounded-2xl shadow-2xl transition-all duration-700 ${
+                                isActive ? "brightness-100" : "brightness-75"
+                              }`}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <div className="w-68 sm:w-96 md:w-104">
-                    <Image
-                      src="/Mobile - ImageContent.png"
-                      alt="Aplikasi Mobile untuk Anggota"
-                      width={800}
-                      height={1300}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                  <div className="w-44 sm:w-48 md:w-44">
-                    <Image
-                      src="/mobile-3.png"
-                      alt="Pruviu Mobile Screen 3"
-                      width={195}
-                      height={400}
-                      className="w-full h-auto"
-                    />
+
+                  {/* Dots Indicator */}
+                  <div className="flex justify-center gap-2 mt-6">
+                    {mobileImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`
+                          w-2 h-2 rounded-full transition-all
+                          ${
+                            index === currentSlide
+                              ? "bg-navy-600 w-8"
+                              : "bg-gray-300"
+                          }
+                        `}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
-              <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 px-6 md:px-8">
+              <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
                   Monitor Risiko Keuangan Keluarga Anda
                 </h3>
@@ -307,12 +389,132 @@ export default function Home() {
                 </p>
 
                 <div className="space-y-2 font-style: italic">
-                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                  <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
                     Khusus untuk anggota koperasi
                   </div>
-                  <div className="bg-navy-50 text-navy-700 text-sm font-medium">
+                  <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
                     Daftarkan diri anda ke koperasi terdekat untuk mengakses
                     layanan Pruviu Mobile
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Additional Features Section with Carousel on Right */}
+            <div className="mt-32 md:mt-40">
+              <div className="flex flex-col lg:flex-row-reverse items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
+                <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
+                  {/* Second Carousel Container */}
+                  <div className="relative w-full max-w-2xl">
+                    {/* Images Container with 3D Perspective */}
+                    <div
+                      className="relative h-[400px] sm:h-[450px] md:h-[500px]"
+                      style={{ perspective: "1200px" }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center gap-4">
+                        {mobileImages2.map((image, index) => {
+                          const isActive = index === currentSlide2;
+                          const isPrev =
+                            index ===
+                            (currentSlide2 - 1 + mobileImages2.length) %
+                              mobileImages2.length;
+                          const isNext =
+                            index ===
+                            (currentSlide2 + 1) % mobileImages2.length;
+                          const isVisible = isActive || isPrev || isNext;
+
+                          let transformStyle = "";
+                          if (isActive) {
+                            transformStyle =
+                              "translateX(0) rotateY(0deg) scale(1)";
+                          } else if (isPrev) {
+                            transformStyle =
+                              "translateX(-80%) rotateY(25deg) scale(0.75)";
+                          } else if (isNext) {
+                            transformStyle =
+                              "translateX(80%) rotateY(-25deg) scale(0.75)";
+                          }
+
+                          return (
+                            <div
+                              key={index}
+                              onClick={() => setCurrentSlide2(index)}
+                              className={`
+                                absolute transition-all duration-700 ease-in-out cursor-pointer
+                                ${
+                                  !isVisible
+                                    ? "opacity-0 pointer-events-none"
+                                    : "opacity-100"
+                                }
+                                ${
+                                  isActive
+                                    ? "w-40 sm:w-48 md:w-56 z-20"
+                                    : "w-32 sm:w-40 md:w-48 z-10"
+                                }
+                              `}
+                              style={{
+                                transform: transformStyle,
+                                transformStyle: "preserve-3d",
+                              }}
+                            >
+                              <Image
+                                src={image.src}
+                                alt={image.alt}
+                                width={800}
+                                height={1300}
+                                className={`w-full h-auto rounded-2xl shadow-2xl transition-all duration-700 ${
+                                  isActive ? "brightness-100" : "brightness-75"
+                                }`}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Dots Indicator */}
+                    <div className="flex justify-center gap-2 mt-6">
+                      {mobileImages2.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentSlide2(index)}
+                          className={`
+                            w-2 h-2 rounded-full transition-all
+                            ${
+                              index === currentSlide2
+                                ? "bg-navy-600 w-8"
+                                : "bg-gray-300"
+                            }
+                          `}
+                          aria-label={`Go to slide ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
+                    Cek Catatan Pengeluaran & Bangun Reputasi Keuangan Anda
+                  </h3>
+                  <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-light">
+                    Dirancang untuk memudahkan pencatatan pengeluaran dari
+                    pembayaran tunai maupun non-tunai. Bermanfaat untuk evaluasi
+                    belanja bulanan/tahunan sekaligus membangun reputasi
+                    keuangan Anda.{" "}
+                  </p>
+
+                  <div className="space-y-2 font-style: italic">
+                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
+                      Untuk Umum (Anggota dan Bukan Anggota Koperasi)
+                    </div>
+                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
+                      Dilengkapi fitur analitik yang insightful
+                    </div>
+                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
+                      Menghasilkan Pruviu Score guna meningkatkan kelayakan
+                      kredit Anda
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -620,7 +822,8 @@ ${pengaduan}
                 className="mb-4 brightness-200"
               />
               <p className="text-sm md:text-base text-gray-400">
-                Platform Monitoring dan Mitigasi Risiko Keuangan untuk Koperasi dan Anggota Koperasi
+                Platform Monitoring dan Mitigasi Risiko Keuangan untuk Koperasi
+                dan Anggota Koperasi
               </p>
             </div>
             <div>
