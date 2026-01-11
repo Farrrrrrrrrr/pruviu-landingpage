@@ -178,7 +178,7 @@ export default function Home() {
             <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
               Platform digital yang dilengkapi berbagai fitur infomasi
               perkreditan terpercaya serta analitik berbasis kecerdasan buatan
-              untuk koperasi dan anggota koperasi
+              untuk koperasi, anggota koperasi, dan masyarakat umum.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
               <Link
@@ -494,7 +494,7 @@ export default function Home() {
                 </div>
                 <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
                   <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
-                    Cek Catatan Pengeluaran & Bangun Reputasi Keuangan Anda
+                    Pantau Pengeluaran & Bangun Reputasi Keuangan Anda
                   </h3>
                   <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed font-light">
                     Dirancang untuk memudahkan pencatatan pengeluaran dari
