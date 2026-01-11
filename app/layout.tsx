@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Pruviu",
     images: [
       {
-        url: "/Pruviu.svg",
+        url: "/pruviu-logo-redblue.png",
         width: 1200,
         height: 630,
         alt: "Pruviu - Platform Anti Fraud Koperasi",
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pruviu - Sistem Mitigasi Risiko Terpadu Pertama di Indonesia",
     description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi.",
-    images: ["/Pruviu.svg"],
+    images: ["/pruviu-logo-redblue.png"],
   },
   icons: {
-    icon: "/Pruviu.svg",
-    apple: "/Pruviu.svg",
+    icon: "/pruviu-logo-redblue.png",
+    apple: "/pruviu-logo-redblue.png",
   },
 };
 
