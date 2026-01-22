@@ -1,281 +1,925 @@
-import Link from "next/link";
 
-export default function PrivacyPolicy() {
+import Link from "next/link";
+import Image from "next/image";
+
+export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header/Navbar */}
-      <header className="bg-white shadow-sm">
-        <nav className="container mx-auto px-6 py-4">
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <nav className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-navy-700">
-              Pruviu
-            </Link>
-            <Link 
-              href="/" 
-              className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
-            >
-              Kembali ke Beranda
-            </Link>
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="Pruviu Logo"
+                width={150}
+                height={79}
+                className="w-32 md:w-40 h-auto"
+                priority
+              />
+            </div>
+            <div className="hidden md:flex items-center space-x-8">
+              <Link
+                href="/"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Beranda
+              </Link>
+              <Link
+                href="/privacy-policy#pengaduan"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Pengaduan
+              </Link>
+              <Link
+                href="/kontak"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Kontak
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className="text-gray-600 hover:text-navy-600 font-bold transition-colors"
+              >
+                Kebijakan Privasi
+              </Link>
+            </div>
+            <div className="hidden md:flex items-center space-x-4">
+              <Link
+                href="https://app.pruviu.com"
+                className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
+              >
+                Masuk
+              </Link>
+              <Link
+                href="https://app.pruviu.com"
+                className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+              >
+                Daftar
+              </Link>
+            </div>
+            {/* Mobile Menu Button */}
+            {/* You can add mobile menu logic here if needed */}
           </div>
         </nav>
       </header>
 
       {/* Privacy Policy Content */}
       <div className="container mx-auto px-6 py-12 max-w-4xl">
-        <h1 className="text-4xl font-bold text-navy-700 mb-4">Kebijakan Privasi</h1>
-        <p className="text-gray-600 mb-8">Terakhir diperbarui: 31 Desember 2025</p>
+        <h1 className="text-4xl font-bold text-navy-700 mb-4">
+          Kebijakan Privasi
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Terakhir diperbarui: 22 Januari 2026
+        </p>
 
         <div className="bg-white rounded-lg shadow-sm p-8 space-y-8">
-          {/* Introduction */}
           <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">1. Pendahuluan</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Selamat datang di Pruviu. Kami berkomitmen untuk melindungi privasi dan keamanan data pribadi Anda. 
-              Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi 
-              informasi pribadi Anda ketika Anda menggunakan aplikasi mobile Pruviu untuk platform verifikasi kredit koperasi.
-            </p>
-          </section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              1. Ketentuan Umum
+            </h2>
 
-          {/* Information We Collect */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">2. Informasi yang Kami Kumpulkan</h2>
-            
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">2.1 Informasi Pribadi</h3>
-            <p className="text-gray-700 mb-2">Kami mengumpulkan informasi berikut:</p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Nama lengkap</li>
-              <li>Nomor Induk Kependudukan (NIK)</li>
-              <li>Nomor telepon dan alamat email</li>
-              <li>Alamat tempat tinggal</li>
-              <li>Informasi pekerjaan dan penghasilan</li>
-              <li>Foto profil dan dokumen identitas (KTP, KK)</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">2.2 Informasi Keuangan</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Riwayat kredit dan pinjaman</li>
-              <li>Informasi rekening bank</li>
-              <li>Riwayat transaksi koperasi</li>
-              <li>Credit score dan assessment kredit</li>
-              <li>Data SLIK OJK (Sistem Layanan Informasi Keuangan)</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">2.3 Informasi Teknis</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Informasi perangkat (model, sistem operasi, versi aplikasi)</li>
-              <li>Alamat IP dan lokasi geografis</li>
-              <li>Log aktivitas aplikasi</li>
-              <li>Cookie dan teknologi pelacakan serupa</li>
-            </ul>
-          </section>
-
-          {/* How We Use Information */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">3. Cara Kami Menggunakan Informasi</h2>
-            <p className="text-gray-700 mb-2">Kami menggunakan informasi Anda untuk:</p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Melakukan verifikasi identitas dan kredit anggota koperasi</li>
-              <li>Menghitung credit score dan kelayakan kredit</li>
-              <li>Mencegah penipuan dan aktivitas yang mencurigakan (anti-fraud)</li>
-              <li>Melakukan pengecekan riwayat kredit melalui koperasi lain</li>
-              <li>Mengintegrasikan data dengan SLIK OJK</li>
-              <li>Meningkatkan keamanan dan fungsionalitas aplikasi</li>
-              <li>Memberikan dukungan pelanggan</li>
-              <li>Mematuhi kewajiban hukum dan regulasi</li>
-              <li>Mengirimkan notifikasi penting terkait layanan</li>
-            </ul>
-          </section>
-
-          {/* Data Sharing */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">4. Pembagian Informasi</h2>
-            <p className="text-gray-700 mb-2">Kami dapat membagikan informasi Anda dengan:</p>
-            
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">4.1 Koperasi Terdaftar</h3>
-            <p className="text-gray-700 mb-2">
-              Informasi kredit dan riwayat keuangan Anda dapat dibagikan kepada koperasi yang terdaftar dalam sistem 
-              untuk tujuan verifikasi dan pencegahan fraud.
-            </p>
-
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">4.2 Otoritas Jasa Keuangan (OJK)</h3>
-            <p className="text-gray-700 mb-2">
-              Kami bekerja sama dengan OJK dan dapat mengakses serta membagikan informasi melalui sistem SLIK OJK 
-              sesuai dengan regulasi yang berlaku.
-            </p>
-
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">4.3 Penyedia Layanan Pihak Ketiga</h3>
-            <p className="text-gray-700 mb-2">
-              Kami dapat menggunakan penyedia layanan pihak ketiga untuk mendukung operasional kami, seperti:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Penyedia cloud hosting dan penyimpanan data</li>
-              <li>Penyedia layanan analitik</li>
-              <li>Penyedia layanan verifikasi identitas</li>
-              <li>Penyedia layanan keamanan siber</li>
-            </ul>
-
-            <h3 className="text-xl font-semibold text-navy-600 mb-3 mt-4">4.4 Kewajiban Hukum</h3>
-            <p className="text-gray-700 mb-2">
-              Kami dapat mengungkapkan informasi Anda jika diwajibkan oleh hukum, perintah pengadilan, atau 
-              proses hukum lainnya.
-            </p>
-          </section>
-
-          {/* Data Security */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">5. Keamanan Data</h2>
-            <p className="text-gray-700 mb-2">
-              Kami menerapkan langkah-langkah keamanan teknis dan organisasional yang sesuai untuk melindungi 
-              data pribadi Anda, termasuk:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>Enkripsi data end-to-end menggunakan protokol TLS/SSL</li>
-              <li>Penyimpanan data terenkripsi di server yang aman</li>
-              <li>Kontrol akses berbasis peran (RBAC)</li>
-              <li>Autentikasi multi-faktor (MFA)</li>
-              <li>Audit keamanan dan penetration testing berkala</li>
-              <li>Backup data secara teratur</li>
-              <li>Monitoring sistem 24/7 untuk mendeteksi aktivitas mencurigakan</li>
-            </ul>
-            <p className="text-gray-700 mt-4">
-              Meskipun kami mengambil langkah-langkah untuk melindungi data Anda, tidak ada metode transmisi 
-              atau penyimpanan elektronik yang 100% aman. Kami tidak dapat menjamin keamanan mutlak.
-            </p>
-          </section>
-
-          {/* Data Retention */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">6. Penyimpanan Data</h2>
-            <p className="text-gray-700">
-              Kami menyimpan data pribadi Anda selama diperlukan untuk tujuan yang dijelaskan dalam kebijakan ini, 
-              atau sesuai dengan kewajiban hukum yang berlaku. Data kredit dan riwayat keuangan akan disimpan 
-              minimal 5 (lima) tahun sesuai dengan regulasi OJK. Setelah periode penyimpanan berakhir, data Anda 
-              akan dihapus atau dianonimkan secara permanen.
-            </p>
-          </section>
-
-          {/* User Rights */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">7. Hak Pengguna</h2>
-            <p className="text-gray-700 mb-2">Anda memiliki hak untuk:</p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li><strong>Akses:</strong> Meminta salinan data pribadi yang kami simpan tentang Anda</li>
-              <li><strong>Koreksi:</strong> Meminta perbaikan data yang tidak akurat atau tidak lengkap</li>
-              <li><strong>Penghapusan:</strong> Meminta penghapusan data pribadi Anda (dengan keterbatasan tertentu)</li>
-              <li><strong>Pembatasan:</strong> Meminta pembatasan pemrosesan data Anda</li>
-              <li><strong>Portabilitas:</strong> Menerima data Anda dalam format yang terstruktur dan umum digunakan</li>
-              <li><strong>Keberatan:</strong> Menolak pemrosesan data pribadi Anda dalam situasi tertentu</li>
-              <li><strong>Penarikan Persetujuan:</strong> Menarik persetujuan kapan saja (jika pemrosesan berdasarkan persetujuan)</li>
-            </ul>
-            <p className="text-gray-700 mt-4">
-              Untuk menggunakan hak-hak ini, silakan hubungi kami melalui informasi kontak yang tercantum di bawah.
-            </p>
-          </section>
-
-          {/* Children's Privacy */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">8. Privasi Anak-anak</h2>
-            <p className="text-gray-700">
-              Layanan kami tidak ditujukan untuk individu di bawah usia 17 tahun. Kami tidak secara sengaja 
-              mengumpulkan informasi pribadi dari anak-anak. Jika Anda adalah orang tua atau wali dan mengetahui 
-              bahwa anak Anda telah memberikan informasi pribadi kepada kami, silakan hubungi kami.
-            </p>
-          </section>
-
-          {/* Consent */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">9. Persetujuan</h2>
-            <p className="text-gray-700">
-              Dengan menggunakan aplikasi Pruviu, Anda menyetujui pengumpulan dan penggunaan informasi sesuai 
-              dengan Kebijakan Privasi ini. Untuk beberapa jenis data sensitif, kami akan meminta persetujuan 
-              eksplisit Anda sebelum pengumpulan atau pemrosesan. Anda dapat menarik persetujuan Anda kapan saja, 
-              namun ini dapat mempengaruhi kemampuan Anda untuk menggunakan layanan tertentu.
-            </p>
-          </section>
-
-          {/* Third-Party Links */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">10. Tautan Pihak Ketiga</h2>
-            <p className="text-gray-700">
-              Aplikasi kami mungkin berisi tautan ke situs web atau layanan pihak ketiga. Kami tidak bertanggung 
-              jawab atas praktik privasi atau konten situs web pihak ketiga. Kami mendorong Anda untuk membaca 
-              kebijakan privasi setiap situs web yang Anda kunjungi.
-            </p>
-          </section>
-
-          {/* Changes to Policy */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">11. Perubahan Kebijakan</h2>
-            <p className="text-gray-700">
-              Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam 
-              praktik kami atau untuk alasan operasional, hukum, atau regulasi lainnya. Kami akan memberi tahu 
-              Anda tentang perubahan material melalui notifikasi dalam aplikasi atau email. Penggunaan berkelanjutan 
-              Anda atas layanan kami setelah perubahan tersebut akan dianggap sebagai penerimaan terhadap kebijakan 
-              yang diperbarui.
-            </p>
-          </section>
-
-          {/* Legal Basis */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">12. Dasar Hukum</h2>
-            <p className="text-gray-700 mb-2">
-              Pemrosesan data pribadi Anda didasarkan pada:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li>UU No. 27 Tahun 2022 tentang Perlindungan Data Pribadi</li>
-              <li>Peraturan OJK tentang Perlindungan Konsumen Sektor Jasa Keuangan</li>
-              <li>UU No. 25 Tahun 1992 tentang Perkoperasian</li>
-              <li>Peraturan terkait lainnya yang berlaku di Indonesia</li>
-            </ul>
-          </section>
-
-          {/* Contact Information */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">13. Hubungi Kami</h2>
-            <p className="text-gray-700 mb-4">
-              Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait Kebijakan Privasi ini atau 
-              praktik data kami, silakan hubungi kami:
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg space-y-2">
-              <p className="text-gray-700"><strong>Pruviu</strong></p>
-              <p className="text-gray-700">Email: bantuan@pruviu.com</p>
-              <p className="text-gray-700">Telepon: +62 21 1234 5678</p>
-              <p className="text-gray-700">Alamat: Jakarta, Indonesia</p>
-              <p className="text-gray-700">Jam Operasional: Senin - Jumat, 09:00 - 17:00 WIB</p>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>1.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu adalah platform elektronik yang menyediakan layanan
+                  berupa (a) perangkat lunak klien Pruviu yang tersedia melalui
+                  situs dan (b) semua informasi, halaman tertaut, fitur, data,
+                  teks, gambar, foto, grafik, pemrograman, perangkat lunak,
+                  layanan aplikasi (termasuk namun tidak terbatas pada, setiap
+                  layanan aplikasi mobile) atau materi lainnya yang tersedia
+                  melalui situs atau layanan terkait (&quotLayanan&quot) yang telah
+                  terdaftar di Kementerian Komunikasi dan Digital sebagai
+                  Penyelenggara Sistem Elektronik (PSE) atas nama PT Pruden Visi
+                  Utama.
+                </p>
+              </div>
             </div>
-            <p className="text-gray-700 mt-4">
-              Kami akan merespons permintaan Anda dalam waktu 14 (empat belas) hari kerja.
-            </p>
-          </section>
 
-          {/* Data Protection Officer */}
-          <section>
-            <h2 className="text-2xl font-bold text-navy-700 mb-4">14. Petugas Perlindungan Data</h2>
-            <p className="text-gray-700 mb-4">
-              Kami telah menunjuk Petugas Perlindungan Data (Data Protection Officer) yang dapat dihubungi untuk 
-              masalah terkait perlindungan data:
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg space-y-2">
-              <p className="text-gray-700">Email: dpo@pruviu.com</p>
-              <p className="text-gray-700">Telepon: +62 21 1234 5679</p>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>1.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Kebijakan privasi layanan ini (“Kebijakan Privasi”) adalah
+                  ketentuan umum dari Pruviu yang diberlakukan untuk Pengguna
+                  Pruviu (“Pengguna”). Pengguna harus membaca Kebijakan Privasi
+                  ini dengan seksama. Untuk mengakses atau menggunakan layanan
+                  Pruviu, Pengguna harus menerima, mengerti, dan menyetujui atas
+                  seluruh isi Kebijakan Privasi ini. Jika Pengguna tidak
+                  menyetujui, seluruh layanan akan berhenti dan Pengguna tidak
+                  akan mendapatkan layanan apapun dari Pruviu. Kebijakan ini
+                  menjelaskan informasi yang Pruviu proses untuk mendukung
+                  Pruviu dan produk serta fitur lainnya yang ditawarkan oleh
+                  Pruviu. Pengguna dapat menemukan fitur dan informasi tambahan
+                  di situs web Pruviu.com
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>1.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Dengan mendaftarkan akun pada platform Pruviu, memberikan
+                  persetujuan secara eksplisit (dengan mencentang ketentuan
+                  Kebijakan Privasi ini pada platform Pruviu), dan menggunakan
+                  layanan Pruviu, Pengguna mengakui dan menyetujui bahwa
+                  Pengguna menerima praktik, persyaratan, dan/atau kebijakan
+                  yang diuraikan dalam Kebijakan Privasi ini dan dengan ini
+                  mengizinkan Pruviu untuk memperoleh dan mengumpulkan data
+                  pribadi, mentransfer data pribadi, melakukan pemrosesan data
+                  pribadi secara otomatis, mengungkapkan data pribadi, menyimpan
+                  data pribadi, menghapus data pribadi, dan memusnahkan data
+                  pribadi seperti yang dijelaskan di bawah ini.
+                </p>
+              </div>
             </div>
           </section>
 
-          {/* Acknowledgment */}
-          <section className="bg-navy-50 p-6 rounded-lg">
-            <h2 className="text-xl font-bold text-navy-700 mb-3">Pengakuan</h2>
-            <p className="text-gray-700">
-              Dengan menggunakan aplikasi Pruviu, Anda mengakui bahwa Anda telah membaca, memahami, dan menyetujui 
-              untuk terikat dengan Kebijakan Privasi ini. Jika Anda tidak setuju dengan kebijakan ini, mohon untuk 
-              tidak menggunakan layanan kami.
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              2. Kepatuhan
+            </h2>
+            <p>
+              Kepatuhan Pruviu atas ketentuan hukum yang berlaku untuk
+              menjalankan layanan dalam memperoleh dan mengumpulkan data
+              pribadi, mentransfer data pribadi, pemrosesan data pribadi secara
+              otomatis, mengungkapkan data pribadi, menyimpan data pribadi,
+              menghapus data pribadi, dan memusnahkan data pribadi serta menjaga
+              kerahasiaan dan keamanan data pribadi sebagaimana diatur dalam:
+            </p>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>a.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Undang-Undang Nomor 11 Tahun 2008 tentang Informasi dan
+                  Transaksi Elektronik sebagaimana diubah dengan Undang-Undang
+                  Nomor 19 Tahun 2016 tentang Perubahan atas Undang-Undang Nomor
+                  11 Tahun 2008 tentang Informasi dan Transaksi Elektronik dan
+                  Undang-Undang Nomor 1 Tahun 2024 tentang Perubahan Kedua atas
+                  Undang-Undang Nomor 11 Tahun 2008 tentang Informasi dan
+                  Transaksi Elektronik.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>b.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Undang-Undang nomor 27 tahun 2022 tentang Perlindungan Data
+                  Pribadi.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>c.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Peraturan Pemerintah Nomor 71 tahun 2019 tentang
+                  Penyelenggaraan Sistem dan Transaksi Elektronik.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>d.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Peraturan Menteri Komunikasi dan Informatika Nomor 20 Tahun
+                  2016 tentang Perlindungan Data Pribadi dalam Sistem
+                  Elektronik.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              3. Informasi Pengendali Data Pribadi{" "}
+            </h2>
+            {/* <p>
+              Kepatuhan Pruviu atas ketentuan hukum yang berlaku untuk
+              menjalankan layanan dalam memperoleh dan mengumpulkan data
+              pribadi, mentransfer data pribadi, pemrosesan data pribadi secara
+              otomatis, mengungkapkan data pribadi, menyimpan data pribadi,
+              menghapus data pribadi, dan memusnahkan data pribadi serta menjaga
+              kerahasiaan dan keamanan data pribadi sebagaimana diatur dalam:
+            </p> */}
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>3.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  PT Pruden Visi Utama, perusahaan yang bergerak di bidang
+                  layanan integrator penyedia jasa informasi perkreditan secara
+                  elektronik dan telah terdaftar di Kementerian Komunikasi dan
+                  Digital sebagai Penyelenggara Sistem Elektronik (PSE)
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>3.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu tunduk kepada ketentuan hukum yang berlaku dalam
+                  memperoleh dan mengumpulkan data pribadi, mentransfer data
+                  pribadi, melakukan pemrosesan data pribadi secara otomatis,
+                  mengungkapkan data pribadi, menyimpan data pribadi, menghapus
+                  data pribadi, dan memusnahkan data pribadi.
+                </p>
+              </div>
+            </div>
+
+            {/* <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>c.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Peraturan Pemerintah Nomor 71 tahun 2019 tentang
+                  Penyelenggaraan Sistem dan Transaksi Elektronik.
+                </p>
+              </div>
+            </div> */}
+
+            {/* <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>d.</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Peraturan Menteri Komunikasi dan Informatika Nomor 20 Tahun
+                  2016 tentang Perlindungan Data Pribadi dalam Sistem
+                  Elektronik.
+                </p>
+              </div>
+            </div> */}
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              4. Informasi Data Pribadi Pengguna{" "}
+            </h2>
+            {/* <p>
+              Kepatuhan Pruviu atas ketentuan hukum yang berlaku untuk
+              menjalankan layanan dalam memperoleh dan mengumpulkan data
+              pribadi, mentransfer data pribadi, pemrosesan data pribadi secara
+              otomatis, mengungkapkan data pribadi, menyimpan data pribadi,
+              menghapus data pribadi, dan memusnahkan data pribadi serta menjaga
+              kerahasiaan dan keamanan data pribadi sebagaimana diatur dalam:
+            </p> */}
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>4.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Data pribadi Pengguna diperoleh ketika:
+                </p>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.1</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna mendaftar akun pada Pruviu;{" "}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.2</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna mengisi informasi sewaktu menggunakan layanan
+                      pada Pruviu, mengirimkan formulir apapun yang berkaitan
+                      dengan produk dan layanan Pruviu, baik secara online
+                      maupun dalam bentuk fisik;{" "}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.3</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna membuat perjanjian atau memberikan dokumen atau
+                      informasi lainnya sehubungan dengan interaksi Pengguna
+                      dengan Pruviu;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.4</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna berinteraksi dengan customer service dan/atau
+                      chatbot Pruviu;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.5</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna menggunakan layanan elektronik, berinteraksi,
+                      atau menggunakan layanan Pruviu;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.6</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna memberikan izin pada perangkat untuk berbagi
+                      informasi dengan Pruviu;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.7</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna menautkan akun Pruviu dengan media sosial atau
+                      akun eksternal lainnya atau menggunakan fitur media sosial
+                      lainnya, sesuai dengan kebijakan penyedia;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.8</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna melakukan transaksi dengan layanan Pruviu; atau
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.1.9</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Pengguna mengirimkan data pribadi kepada Pruviu dengan
+                      alasan apapun.
+                    </p>
+                  </div>
+                </div>
+                <p>
+                  Daftar di atas tidak dimaksudkan sebagai suatu daftar yang
+                  lengkap dan hanya menetapkan beberapa contoh umum tentang
+                  kapan data pribadi Pengguna mungkin diambil.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>4.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Data pribadi Pengguna yang dikelola oleh Pruviu, antara lain:
+                </p>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.1</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data identitas termasuk nama, nama pengguna, kata sandi,
+                      kartu tanda penduduk, nomor pokok wajib pajak, kartu
+                      keluarga, identitas pengguna atau pengenal lainnya,
+                      jabatan, tanggal kelahiran, jenis kelamin, tempat
+                      kelahiran, pekerjaan, kebangsaan, foto dan/atau data
+                      biometrik.{" "}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.2</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data kontak termasuk alamat penagihan, alamat email, nomor
+                      telepon dan daftar kontak.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.3</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data transaksi termasuk pembelian atau pesanan yang
+                      Pengguna lakukan, minat, preferensi, masukan, dan
+                      tanggapan survei Pengguna, sehubungan dengan Pengguna,
+                      jenis layanan yang dicari, rincian pembayaran atau
+                      transfer yang dilakukan oleh Pengguna pada Pruviu,
+                      termasuk namun tidak terbatas pada data yang berkaitan
+                      dengan penggunaan, pembayaran, rincian penerima (termasuk
+                      rincian rekening Pengguna), metode pembayaran yang
+                      digunakan, jumlah pembayaran yang dibayarkan, rincian
+                      tagihan, dan rincian faktur.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.4</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data teknis termasuk rincian tentang penggunaan Pengguna
+                      atas Layanan Pruviu seperti identifikasi yang dihasilkan
+                      oleh Pruviu (user ID), alamat protokol internet (IP), data
+                      sebagai halaman web yang dilihat sebelumnya atau
+                      sesudahnya, durasi setiap kunjungan/sesi, identitas (ID)
+                      perangkat internet atau alamat kontrol akses media, ID
+                      periklanan dan informasi perangkat lainnya termasuk
+                      informasi mengenai produsen, model, dan sistem operasi
+                      perangkat yang Pengguna gunakan untuk mengakses Pruviu dan
+                      crash logs.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.5</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data perangkat termasuk data perangkat, diantaranya jenis
+                      perangkat yang Pengguna gunakan untuk mengakses Pruviu,
+                      termasuk model perangkat keras, sistem operasi dan
+                      versinya, perangkat lunak, nomor IMEI, nama file dan
+                      versinya, pilihan bahasa, pengenal perangkat unik,
+                      pengenal iklan, nomor seri, informasi gerakan perangkat,
+                      dan/atau informasi jaringan seluler.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.6</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data aktivitas (log) termasuk catatan pada server yang
+                      menerima data seperti IP Address perangkat, tanggal dan
+                      waktu akses, fitur Pruviu atau laman yang dilihat, proses
+                      kerja Pruviu dan aktivitas sistem lainnya, jenis peramban
+                      (browser), dan/atau situs atau layanan pihak ketiga yang
+                      Pengguna gunakan sebelum berinteraksi dengan Pruviu.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>4.2.7</strong>
+                  </div>
+                  <div className="flex-2">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      Data lokasi termasuk data lokasi geografis waktu-nyata
+                      (real-time) Pengguna, titik koordinat lokasi berupa
+                      longitude latitude, dan lokasi Wi-Fi.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              5. Penyimpanan Data Pribadi
+            </h2>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>5.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Seluruh data pribadi Pengguna yang telah diberikan kepada
+                  Pruviu disimpan di perangkat dan fasilitas Pruviu dan pihak
+                  ketiga (anak perusahaan, afiliasi, dan itra Pruviu) yang
+                  berada di wilayah hukum Negara Republik Indonesia.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>5.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Perangkat penyimpanan memiliki standar keamanan yang
+                  menerapkan sistem enkripsi Advanced Encryption Standard (AES)
+                  256.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>5.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Masa penyimpanan data pribadi Pengguna adalah selama masa
+                  aktif akun Pengguna.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>5.4</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Masa retensi data pribadi Pengguna adalah sesingkat-singkatnya
+                  10 (sepuluh) tahun.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              6. Pengungkapan Data Pribadi{" "}
+            </h2>
+            <p>
+              Priviu tidak akan mengungkapkan data pribadi Pengguna kecuali
+              dengan persetujuan tertulis Pengguna atau atas suatu kewajiban
+              menurut ketentuan hukum yang berlaku dan/atau perintah pengadilan.
+              Pengguna membebaskan Pruviu dari segala tuntutan terhadap akibat
+              yang dapat timbul dari pengungkapan data pribadi tersebut.
             </p>
           </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              7. Pemrosesan Data Pribadi secara Otomatis{" "}
+            </h2>
+            <p>
+              Pruviu dapat menerapkan pemrosesan data pribadi secara otomatis
+              menggunakan artificial intelligence dengan metode machine learning
+              dan natural language processing. Pemrosesan data pribadi secara
+              otomatis yang diterapkan Pruviu telah dilakukan dengan tunduk pada
+              pedoman maupun kode etik penggunaan artificial intelligence di
+              Indonesia. Tindakan ini dilakukan untuk mengembangkan promosi
+              produk, penawaran-penawaran yang dapat diberikan kepada Pengguna
+              sesuai preferensi masing-masing yang lebih personal, dan dalam
+              pengembangan chatbot untuk memfasilitasi kebutuhan Pengguna
+              Pruviu.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              8. Hak Pengguna Sebagai Subjek Data Pribadi
+            </h2>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>8.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pengguna memiliki hak tertentu berdasarkan ketentuan hukum
+                  yang berlaku untuk meminta kepada Pruviu terhadap akses,
+                  koreksi, penarikan persetujuan, dan penghapusan dan/atau
+                  pemusnahan terhadap data pribadi Pengguna yang berada dalam
+                  penguasaan dan kendali Pruviu.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>8.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu dapat menolak permintaan Pengguna terhadap akses,
+                  koreksi, dan penghapusan dan/atau pemusnahan terhadap data
+                  pribadi Pengguna yang Pruviu kuasai atau kendalikan jika
+                  diperbolehkan atau diperlukan berdasarkan ketentuan hukum yang
+                  berlaku. Hal ini termasuk dalam keadaan di mana data pribadi
+                  tersebut dapat berisi referensi kepada orang lain atau di mana
+                  permintaan untuk akses atau permintaan untuk mengoreksi atau
+                  menghapus dan/atau memusnahkan adalah untuk alasan yang Pruviu
+                  anggap tidak relevan, tidak serius, mengada-ada, atau
+                  terindikasi terkait dengan tindakan pelanggaran syarat dan
+                  ketentuan atau pelanggaran ketentuan hukum yang berlaku.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>8.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Mekanisme terkait hak sebagaimana dimaksud pada Bagian [8.1]
+                  dapat dilakukan dengan menggunakan fitur yang tersedia di
+                  Pruviu.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>8.4</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pengguna berhak untuk mengetahui standar keamanan yang
+                  digunakan oleh Pruviu dan pihak ketiga (anak perusahaan,
+                  afiliasi, dan perusahaan terkait dengan Pruviu) yang
+                  memberikan layanan dukungan bisnis Pruviu. Terkait dengan hal
+                  tersebut, Pengguna dapat mengunjungi situs web [*web address].
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>8.5</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Apabila Pengguna sudah menyerahkan data pribadinya dan tidak
+                  meneruskan proses selanjutnya dalam proses pendaftaran akun
+                  dalam jangka waktu 2 (dua) minggu, maka data pribadinya akan
+                  dimusnahkan oleh sistem.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              9. Kerahasiaan Data Pribadi{" "}
+            </h2>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>9.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Informasi rahasia berarti informasi Pengguna, baik yang
+                  bersifat pribadi atau sifat lainnya.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>9.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Ketika Pruviu diwajibkan oleh peraturan perundang-undangan
+                  untuk mengungkapkan informasi rahasia, maka Pruviu akan
+                  memberikan pemberitahuan tertulis kepada Pengguna sebelum
+                  pengungkapan data akan dilakukan, kecuali jika dilarang
+                  melakukan hal tersebut oleh ketentuan hukum yang berlaku atau
+                  melalui proses hukum.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>9.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu berhak melakukan penghentian Layanan secara sementara
+                  apabila terdapat indikasi pelanggaran terhadap Kebijakan
+                  Privasi ini maupun kegagalan data pribadi.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              10. Pihak Ketiga{" "}
+            </h2>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>10.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu dapat menggunakan, memproses, mengungkapkan, dan/atau
+                  mengalihkan data pribadi Pengguna kepada penyedia layanan
+                  pihak ketiga, agen dan/atau afiliasi atau perusahaan terkait
+                  dengan Pruviu, dan/atau pihak ketiga lainnya, yang dapat
+                  berlokasi di Indonesia atau di luar Indonesia. Penyedia
+                  layanan pihak ketiga, agen dan/atau afiliasi atau perusahaan
+                  terkait dan/atau pihak ketiga lainnya tersebut akan mengolah
+                  data pribadi Pengguna atas nama Pruviu atau pihak lainnya
+                  untuk tujuan yang sah secara hukum. Pruviu memastikan bahwa
+                  pihak ketiga menjaga keamanan data pribadi Pengguna dari
+                  segala perlakuan yang tidak sah atau resiko serupa dan
+                  menyimpan data pribadi Pengguna hanya selama data pribadi
+                  Pengguna dibutuhkan untuk tujuan yang telah ditetapkan. Pihak
+                  ketiga tersebut termasuk, namun tidak terbatas pada:
+                </p>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>10.1.1</strong>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      anak perusahaan, afiliasi, dan perusahaan terkait Pruviu;
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>10.1.2</strong>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      pembeli atau penerus lainnya dalam hal terjadi
+                      penggabungan, divestasi, restrukturisasi, reorganisasi,
+                      pembubaran, atau pengalihan lainnya atas beberapa atau
+                      semua aset Pruviu, baik secara berkelanjutan atau sebagai
+                      bagian dari kepailitan, likuidasi, atau proses serupa, di
+                      mana data pribadi yang dimiliki oleh Pruviu tentang
+                      Pengguna adalah salah satu aset yang dialihkan atau kepada
+                      rekanan dalam suatu transaksi aset bisnis yang melibatkan
+                      Pruviu; dan
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 min-w-[3rem] text-right pt-1">
+                    <strong>10.1.3</strong>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-700 leading-relaxed mb-0">
+                      penyedia layanan dan pihak ketiga lainnya yang Pruviu
+                      gunakan untuk mendukung bisnis dan layanan Pruviu terhadap
+                      Pengguna.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>10.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Dalam melibatkan pihak ketiga, Pruviu harus mendapatkan
+                  persetujuan secara eksplisit dari Pengguna, kecuali ditentukan
+                  lain oleh ketentuan hukum yang berlaku.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>10.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu dapat menggunakan, memproses, mengungkapkan, dan/atau
+                  mengalihkan data pribadi Pengguna kepada otoritas yang
+                  berwenang apabila diwajibkan oleh ketentuan hukum yang
+                  berlaku. Dalam hal ini, Pruviu akan memberikan pemberitahuan
+                  kepada Pengguna bahwa data pribadinya digunakan, diproses,
+                  diungkap, dan/atau dialihkan kepada otoritas yang berwenang.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              11. Perubahan Kebijakan Privasi
+            </h2>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>11.1</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pruviu dapat memperbarui atau mengubah isi Kebijakan Privasi
+                  pada masa waktu tertentu tanpa ada pemberitahuan sebelumnya,
+                  baik sebagian atau seluruhnya. Perubahan Kebijakan Privasi
+                  akan berlaku sejak tanggal pengesahannya.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>11.2</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Pengguna berhak untuk memberikan persetujuannya terhadap
+                  perubahan Kebijakan Privasi dalam Pruviu. Apabila Pengguna
+                  tidak menyetujui perubahan tersebut, maka Pengguna dapat
+                  melakukan pengakhiran layanan dan/atau akun pada Pruviu.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-12 min-w-[3rem] text-right pt-1">
+                <strong>11.3</strong>
+              </div>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed mb-0">
+                  Dengan tunduk pada Kebijakan Privasi ini, Pruviu akan
+                  memberikan layanan dan hak kepada setiap Pengguna.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-navy-700 mb-4">
+              12. Informasi dan Keluhan
+            </h2>
+            <p>
+              Seluruh informasi lainnya mengenai Kebijakan Privasi dan data
+              pribadi Pengguna serta keluhan Pengguna dapat diperoleh dan
+              disampaikan pada: 
+              </p>
+              <p>alamat; Jalan Daksa V No. 5, Selong, Kebayoran
+              Baru Jakarta Selatan, DKI Jakarta 12110, Indonesia. 
+              </p>
+              <p>email:support@pruviu.com
+            </p>
+          </section>
+
         </div>
 
         {/* Back to Home Button */}
         <div className="mt-8 text-center">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="inline-block px-8 py-3 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
           >
             Kembali ke Beranda
@@ -284,10 +928,24 @@ export default function PrivacyPolicy() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-navy-700 text-white mt-16">
-        <div className="container mx-auto px-6 py-8">
-          <div className="text-center text-gray-300">
-            <p>&copy; 2025 Pruden Visi Utama. Semua hak cipta dilindungi.</p>
+      <footer className="bg-gray-900 text-gray-300 py-8 md:py-12">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col items-center mb-8">
+            <Image
+              src="/Pruviu.svg"
+              alt="Pruviu Logo"
+              width={100}
+              height={33}
+              className="mb-4 brightness-200"
+            />
+            <p className="text-gray-300 text-center">
+              Hubungi kami: <a href="mailto:support@pruviu.com" className="text-navy-400 underline">support@pruviu.com</a>
+            </p>
+          </div>
+          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400">
+            <p className="text-sm md:text-base">
+              &copy; 2025 PT Pruden Visi Utama. Hak Cipta Dilindungi.
+            </p>
           </div>
         </div>
       </footer>
