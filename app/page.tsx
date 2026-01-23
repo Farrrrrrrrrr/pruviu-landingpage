@@ -400,13 +400,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Additional Features Section with Carousel on Right */}
+            {/* Mobile umum */}
+            
             <div className="mt-32 md:mt-40">
               <div className="flex flex-col lg:flex-row-reverse items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
-                <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
-                  {/* Second Carousel Container */}
+                {/* <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
                   <div className="relative w-full max-w-2xl">
-                    {/* Images Container with 3D Perspective */}
                     <div
                       className="relative h-[400px] sm:h-[450px] md:h-[500px]"
                       style={{ perspective: "1200px" }}
@@ -472,7 +471,6 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Dots Indicator */}
                     <div className="flex justify-center gap-2 mt-6">
                       {mobileImages2.map((_, index) => (
                         <button
@@ -491,7 +489,8 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </div> */}
+{/*                 
                 <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
                   <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
                     Pantau Pengeluaran & Bangun Reputasi Keuangan Anda
@@ -516,9 +515,10 @@ export default function Home() {
                     </div>
                     
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
+
           </div>
         </div>
       </section>
