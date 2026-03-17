@@ -6,7 +6,6 @@ import { useState } from "react";
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
-  const [currentSlide2, setCurrentSlide2] = useState(1);
 
   const mobileImages = [
     { src: "/Onboarding.png", alt: "Pruviu Mobile Onboarding" },
@@ -14,29 +13,16 @@ export default function Home() {
     { src: "/Homepage.png", alt: "Pruviu Mobile Homepage" },
   ];
 
-  const mobileImages2 = [
-    { src: "/konsul.png", alt: "Pruviu Mobile Konsultasi" },
-    { src: "/pencatatan.png", alt: "Pruviu Mobile Pencatatan" },
-    { src: "/tren.png", alt: "Pruviu Mobile Tren" },
-  ];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % mobileImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + mobileImages.length) % mobileImages.length
-    );
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header/Navbar */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-4 md:px-6 py-4">
+        <nav
+          className="container mx-auto px-4 md:px-6 py-4"
+          aria-label="Navigasi utama"
+        >
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3" aria-label="Pruviu beranda">
               <Image
                 src="/logo.png"
                 alt="Pruviu Logo"
@@ -45,7 +31,7 @@ export default function Home() {
                 className="w-32 md:w-40 h-auto"
                 priority
               />
-            </div>
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
               <a
                 href="#beranda"
@@ -88,9 +74,12 @@ export default function Home() {
             </div>
             {/* Mobile Menu Button */}
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-navy-600"
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <svg
                 className="w-6 h-6"
@@ -118,7 +107,7 @@ export default function Home() {
           </div>
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 space-y-4">
+            <div id="mobile-menu" className="md:hidden mt-4 pb-4 space-y-4">
               <a
                 href="#beranda"
                 className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
@@ -162,14 +151,17 @@ export default function Home() {
         </nav>
       </header>
 
+      <main id="main-content">
+
       {/* Hero Section */}
       <section
         id="beranda"
+        aria-labelledby="hero-title"
         className="container mx-auto px-4 md:px-6 py-10 md:py-20"
       >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
+            <h1 id="hero-title" className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-navy-700 leading-tight md:leading-none tracking-wide md:tracking-widest">
               Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu{" "}
               <span className="bg-clip-text text-red-600">
                 Pertama di Indonesia
@@ -237,12 +229,12 @@ export default function Home() {
       </section>
 
       {/* Product Showcase Section */}
-      <section className="bg-white py-20 md:py-32">
+      <section className="bg-white py-20 md:py-32" aria-labelledby="product-showcase-title">
         <div className="container mx-auto px-4 md:px-6">
           {/* Desktop Dashboard Section */}
           <div className="mb-32 md:mb-40">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
+              <h2 id="product-showcase-title" className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-700 mb-2 tracking-tight">
                 Pruviu <span className="text-red-600">Web</span>
               </h2>
             </div>
@@ -321,11 +313,12 @@ export default function Home() {
                         }
 
                         return (
-                          <div
+                          <button
+                            type="button"
                             key={index}
                             onClick={() => setCurrentSlide(index)}
                             className={`
-                              absolute transition-all duration-700 ease-in-out cursor-pointer
+                              absolute transition-all duration-700 ease-in-out cursor-pointer bg-transparent border-0 p-0
                               ${
                                 !isVisible
                                   ? "opacity-0 pointer-events-none"
@@ -341,6 +334,8 @@ export default function Home() {
                               transform: transformStyle,
                               transformStyle: "preserve-3d",
                             }}
+                            aria-label={`Tampilkan slide ${index + 1}`}
+                            aria-current={isActive ? "true" : undefined}
                           >
                             <Image
                               src={image.src}
@@ -351,16 +346,17 @@ export default function Home() {
                                 isActive ? "brightness-100" : "brightness-75"
                               }`}
                             />
-                          </div>
+                          </button>
                         );
                       })}
                     </div>
                   </div>
 
                   {/* Dots Indicator */}
-                  <div className="flex justify-center gap-2 mt-6">
+                  <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Navigasi slide aplikasi mobile">
                     {mobileImages.map((_, index) => (
                       <button
+                        type="button"
                         key={index}
                         onClick={() => setCurrentSlide(index)}
                         className={`
@@ -372,6 +368,8 @@ export default function Home() {
                           }
                         `}
                         aria-label={`Go to slide ${index + 1}`}
+                        aria-selected={index === currentSlide}
+                        role="tab"
                       />
                     ))}
                   </div>
@@ -524,10 +522,10 @@ export default function Home() {
       </section>
 
       {/* Pengaduan Section */}
-      <section id="pengaduan" className="bg-gray-50 py-12 md:py-16 lg:py-20">
+      <section id="pengaduan" className="bg-gray-50 py-12 md:py-16 lg:py-20" aria-labelledby="complaint-title">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 mb-3 md:mb-4 tracking-tight">
+            <h2 id="complaint-title" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 mb-3 md:mb-4 tracking-tight">
               Form Pengaduan
             </h2>
             {/* <p className="text-base sm:text-lg md:text-xl text-gray-600 font-light">
@@ -578,6 +576,7 @@ ${pengaduan}
                     id="nama"
                     name="nama"
                     required
+                    autoComplete="name"
                     className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
                     placeholder="Masukkan nama lengkap Anda"
                   />
@@ -598,9 +597,14 @@ ${pengaduan}
                     required
                     pattern="[0-9]{16}"
                     maxLength={16}
+                    inputMode="numeric"
+                    aria-describedby="nik-helper"
                     className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
                     placeholder="16 digit NIK"
                   />
+                  <p id="nik-helper" className="text-xs text-gray-500 mt-2">
+                    Masukkan 16 digit angka sesuai NIK Anda
+                  </p>
                 </div>
               </div>
 
@@ -619,6 +623,7 @@ ${pengaduan}
                     id="email-pengaduan"
                     name="email"
                     required
+                    autoComplete="email"
                     className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
                     placeholder="contoh@email.com"
                   />
@@ -638,6 +643,7 @@ ${pengaduan}
                     name="noTelpon"
                     required
                     pattern="[0-9+\-\s()]+"
+                    autoComplete="tel"
                     className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
                     placeholder="08123456789"
                   />
@@ -658,10 +664,11 @@ ${pengaduan}
                   required
                   rows={5}
                   minLength={20}
+                  aria-describedby="pengaduan-helper"
                   className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all resize-vertical text-gray-800 text-base"
                   placeholder="Jelaskan pengaduan Anda secara detail..."
                 />
-                <p className="text-xs md:text-sm text-gray-500 mt-2">
+                <p id="pengaduan-helper" className="text-xs md:text-sm text-gray-500 mt-2">
                   Minimal 20 karakter
                 </p>
               </div>
@@ -825,6 +832,10 @@ ${pengaduan}
                 Platform Monitoring dan Mitigasi Risiko Keuangan untuk Koperasi
                 dan Anggota Koperasi
               </p>
+              <hr className="border-gray-700 my-4" />
+              <p className="text-sm md:text-base text-gray-400">
+                51st Floor, Gedung Treasury Tower, Kawasan District 8 LOT 28, Jl. Tulodong Atas 2 No.28, Senayan, Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12190
+              </p>
             </div>
             <div>
               <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
@@ -947,6 +958,7 @@ ${pengaduan}
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }

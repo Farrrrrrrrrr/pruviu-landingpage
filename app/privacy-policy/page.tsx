@@ -7,9 +7,9 @@ export default function PrivacyPolicyPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header/Navbar */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-4 md:px-6 py-4">
+        <nav className="container mx-auto px-4 md:px-6 py-4" aria-label="Navigasi utama">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3" aria-label="Pruviu beranda">
               <Image
                 src="/logo.png"
                 alt="Pruviu Logo"
@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
                 className="w-32 md:w-40 h-auto"
                 priority
               />
-            </div>
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link
                 href="/"
@@ -40,6 +40,7 @@ export default function PrivacyPolicyPage() {
               </Link>
               <Link
                 href="/privacy-policy"
+                aria-current="page"
                 className="text-gray-600 hover:text-navy-600 font-bold transition-colors"
               >
                 Kebijakan Privasi
@@ -64,6 +65,8 @@ export default function PrivacyPolicyPage() {
           </div>
         </nav>
       </header>
+
+      <main id="main-content">
 
       {/* Privacy Policy Content */}
       <div className="container mx-auto px-6 py-12 max-w-4xl">
@@ -949,6 +952,7 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ComingSoon() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center px-6">
-      <div className="max-w-3xl mx-auto text-center space-y-8">
+      <main id="main-content" className="max-w-3xl mx-auto text-center space-y-8">
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <Link href="/">
@@ -89,12 +89,12 @@ export default function ComingSoon() {
         <footer className="pt-16 pb-8 text-gray-500 text-sm">
           <p>&copy; 2026 Pruviu. Hak Cipta Dilindungi.</p>
           <div className="mt-2">
-            <a href="/privacy-policy" className="hover:text-navy-600 transition-colors">
+            <Link href="/privacy-policy" className="hover:text-navy-600 transition-colors">
               Kebijakan Privasi
-            </a>
+            </Link>
           </div>
         </footer>
-      </div>
+      </main>
     </div>
   );
 }

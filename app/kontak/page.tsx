@@ -10,7 +10,7 @@ export default function Kontak() {
     <div className="min-h-screen bg-gray-50">
       {/* Header/Navbar */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-4 md:px-6 py-4">
+        <nav className="container mx-auto px-4 md:px-6 py-4" aria-label="Navigasi utama">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               <Image
@@ -36,9 +36,12 @@ export default function Kontak() {
               </Link>
             </div>
             <button 
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:text-navy-600"
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="kontak-mobile-menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (
@@ -50,9 +53,9 @@ export default function Kontak() {
             </button>
           </div>
           {mobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 space-y-4">
+            <div id="kontak-mobile-menu" className="md:hidden mt-4 pb-4 space-y-4">
               <Link href="/#beranda" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Beranda</Link>
-              <Link href="/kontak" className="block text-navy-600 font-semibold transition-colors py-2">Kontak</Link>
+              <Link href="/kontak" aria-current="page" className="block text-navy-600 font-semibold transition-colors py-2">Kontak</Link>
               <Link href="/privacy-policy" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Kebijakan Privasi</Link>
               <div className="pt-4 space-y-2">
                 <Link href="https://app.pruviu.com" className="block text-center px-6 py-2 text-navy-600 border border-navy-600 rounded-lg">
@@ -67,11 +70,13 @@ export default function Kontak() {
         </nav>
       </header>
 
+      <main id="main-content">
+
       {/* Contact Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10 md:py-20">
+      <section className="container mx-auto px-4 md:px-6 py-10 md:py-20" aria-labelledby="contact-title">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 md:mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy-700 mb-3 md:mb-4">Hubungi Kami</h1>
+            <h1 id="contact-title" className="text-3xl sm:text-4xl md:text-5xl font-bold text-navy-700 mb-3 md:mb-4">Hubungi Kami</h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-600">Kami siap membantu Anda dengan pertanyaan dan kebutuhan Anda</p>
           </div>
 
@@ -152,6 +157,7 @@ export default function Kontak() {
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }
