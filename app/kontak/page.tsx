@@ -24,6 +24,7 @@ export default function Kontak() {
             </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/#beranda" className="text-gray-600 hover:text-navy-600 transition-colors">Beranda</Link>
+              <Link href="/tentang-kami" className="text-gray-600 hover:text-navy-600 transition-colors">Tentang Kami</Link>
               <Link href="/kontak" className="text-navy-600 font-semibold transition-colors">Kontak</Link>
               <Link href="/privacy-policy" className="text-gray-600 hover:text-navy-600 transition-colors">Kebijakan Privasi</Link>
             </div>
@@ -55,6 +56,7 @@ export default function Kontak() {
           {mobileMenuOpen && (
             <div id="kontak-mobile-menu" className="md:hidden mt-4 pb-4 space-y-4">
               <Link href="/#beranda" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Beranda</Link>
+              <Link href="/tentang-kami" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Tentang Kami</Link>
               <Link href="/kontak" aria-current="page" className="block text-navy-600 font-semibold transition-colors py-2">Kontak</Link>
               <Link href="/privacy-policy" className="block text-gray-600 hover:text-navy-600 transition-colors py-2">Kebijakan Privasi</Link>
               <div className="pt-4 space-y-2">
@@ -133,7 +135,7 @@ export default function Kontak() {
             <div>
               <h4 className="font-bold text-white mb-4">Perusahaan</h4>
               <ul className="space-y-2">
-                <li><Link href="/coming-soon" className="hover:text-white transition-colors">Tentang Kami</Link></li>
+                <li><Link href="/tentang-kami" className="hover:text-white transition-colors">Tentang Kami</Link></li>
                 <li><Link href="/coming-soon-karir" className="hover:text-white transition-colors">Karir</Link></li>
                 <li><Link href="/coming-soon-blog" className="hover:text-white transition-colors">Blog</Link></li>
               </ul>

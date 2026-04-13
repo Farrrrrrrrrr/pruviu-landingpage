@@ -51,6 +51,12 @@ export default function Home() {
               >
                 Kontak
               </Link>
+              <Link
+                href="/about-us"
+                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
+              >
+                Tentang Kami
+              </Link>
               <a
                 href="/privacy-policy"
                 className="text-gray-600 hover:text-navy-600 font-bold transition-colors"
@@ -125,6 +131,12 @@ export default function Home() {
                 className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
               >
                 Kontak
+              </Link>
+              <Link
+                href="/about-us"
+                className="block text-gray-600 font-bold hover:text-navy-600 transition-colors py-2"
+              >
+                Tentang Kami
               </Link>
               <a
                 href="/privacy-policy"
@@ -874,12 +886,12 @@ ${pengaduan}
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/tentang-kami"
                     className="hover:text-white transition-colors text-sm md:text-base"
                   >
                     Tentang Kami
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
