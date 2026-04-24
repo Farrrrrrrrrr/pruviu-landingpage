@@ -3,9 +3,38 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --navy-600: #1e3a8a;
-  --navy-700: #1e40af;
-  --navy-800: #1e3a8a;
+
+  /* === Pruviu Brand Palette ===
+   * Red:        primary #ee3042 / secondary #f26d72
+   * Dark Indigo: primary #282561 / secondary #273b93
+   * Medium Blue: primary #336ab3 / secondary #416088
+   * Blue-Gray:  primary #a4b0ce / secondary #606161
+   */
+
+  /* Red */
+  --brand-red:          #ee3042;
+  --brand-red-light:    #f26d72;
+
+  /* Dark Indigo */
+  --brand-indigo:       #282561;
+  --brand-indigo-light: #273b93;
+
+  /* Medium Blue */
+  --brand-blue:         #336ab3;
+  --brand-blue-muted:   #416088;
+
+  /* Blue-Gray */
+  --brand-bluegray:     #a4b0ce;
+  --brand-gray:         #606161;
+
+  /* Tailwind token aliases */
+  --navy-50:  #eef1fb;
+  --navy-200: var(--brand-bluegray);   /* #a4b0ce */
+  --navy-400: var(--brand-blue-muted); /* #416088 */
+  --navy-500: var(--brand-blue);       /* #336ab3 */
+  --navy-600: var(--brand-indigo-light); /* #273b93 — buttons, interactive */
+  --navy-700: var(--brand-indigo);       /* #282561 — headings, hover */
+  --navy-800: #1f1d52;                   /* deeper dark indigo for high-emphasis text */
 }
 
 @theme inline {
@@ -13,9 +42,22 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-navy-600: #1e3a8a;
-  --color-navy-700: #1e40af;
-  --color-navy-800: #1e3a8a;
+
+  /* Navy scale */
+  --color-navy-50:  #eef1fb;
+  --color-navy-200: #a4b0ce;
+  --color-navy-400: #416088;
+  --color-navy-500: #336ab3;
+  --color-navy-600: #273b93;
+  --color-navy-700: #282561;
+  --color-navy-800: #1f1d52;
+
+  /* Red scale */
+  --color-red-600: #ee3042;
+  --color-red-400: #f26d72;
+
+  /* Gray */
+  --color-gray-600: #606161;
 }
 
 body {

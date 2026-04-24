@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="120" viewBox="0 0 280 120" fill="none">
+  <rect x="1" y="1" width="278" height="118" rx="14" fill="#ffffff" stroke="#D7D9E5" stroke-width="2"/>
+  <rect x="16" y="16" width="74" height="88" rx="10" fill="#EEF2FF"/>
+  <path d="M38 40h30v8H46v10h18v8H46v16h-8V40z" fill="#282561"/>
+  <path d="M67 52h9l7 28h-9l-1.2-5h-8.6L63 80h-9l13-28zm4.3 17-2.7-10.4L65.9 69h5.4z" fill="#282561"/>
+  <text x="104" y="49" font-size="17" font-family="Arial, sans-serif" font-weight="700" fill="#282561">PSE</text>
+  <text x="104" y="72" font-size="14" font-family="Arial, sans-serif" fill="#555B74">Terdaftar Penyelenggara</text>
+  <text x="104" y="90" font-size="12" font-family="Arial, sans-serif" fill="#555B74">Sistem Elektronik</text>
+  <circle cx="245" cy="60" r="14" fill="#EE3042"/>
+  <path d="M238 60l5 5 9-10" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

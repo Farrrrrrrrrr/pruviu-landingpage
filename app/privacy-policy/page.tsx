@@ -1,75 +1,16 @@
-
 import Link from "next/link";
-import Image from "next/image";
+import { SiteFooter } from "../components/site-footer";
+import { SiteHeader } from "../components/site-header";
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header/Navbar */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-4 md:px-6 py-4" aria-label="Navigasi utama">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3" aria-label="Pruviu beranda">
-              <Image
-                src="/logo.png"
-                alt="Pruviu Logo"
-                width={150}
-                height={79}
-                className="w-32 md:w-40 h-auto"
-                priority
-              />
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                href="/"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Beranda
-              </Link>
-              <Link
-                href="/privacy-policy#pengaduan"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Pengaduan
-              </Link>
-              <Link
-                href="/kontak"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Kontak
-              </Link>
-              <Link
-                href="/privacy-policy"
-                aria-current="page"
-                className="text-gray-600 hover:text-navy-600 font-bold transition-colors"
-              >
-                Kebijakan Privasi
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                href="https://app.pruviu.com"
-                className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
-              >
-                Masuk
-              </Link>
-              <Link
-                href="https://app.pruviu.com"
-                className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
-              >
-                Daftar
-              </Link>
-            </div>
-            {/* Mobile Menu Button */}
-            {/* You can add mobile menu logic here if needed */}
-          </div>
-        </nav>
-      </header>
+      <SiteHeader currentPath="/privacy-policy" />
 
       <main id="main-content">
 
       {/* Privacy Policy Content */}
-      <div className="container mx-auto px-6 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 md:px-6 py-10 md:py-12 max-w-4xl">
         <h1 className="text-4xl font-bold text-navy-700 mb-4">
           Kebijakan Privasi
         </h1>
@@ -77,7 +18,7 @@ export default function PrivacyPolicyPage() {
           Terakhir diperbarui: 22 Januari 2026
         </p>
 
-        <div className="bg-white rounded-lg shadow-sm p-8 space-y-8">
+        <div className="bg-white rounded-lg shadow-sm p-5 md:p-8 space-y-8">
           <section>
             <h2 className="text-2xl font-bold text-navy-700 mb-4">
               1. Ketentuan Umum
@@ -95,7 +36,7 @@ export default function PrivacyPolicyPage() {
                   teks, gambar, foto, grafik, pemrograman, perangkat lunak,
                   layanan aplikasi (termasuk namun tidak terbatas pada, setiap
                   layanan aplikasi mobile) atau materi lainnya yang tersedia
-                  melalui situs atau layanan terkait (&quotLayanan&quot) yang telah
+                  melalui situs atau layanan terkait ("Layanan") yang telah
                   terdaftar di Kementerian Komunikasi dan Digital sebagai
                   Penyelenggara Sistem Elektronik (PSE) atas nama PT Pruden Visi
                   Utama.
@@ -930,28 +871,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-8 md:py-12">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col items-center mb-8">
-            <Image
-              src="/Pruviu.svg"
-              alt="Pruviu Logo"
-              width={100}
-              height={33}
-              className="mb-4 brightness-200"
-            />
-            <p className="text-gray-300 text-center">
-              Hubungi kami: <a href="mailto:support@pruviu.com" className="text-navy-400 underline">support@pruviu.com</a>
-            </p>
-          </div>
-          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400">
-            <p className="text-sm md:text-base">
-              &copy; 2025 PT Pruden Visi Utama. Hak Cipta Dilindungi.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
       </main>
     </div>
   );

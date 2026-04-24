@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { SiteFooter } from "../components/site-footer";
+import { SiteHeader } from "../components/site-header";
 
 export const metadata: Metadata = {
   title: "Tentang Kami | Pruviu",
@@ -13,53 +13,7 @@ const companyProfilePath = "/PRUVIU_Company_Profile-2026-04-10.pdf";
 export default function TentangKamiPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <nav
-          className="container mx-auto px-4 md:px-6 py-4"
-          aria-label="Navigasi utama"
-        >
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3" aria-label="Pruviu beranda">
-              <Image
-                src="/logo.png"
-                alt="Pruviu Logo"
-                width={150}
-                height={79}
-                className="w-32 md:w-40 h-auto"
-                priority
-              />
-            </Link>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                href="/"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Beranda
-              </Link>
-              <Link
-                href="/tentang-kami"
-                aria-current="page"
-                className="text-navy-600 font-bold transition-colors"
-              >
-                Tentang Kami
-              </Link>
-              <Link
-                href="/kontak"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Kontak
-              </Link>
-              <Link
-                href="/privacy-policy"
-                className="text-gray-600 font-bold hover:text-navy-600 transition-colors"
-              >
-                Kebijakan Privasi
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader currentPath="/tentang-kami" />
 
       <main id="main-content" className="container mx-auto px-4 md:px-6 py-10 md:py-14">
         <section className="max-w-6xl mx-auto">
@@ -95,7 +49,7 @@ export default function TentangKamiPage() {
             <iframe
               src={companyProfilePath}
               title="PRUVIU Company Profile"
-              className="w-full h-[70vh] min-h-[640px]"
+              className="w-full h-[65vh] min-h-[420px] md:min-h-[640px]"
             />
           </div>
 
@@ -104,6 +58,9 @@ export default function TentangKamiPage() {
             &quot;Buka PDF di Tab Baru&quot; atau &quot;Download Company Profile&quot;.
           </p>
         </section>
+        <div className="mt-12 -mx-4 md:-mx-6">
+          <SiteFooter />
+        </div>
       </main>
     </div>
   );

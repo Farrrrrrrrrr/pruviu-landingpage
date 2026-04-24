@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="120" viewBox="0 0 280 120" fill="none">
+  <rect x="1" y="1" width="278" height="118" rx="14" fill="#ffffff" stroke="#D7D9E5" stroke-width="2"/>
+  <rect x="16" y="16" width="74" height="88" rx="10" fill="#282561"/>
+  <text x="53" y="62" font-size="28" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#ffffff">D-U-N-S</text>
+  <text x="104" y="49" font-size="17" font-family="Arial, sans-serif" font-weight="700" fill="#282561">DUNS</text>
+  <text x="104" y="72" font-size="14" font-family="Arial, sans-serif" fill="#555B74">Registered Entity</text>
+  <circle cx="245" cy="60" r="14" fill="#EE3042"/>
+  <path d="M238 60l5 5 9-10" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
