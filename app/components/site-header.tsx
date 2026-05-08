@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 type SiteHeaderProps = {
-  currentPath?: "/" | "/fitur" | "/kontak" | "/tentang-kami" | "/privacy-policy" | string;
+  currentPath?: "/" | "/fitur" | "/harga" | "/kontak" | "/tentang-kami" | string;
 };
 
 function getNavClass(isActive: boolean) {
@@ -18,12 +18,12 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isHome = currentPath === "/";
   const homeHref = isHome ? "#beranda" : "/#beranda";
-  const complaintHref = isHome ? "#pengaduan" : "/#pengaduan";
+  const complianceHref = isHome ? "#compliance" : "/#compliance";
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav
-        className="container mx-auto px-4 md:px-6 py-4"
+        className="edge-safe-header container mx-auto py-4 md:px-6"
         aria-label="Navigasi utama"
       >
         <div className="flex items-center justify-between">
@@ -41,20 +41,17 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             <Link href={homeHref} className={getNavClass(isHome)}>
               Beranda
             </Link>
-            <Link href={complaintHref} className={getNavClass(false)}>
-              Pengaduan
-            </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur")}>
               Fitur
+            </Link> */}
+            {/* <Link href="/harga" className={getNavClass(currentPath === "/harga")}>
+              Harga
             </Link> */}
             <Link href="/kontak" className={getNavClass(currentPath === "/kontak")}>
               Kontak
             </Link>
             <Link href="/tentang-kami" className={getNavClass(currentPath === "/tentang-kami")}>
               Tentang Kami
-            </Link>
-            <Link href="/privacy-policy" className={getNavClass(currentPath === "/privacy-policy")}>
-              Kebijakan Privasi
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
@@ -108,20 +105,17 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             <Link href={homeHref} className={getNavClass(isHome) + " block py-2"}>
               Beranda
             </Link>
-            <Link href={complaintHref} className={getNavClass(false) + " block py-2"}>
-              Pengaduan
-            </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur") + " block py-2"}>
               Fitur
+            </Link> */}
+            {/* <Link href="/harga" className={getNavClass(currentPath === "/harga") + " block py-2"}>
+              Harga
             </Link> */}
             <Link href="/kontak" className={getNavClass(currentPath === "/kontak") + " block py-2"}>
               Kontak
             </Link>
             <Link href="/tentang-kami" className={getNavClass(currentPath === "/tentang-kami") + " block py-2"}>
               Tentang Kami
-            </Link>
-            <Link href="/privacy-policy" className={getNavClass(currentPath === "/privacy-policy") + " block py-2"}>
-              Kebijakan Privasi
             </Link>
             <div className="pt-4 space-y-2">
               <Link

@@ -1,7 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import {
+  ReactNode,
+  TouchEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  WheelEvent,
+} from "react";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 
@@ -24,13 +33,182 @@ function FeaturePointer({ children }: { children: ReactNode }) {
           />
         </svg>
       </span>
-      <p className="text-xs sm:text-sm font-medium text-navy-800">{children}</p>
+      <p className="text-xs font-medium text-navy-800 sm:text-sm">{children}</p>
     </div>
   );
 }
 
+const SECTION_IDS = ["beranda", "web", "mobile", "compliance"] as const;
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(1);
+  const [activeSection, setActiveSection] = useState(0);
+
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const footerRef = useRef<HTMLElement | null>(null);
+  const activeSectionRef = useRef(0);
+  const isTransitioningRef = useRef(false);
+  const touchStartYRef = useRef<number | null>(null);
+  const transitionTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  const scrollToSection = useCallback((index: number) => {
+    const target = clamp(index, 0, SECTION_IDS.length - 1);
+    if (target === activeSectionRef.current || isTransitioningRef.current) {
+      return;
+    }
+
+    const targetElement = sectionRefs.current[target];
+    if (!targetElement) {
+      return;
+    }
+
+    isTransitioningRef.current = true;
+    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (transitionTimeoutRef.current) {
+      window.clearTimeout(transitionTimeoutRef.current);
+    }
+
+    transitionTimeoutRef.current = window.setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 850);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) {
+          return;
+        }
+
+        const index = sectionRefs.current.findIndex(
+          (section) => section === visible.target,
+        );
+
+        if (index >= 0) {
+          setActiveSection(index);
+        }
+      },
+      {
+        threshold: [0.55, 0.7],
+      },
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const moveSection = useCallback(
+    (direction: 1 | -1) => {
+      scrollToSection(activeSectionRef.current + direction);
+    },
+    [scrollToSection],
+  );
+
+  const scrollToFooter = useCallback(() => {
+    if (isTransitioningRef.current || !footerRef.current) {
+      return;
+    }
+
+    isTransitioningRef.current = true;
+    footerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (transitionTimeoutRef.current) {
+      window.clearTimeout(transitionTimeoutRef.current);
+    }
+
+    transitionTimeoutRef.current = window.setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 850);
+  }, []);
+
+  const handleWheel = useCallback(
+    (event: WheelEvent<HTMLElement>) => {
+      if (Math.abs(event.deltaY) < 25) {
+        return;
+      }
+
+      const stage = stageRef.current;
+      const footer = footerRef.current;
+      const footerStart = footer?.offsetTop ?? Number.POSITIVE_INFINITY;
+      const isInFooter = stage ? stage.scrollTop >= footerStart - 24 : false;
+
+      if (isInFooter) {
+        return;
+      }
+
+      if (
+        event.deltaY > 0 &&
+        activeSectionRef.current === SECTION_IDS.length - 1
+      ) {
+        event.preventDefault();
+        scrollToFooter();
+        return;
+      }
+
+      event.preventDefault();
+
+      if (isTransitioningRef.current) {
+        return;
+      }
+
+      moveSection(event.deltaY > 0 ? 1 : -1);
+    },
+    [moveSection, scrollToFooter],
+  );
+
+  const handleTouchStart = useCallback((event: TouchEvent<HTMLElement>) => {
+    touchStartYRef.current = event.touches[0]?.clientY ?? null;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (event: TouchEvent<HTMLElement>) => {
+      if (touchStartYRef.current === null || isTransitioningRef.current) {
+        return;
+      }
+
+      const endY = event.changedTouches[0]?.clientY;
+      if (typeof endY !== "number") {
+        return;
+      }
+
+      const delta = touchStartYRef.current - endY;
+      if (Math.abs(delta) < 45) {
+        return;
+      }
+
+      if (delta > 0 && activeSectionRef.current === SECTION_IDS.length - 1) {
+        scrollToFooter();
+        return;
+      }
+
+      moveSection(delta > 0 ? 1 : -1);
+    },
+    [moveSection, scrollToFooter],
+  );
 
   const mobileImages = [
     { src: "/Onboarding.png", alt: "Pruviu Mobile Onboarding" },
@@ -43,21 +221,33 @@ export default function Home() {
       src: "/duns-registered.webp",
       alt: "DUNS Registered badge",
       title: "DUNS",
+      subtitle: "Dun & Bradstreet Registered",
+      width: 156,
+      height: 46,
     },
     {
       src: "/logo-pse-small.png",
       alt: "PSE registration badge",
       title: "PSE",
+      subtitle: "Penyelenggara Sistem Elektronik",
+      width: 136,
+      height: 38,
     },
     {
       src: "/logo-komdigi.png",
       alt: "Komdigi partnership badge",
-      title: "Komdigi Partnership",
+      title: "Komdigi",
+      subtitle: "Konektivitas Ekosistem Komdigi",
+      width: 136,
+      height: 38,
     },
     {
       src: "/iso-270012022.webp",
       alt: "ISO 27001 certified badge",
       title: "ISO 27001",
+      subtitle: "Sertifikasi ISO 27001:2022",
+      width: 136,
+      height: 38,
     },
   ];
 
@@ -65,157 +255,139 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <SiteHeader currentPath="/" />
 
-      <main id="main-content">
-
-      {/* Hero Section */}
-      <section
-        id="beranda"
-        aria-labelledby="hero-title"
-        className="container mx-auto px-4 md:px-6 py-10 md:py-20"
-      >
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
-          <div className="flex-1 space-y-4 md:space-y-6 text-center lg:text-left">
-            <h1 id="hero-title" className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-navy-800 leading-tight md:leading-none tracking-wide md:tracking-widest">
-              Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu{" "}
-              <span className="text-red-600">
-                Pertama di Indonesia
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-navy-800 leading-relaxed">
-              Platform digital yang dilengkapi berbagai fitur infomasi
-              perkreditan terpercaya serta analitik berbasis kecerdasan buatan
-              untuk koperasi, anggota koperasi, dan masyarakat umum.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-              <Link
-                href="https://app.pruviu.com"
-                className="px-6 md:px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium text-base md:text-lg shadow-lg text-center"
-              >
-                Daftar
-              </Link>
-              <Link
-                href="https://app.pruviu.com"
-                className="px-6 md:px-8 py-3 md:py-4 bg-white text-navy-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base md:text-lg border-2 border-navy-600 text-center"
-              >
-                Masuk
-              </Link>
-            </div>
-            <div className="grid grid-cols-3 gap-4 md:gap-8 pt-4">
-              <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-800">
-                  500+
-                </p>
-                <p className="text-xs sm:text-sm md:text-base text-navy-800">
-                  Koperasi User Web
-                </p>
-              </div>
-              <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-800">
-                  50K+
-                </p>
-                <p className="text-xs sm:text-sm md:text-base text-navy-800">
-                  User Mobile untuk Anggota Koperasi
-                </p>
-              </div>
-              <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-navy-800">
-                  75K+
-                </p>
-                <p className="text-xs sm:text-sm md:text-base text-navy-800">
-                  User Mobile untuk Umum
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1 w-full hidden lg:block">
-            <div className="relative mt-2 lg:-mt-20">
-              <Image
-                src="/ImageContent - Hero.png"
-                alt="Pruviu Dashboard Preview"
-                width={800}
-                height={533}
-                className="w-full h-auto scale-100 lg:scale-110"
-                priority
-              />
-            </div>
-          </div>
+      <main id="main-content" className="relative">
+        <div className="pointer-events-none fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 md:flex md:flex-col md:gap-3">
+          {SECTION_IDS.map((sectionId, index) => (
+            <button
+              key={sectionId}
+              type="button"
+              onClick={() => scrollToSection(index)}
+              className={`pointer-events-auto h-2.5 w-2.5 rounded-full transition-all ${
+                index === activeSection
+                  ? "scale-125 bg-navy-600"
+                  : "bg-navy-400/60 hover:bg-navy-600"
+              }`}
+              aria-label={`Buka section ${sectionId}`}
+              aria-current={index === activeSection}
+            />
+          ))}
         </div>
-      </section>
 
-      {/* Trust & Compliance Strip */}
-      <section className="bg-white py-4 md:py-5 border-y border-navy-600/10" aria-labelledby="trust-title">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-6xl mx-auto flex flex-col items-center gap-2 md:gap-2">
-            <p id="trust-title" className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-gray-500 font-semibold text-center md:text-left">
-              Tersertifikasi dan beranggota
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 w-full md:w-auto">
-              {trustBadges.map((badge) => (
-                <div key={badge.title} className="h-12 md:h-14 rounded-lg border border-gray-200 bg-gray-50/80 px-2.5 flex items-center justify-center">
-                  <Image
-                    src={badge.src}
-                    alt={badge.alt}
-                    width={badge.title === "DUNS" ? 140 : 124}
-                    height={badge.title === "DUNS" ? 40 : 36}
-                    className={`w-auto object-contain opacity-80 ${
-                      badge.title === "DUNS"
-                        ? "max-h-9 md:max-h-10"
-                        : "max-h-7 md:max-h-8"
-                    }`}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Showcase Section */}
-      <section className="bg-white py-20 md:py-32" aria-labelledby="product-showcase-title">
-        <div className="container mx-auto px-4 md:px-6">
-          {/* Desktop Dashboard Section */}
-          <div className="mb-32 md:mb-40">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 id="product-showcase-title" className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-800 mb-2 tracking-tight">
-                Pruviu <span className="text-red-600">Web</span>
-              </h2>
-              {/* <p className="mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Jelajahi pemetaan fitur lengkap Pruviu Web dalam halaman khusus
-                dengan diagram layanan, penunjuk fitur, dan detail produk yang
-                lebih leluasa dibaca.
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/fitur"
-                  className="inline-flex items-center justify-center rounded-lg bg-navy-600 px-6 py-3 text-white font-medium shadow-sm transition-colors hover:bg-navy-700"
+        <div
+          className="snap-stage"
+          ref={stageRef}
+          onWheel={handleWheel}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <section
+            id="beranda"
+            ref={(element) => {
+              sectionRefs.current[0] = element;
+            }}
+            className={`snap-panel overflow-hidden items-start bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] ${
+              activeSection === 0 ? "panel-active" : ""
+            }`}
+            aria-labelledby="hero-title"
+          >
+            <div className="panel-reveal edge-safe-x mx-auto w-full max-w-5xl pb-0 pt-8 sm:pt-10 md:px-8">
+              <div className="text-center">
+                <h1
+                  id="hero-title"
+                  className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
                 >
-                  Lihat Halaman Fitur
-                </Link>
-              </div>*/}
-            </div>
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 max-w-7xl mx-auto">
-              <div className="flex-1 lg:order-2">
+                  Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu
+                  <span className="text-red-400"> Pertama di Indonesia</span>
+                </h1>
+                <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+                  Platform digital dengan informasi perkreditan terpercaya dan
+                  analitik cerdas untuk koperasi, anggota koperasi, dan
+                  masyarakat umum.
+                </p>
+                <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                  <Link
+                    href="https://app.pruviu.com"
+                    className="rounded-lg bg-white px-6 py-3 text-center text-base font-semibold text-navy-700 shadow-lg transition hover:bg-white/90"
+                  >
+                    Daftar
+                  </Link>
+                  <Link
+                    href="https://app.pruviu.com"
+                    className="rounded-lg border-2 border-white/40 px-6 py-3 text-center text-base font-medium text-white transition hover:bg-white/10"
+                  >
+                    Masuk
+                  </Link>
+                </div>
+                <div className="mt-6 flex justify-center gap-8 text-center sm:gap-16">
+                  <div>
+                    <p className="text-2xl font-bold text-white md:text-3xl">500+</p>
+                    <p className="text-xs text-white/70 md:text-sm">Koperasi User Web</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-white md:text-3xl">50K+</p>
+                    <p className="text-xs text-white/70 md:text-sm">Anggota Koperasi</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-white md:text-3xl">75K+</p>
+                    <p className="text-xs text-white/70 md:text-sm">Masyarakat Umum</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 overflow-hidden">
                 <Image
-                  src="/Laptop - ImageContent.png"
-                  alt="Pruviu Web"
-                  width={1200}
-                  height={675}
-                  className="w-full h-auto"
+                  src="/ImageContent - Hero.png"
+                  alt="Pruviu dashboard preview"
+                  width={1080}
+                  height={1080}
+                  className="h-auto w-full md:hidden"
+                  priority
+                />
+                <Image
+                  src="/dashboard-example.png"
+                  alt="Pruviu dashboard preview"
+                  width={1512}
+                  height={800}
+                  className="h-auto w-full hidden md:block"
                   priority
                 />
               </div>
-              <div className="flex-1 lg:order-1 text-center lg:text-left space-y-6">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-800 tracking-tight">
+            </div>
+          </section>
+
+          <section
+            id="web"
+            ref={(element) => {
+              sectionRefs.current[1] = element;
+            }}
+            className={`snap-panel bg-[radial-gradient(circle_at_top_right,_#f4f7ff,_#ffffff_60%,_#e8efff)] ${
+              activeSection === 1 ? "panel-active" : ""
+            }`}
+            aria-labelledby="web-title"
+          >
+            <div className="panel-reveal edge-safe-x container mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 md:px-6 lg:grid-cols-2 lg:gap-16">
+              <div className="mx-auto w-full max-w-2xl">
+                <Image
+                  src="/Laptop - ImageContent.png"
+                  alt="Pruviu web dashboard"
+                  width={1200}
+                  height={675}
+                  className="h-auto w-full"
+                />
+              </div>
+
+              <div className="space-y-4 text-center lg:text-left">
+                <h2 id="web-title" className="text-3xl font-semibold text-navy-800 md:text-5xl">
+                  Pruviu <span className="text-red-600">Web</span>
+                </h2>
+                <h3 className="text-2xl font-semibold leading-tight text-navy-700 md:text-4xl">
                   Tingkatkan Kualitas Pinjaman Koperasi Anda
                 </h3>
-                <p className="text-lg md:text-xl text-navy-800 leading-relaxed font-light">
-                  Dirancang untuk kebutuhan koperasi sektor jasa keuangan
-                  menerapkan prinsip kehati-hatian,{" "}
-                  <i className="italic">know-your-customer</i>, serta
-                  memininalisir risiko pinjaman bermasalah yang disalurkan
-                  kepada anggota{" "}
+                <p className="text-base leading-relaxed text-navy-700 md:text-lg">
+                  Dirancang untuk koperasi sektor jasa keuangan dengan prinsip
+                  kehati-hatian, know-your-customer, dan mitigasi risiko
+                  pinjaman bermasalah.
                 </p>
-
                 <div className="space-y-3 italic">
                   <FeaturePointer>
                     Didukung sumber data serta analitik lengkap dan terpercaya
@@ -226,23 +398,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </section>
 
-          </div>
-
-          {/* Mobile App Section */}
-          <div>
-            <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-6xl font-semibold text-navy-800 mb-2 tracking-tight">
-                Pruviu <span className="text-red-600">Mobile</span>
-              </h2>
-            </div>
-            <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
-              <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
-                {/* Carousel Container */}
-                <div className="relative w-full max-w-2xl">
-                  {/* Images Container with 3D Perspective */}
+          <section
+            id="mobile"
+            ref={(element) => {
+              sectionRefs.current[2] = element;
+            }}
+            className={`snap-panel bg-[radial-gradient(circle_at_top_left,_#f4f7ff,_#ffffff_60%,_#e8efff)] ${
+              activeSection === 2 ? "panel-active" : ""
+            }`}
+            aria-labelledby="mobile-title"
+          >
+            <div className="panel-reveal edge-safe-x container mx-auto grid max-w-7xl grid-cols-1 items-start gap-6 md:items-center md:gap-8 md:px-6 lg:grid-cols-2 lg:gap-14">
+              <div className="mx-auto w-full max-w-2xl">
+                <div className="relative">
                   <div
-                    className="relative h-[400px] sm:h-[450px] md:h-[500px]"
+                    className="relative h-[300px] sm:h-[420px] md:h-[480px]"
                     style={{ perspective: "1200px" }}
                   >
                     <div className="absolute inset-0 flex items-center justify-center gap-4">
@@ -273,32 +445,28 @@ export default function Home() {
                             type="button"
                             key={index}
                             onClick={() => setCurrentSlide(index)}
-                            className={`
-                              absolute transition-all duration-700 ease-in-out cursor-pointer bg-transparent border-0 p-0
-                              ${
-                                !isVisible
-                                  ? "opacity-0 pointer-events-none"
-                                  : "opacity-100"
-                              }
-                              ${
-                                isActive
-                                  ? "w-40 sm:w-48 md:w-56 z-20"
-                                  : "w-32 sm:w-40 md:w-48 z-10"
-                              }
-                            `}
+                            className={`absolute cursor-pointer border-0 bg-transparent p-0 transition-all duration-700 ease-in-out ${
+                              !isVisible
+                                ? "pointer-events-none opacity-0"
+                                : "opacity-100"
+                            } ${
+                              isActive
+                                ? "z-20 w-36 sm:w-44 md:w-52"
+                                : "z-10 w-28 sm:w-36 md:w-44"
+                            }`}
                             style={{
                               transform: transformStyle,
                               transformStyle: "preserve-3d",
                             }}
                             aria-label={`Tampilkan slide ${index + 1}`}
-                            aria-current={isActive ? "true" : undefined}
+                            aria-current={isActive}
                           >
                             <Image
                               src={image.src}
                               alt={image.alt}
                               width={800}
                               height={1300}
-                              className={`w-full h-auto rounded-2xl shadow-2xl transition-all duration-700 ${
+                              className={`h-auto w-full rounded-2xl shadow-2xl transition-all duration-700 ${
                                 isActive ? "brightness-100" : "brightness-75"
                               }`}
                             />
@@ -308,22 +476,20 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Dots Indicator */}
-                  <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Navigasi slide aplikasi mobile">
+                  <div
+                    className="mt-6 flex justify-center gap-2"
+                    role="tablist"
+                    aria-label="Navigasi slide aplikasi mobile"
+                  >
                     {mobileImages.map((_, index) => (
                       <button
                         type="button"
                         key={index}
                         onClick={() => setCurrentSlide(index)}
-                        className={`
-                          w-2 h-2 rounded-full transition-all
-                          ${
-                            index === currentSlide
-                              ? "bg-navy-600 w-8"
-                              : "bg-gray-300"
-                          }
-                        `}
-                        aria-label={`Go to slide ${index + 1}`}
+                        className={`h-2 rounded-full transition-all ${
+                          index === currentSlide ? "w-8 bg-navy-600" : "w-2 bg-gray-300"
+                        }`}
+                        aria-label={`Slide ${index + 1}`}
                         aria-selected={index === currentSlide}
                         role="tab"
                       />
@@ -331,446 +497,103 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-800 tracking-tight leading-tight">
+
+              <div className="space-y-4 text-center lg:text-left">
+                <h2 id="mobile-title" className="text-3xl font-semibold text-navy-800 md:text-5xl">
+                  Pruviu <span className="text-red-600">Mobile</span>
+                </h2>
+                <h3 className="text-2xl font-semibold leading-tight text-navy-700 md:text-4xl">
                   Monitor Risiko Keuangan Keluarga Anda
                 </h3>
-                <p className="text-base sm:text-lg md:text-xl text-navy-800 leading-relaxed font-light">
-                  Dirancang untuk menjembatani interaksi antara koperasi dengan
-                  anggota. Memungkinkan anggota memonitor risiko keuangan
-                  pribadi dan keluarga melalui akses konsultasi dengan koperasi
-                  tempat bernaung{" "}
+                <p className="text-base leading-relaxed text-navy-700 md:text-lg">
+                  Menjembatani interaksi koperasi dengan anggota melalui akses
+                  pemantauan risiko keuangan pribadi dan keluarga secara cepat.
                 </p>
-
                 <div className="space-y-3 italic">
                   <FeaturePointer>Khusus untuk anggota koperasi</FeaturePointer>
                   <FeaturePointer>
-                    Daftarkan diri anda ke koperasi terdekat untuk mengakses
+                    Daftarkan diri Anda ke koperasi terdekat untuk mengakses
                     layanan Pruviu Mobile
                   </FeaturePointer>
                 </div>
               </div>
             </div>
+          </section>
 
-            {/* Mobile umum */}
-            
-            <div className="mt-32 md:mt-40">
-              <div className="flex flex-col lg:flex-row-reverse items-center gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
-                {/* <div className="flex-1 flex justify-center w-full mb-6 lg:mb-0">
-                  <div className="relative w-full max-w-2xl">
+          <section
+            id="compliance"
+            ref={(element) => {
+              sectionRefs.current[3] = element;
+            }}
+            className={`snap-panel bg-[linear-gradient(135deg,_#1f1d52,_#273b93_55%,_#ee3042)] ${
+              activeSection === 3 ? "panel-active" : ""
+            }`}
+            aria-labelledby="compliance-title"
+          >
+            <div className="panel-reveal edge-safe-x container mx-auto w-full max-w-6xl md:px-6">
+              <div className="rounded-3xl border border-white/25 bg-white/10 p-6 text-white shadow-2xl backdrop-blur-sm md:p-10">
+                <div className="mb-8 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
+                    Trust • Compliance • Security
+                  </p>
+                  <h2
+                    id="compliance-title"
+                    className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+                  >
+                    Dipercaya karena terhubung, terdaftar, dan tersertifikasi
+                  </h2>
+                  <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
+                    Komitmen tata kelola data dan keamanan diperkuat melalui
+                    afiliasi global, sertifikasi internasional, dan registrasi
+                    sistem elektronik di Indonesia.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {trustBadges.map((badge) => (
                     <div
-                      className="relative h-[400px] sm:h-[450px] md:h-[500px]"
-                      style={{ perspective: "1200px" }}
+                      key={badge.title}
+                      className="rounded-xl border border-white/20 bg-white/95 px-3 py-3.5 text-center text-navy-800 shadow-lg"
                     >
-                      <div className="absolute inset-0 flex items-center justify-center gap-4">
-                        {mobileImages2.map((image, index) => {
-                          const isActive = index === currentSlide2;
-                          const isPrev =
-                            index ===
-                            (currentSlide2 - 1 + mobileImages2.length) %
-                              mobileImages2.length;
-                          const isNext =
-                            index ===
-                            (currentSlide2 + 1) % mobileImages2.length;
-                          const isVisible = isActive || isPrev || isNext;
-
-                          let transformStyle = "";
-                          if (isActive) {
-                            transformStyle =
-                              "translateX(0) rotateY(0deg) scale(1)";
-                          } else if (isPrev) {
-                            transformStyle =
-                              "translateX(-80%) rotateY(25deg) scale(0.75)";
-                          } else if (isNext) {
-                            transformStyle =
-                              "translateX(80%) rotateY(-25deg) scale(0.75)";
-                          }
-
-                          return (
-                            <div
-                              key={index}
-                              onClick={() => setCurrentSlide2(index)}
-                              className={`
-                                absolute transition-all duration-700 ease-in-out cursor-pointer
-                                ${
-                                  !isVisible
-                                    ? "opacity-0 pointer-events-none"
-                                    : "opacity-100"
-                                }
-                                ${
-                                  isActive
-                                    ? "w-40 sm:w-48 md:w-56 z-20"
-                                    : "w-32 sm:w-40 md:w-48 z-10"
-                                }
-                              `}
-                              style={{
-                                transform: transformStyle,
-                                transformStyle: "preserve-3d",
-                              }}
-                            >
-                              <Image
-                                src={image.src}
-                                alt={image.alt}
-                                width={800}
-                                height={1300}
-                                className={`w-full h-auto rounded-2xl shadow-2xl transition-all duration-700 ${
-                                  isActive ? "brightness-100" : "brightness-75"
-                                }`}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
+                      <Image
+                        src={badge.src}
+                        alt={badge.alt}
+                        width={badge.width}
+                        height={badge.height}
+                        className={`mx-auto w-auto object-contain ${
+                          badge.title === "DUNS"
+                            ? "max-h-9 md:max-h-10"
+                            : "max-h-8 md:max-h-9"
+                        }`}
+                      />
+                      <p className="mt-2 text-sm font-semibold">{badge.title}</p>
+                      <p className="mt-1 text-xs text-navy-700/90">{badge.subtitle}</p>
                     </div>
-
-                    <div className="flex justify-center gap-2 mt-6">
-                      {mobileImages2.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentSlide2(index)}
-                          className={`
-                            w-2 h-2 rounded-full transition-all
-                            ${
-                              index === currentSlide2
-                                ? "bg-navy-600 w-8"
-                                : "bg-gray-300"
-                            }
-                          `}
-                          aria-label={`Go to slide ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div> */}
-{/*                 
-                <div className="flex-1 text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6 px-4 sm:px-6 md:px-8">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 tracking-tight leading-tight">
-                    Pantau Pengeluaran & Bangun Reputasi Keuangan Anda
-                  </h3>
-                  <p className="text-base sm:text-lg md:text-xl text-navy-500 leading-relaxed font-light">
-                    Dirancang untuk memudahkan pencatatan pengeluaran dari
-                    pembayaran tunai maupun non-tunai. Bermanfaat untuk evaluasi
-                    belanja bulanan/tahunan sekaligus membangun reputasi
-                    keuangan Anda.{" "}
-                  </p>
-
-                  <div className="space-y-2 font-style: italic">
-                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
-                      Untuk Umum (Anggota dan Bukan Anggota Koperasi)
-                    </div>
-                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
-                      Dilengkapi fitur analitik yang insightful
-                    </div>
-                    <div className="bg-navy-50 text-navy-700 text-xs sm:text-sm font-medium px-3 py-2 rounded-lg">
-                      Menghasilkan Pruviu Score guna meningkatkan kelayakan
-                      kredit Anda
-                    </div>
-                    
-                  </div>
-                </div> */}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Pengaduan Section */}
-      <section id="pengaduan" className="bg-gray-50 py-12 md:py-16 lg:py-20" aria-labelledby="complaint-title">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 id="complaint-title" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-navy-700 mb-3 md:mb-4 tracking-tight">
-              Form Pengaduan
-            </h2>
-            {/* <p className="text-base sm:text-lg md:text-xl text-gray-600 font-light">
-              Sampaikan keluhan atau laporan Anda kepada kami
-            </p> */}
-          </div>
-
-          <div className="rounded-xl border border-navy-600/10 bg-white shadow-sm p-6 md:p-8 lg:p-12">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const nama = formData.get("nama");
-                const nik = formData.get("nik");
-                const email = formData.get("email");
-                const noTelpon = formData.get("noTelpon");
-                const pengaduan = formData.get("pengaduan");
-
-                const emailBody = `
-Nama: ${nama}
-NIK: ${nik}
-Email: ${email}
-No. Telepon: ${noTelpon}
-
-Pengaduan:
-${pengaduan}
-                `.trim();
-
-                const mailtoLink = `mailto:support@pruviu.com?subject=Pengaduan%20dari%20${encodeURIComponent(
-                  nama as string
-                )}&body=${encodeURIComponent(emailBody)}`;
-                window.location.href = mailtoLink;
-              }}
-              className="space-y-5 md:space-y-6"
-            >
-              {/* First Row: Nama and NIK */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {/* Nama */}
-                <div>
-                  <label
-                    htmlFor="nama"
-                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
-                  >
-                    Nama Lengkap <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="nama"
-                    name="nama"
-                    required
-                    autoComplete="name"
-                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
-                    placeholder="Masukkan nama lengkap Anda"
-                  />
+                  ))}
                 </div>
 
-                {/* NIK */}
-                <div>
-                  <label
-                    htmlFor="nik"
-                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
+                <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <Link
+                    href="https://app.pruviu.com"
+                    className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-navy-700 transition hover:bg-white/90"
                   >
-                    NIK <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="nik"
-                    name="nik"
-                    required
-                    pattern="[0-9]{16}"
-                    maxLength={16}
-                    inputMode="numeric"
-                    aria-describedby="nik-helper"
-                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
-                    placeholder="16 digit NIK"
-                  />
-                  <p id="nik-helper" className="text-xs text-gray-500 mt-2">
-                    Masukkan 16 digit angka sesuai NIK Anda
-                  </p>
+                    Mulai Sekarang
+                  </Link>
+                  <Link
+                    href="/kontak"
+                    className="rounded-lg border border-white/50 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                  >
+                    Hubungi Kami
+                  </Link>
                 </div>
               </div>
-
-              {/* Second Row: Email and No Telepon */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Email */}
-                <div>
-                  <label
-                    htmlFor="email-pengaduan"
-                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
-                  >
-                    Email <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email-pengaduan"
-                    name="email"
-                    required
-                    autoComplete="email"
-                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
-                    placeholder="contoh@email.com"
-                  />
-                </div>
-
-                {/* No Telepon */}
-                <div>
-                  <label
-                    htmlFor="noTelpon"
-                    className="block text-sm md:text-base font-medium text-navy-700 mb-2"
-                  >
-                    No. Telepon <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="noTelpon"
-                    name="noTelpon"
-                    required
-                    pattern="[0-9+\-\s()]+"
-                    autoComplete="tel"
-                    className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all text-gray-800 text-base"
-                    placeholder="08123456789"
-                  />
-                </div>
-              </div>
-
-              {/* Pengaduan - Full Width */}
-              <div>
-                <label
-                  htmlFor="pengaduan"
-                  className="block text-sm md:text-base font-medium text-navy-700 mb-2"
-                >
-                  Isi Pengaduan <span className="text-red-600">*</span>
-                </label>
-                <textarea
-                  id="pengaduan"
-                  name="pengaduan"
-                  required
-                  rows={5}
-                  minLength={20}
-                  aria-describedby="pengaduan-helper"
-                  className="w-full px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:border-navy-600 focus:ring-2 focus:ring-navy-600 focus:ring-opacity-20 focus:outline-none transition-all resize-vertical text-gray-800 text-base"
-                  placeholder="Jelaskan pengaduan Anda secara detail..."
-                />
-                <p id="pengaduan-helper" className="text-xs md:text-sm text-gray-500 mt-2">
-                  Minimal 20 karakter
-                </p>
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  className="w-full px-8 py-3 md:py-4 bg-navy-600 text-white rounded-lg hover:bg-navy-700 active:bg-navy-800 transition-colors font-medium text-base md:text-lg shadow-sm"
-                >
-                  Kirim Pengaduan
-                </button>
-                <p className="text-xs md:text-sm text-center text-gray-500 mt-3 md:mt-4 leading-relaxed">
-                  Dengan menekan tombol ini, aplikasi email Anda akan terbuka
-                  dengan pengaduan yang telah Anda isi
-                </p>
-              </div>
-            </form>
-          </div>
-
-          {/* Additional Info */}
-          {/* <div className="mt-8 md:mt-12 bg-blue-50 p-6 md:p-8 rounded-xl">
-            <div className="flex items-start space-x-3 md:space-x-4">
-              <svg
-                className="w-5 h-5 md:w-6 md:h-6 text-navy-700 flex-shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-               <div>
-                <h3 className="text-base md:text-lg font-semibold text-navy-700 mb-3">
-                  Informasi Penting
-                </h3>
-                <ul className="text-sm md:text-base text-navy-500 space-y-2 md:space-y-3">
-                  <li>
-                    • Semua pengaduan akan ditindaklanjuti dalam waktu maksimal
-                    3x24 jam kerja
-                  </li>
-                  <li>• Pastikan data yang Anda masukkan benar dan valid</li>
-                  <li>
-                    • Pengaduan akan dikirim melalui aplikasi email default Anda
-                  </li>
-                  <li>
-                    • Untuk pertanyaan lebih lanjut, hubungi{" "}
-                    <Link
-                      href="/kontak"
-                      className="text-navy-700 font-semibold hover:underline"
-                    >
-                      layanan kontak kami
-                    </Link>
-                  </li>
-                </ul>
-              </div> 
             </div>
-          </div> */}
+          </section>
+
+          <footer ref={footerRef} className="post-glide-footer">
+            <SiteFooter complaintHref="#compliance" />
+          </footer>
         </div>
-      </section>
-
-      {/* Features Section */}
-      {/* <section id="fitur" className="bg-white py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-700 mb-4">Fitur Lengkap Anti Fraud</h2>
-            <p className="text-xl text-navy-500">Lindungi koperasi Anda dengan verifikasi kredit yang akurat dan terpercaya</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-6 bg-blue-50 rounded-xl hover:shadow-lg transition-shadow border-2 border-navy-600">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">Koperasi Checking</h3>
-              <p className="text-navy-500">Verifikasi riwayat pinjaman anggota di berbagai koperasi secara real-time untuk mencegah peminjaman ganda.</p>
-            </div>
-            <div className="p-6 bg-blue-50 rounded-xl hover:shadow-lg transition-shadow border-2 border-navy-600">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">SLIK OJK</h3>
-              <p className="text-navy-500">Akses informasi kredit resmi dari Sistem Layanan Informasi Keuangan OJK untuk validasi kredit yang akurat.</p>
-            </div>
-            <div className="p-6 bg-blue-50 rounded-xl hover:shadow-lg transition-shadow border-2 border-navy-600">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">Credit Scoring</h3>
-              <p className="text-navy-500">Sistem penilaian kredit otomatis dengan algoritma canggih untuk keputusan pemberian pinjaman yang lebih tepat.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">Anti Fraud</h3>
-              <p className="text-navy-500">Deteksi otomatis terhadap pola peminjaman mencurigakan dan potensi fraud dengan teknologi AI.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">Laporan & Analitik</h3>
-              <p className="text-navy-500">Dashboard lengkap dengan laporan riwayat pengecekan dan analitik tren risiko kredit koperasi Anda.</p>
-            </div>
-            <div className="p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-navy-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-navy-700 mb-2">Riwayat Pencairan</h3>
-              <p className="text-navy-500">Lacak dan monitor riwayat pencairan pinjaman untuk memastikan transparansi dan akuntabilitas.</p>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* CTA Section */}
-      {/* <section className="bg-navy-600 py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">Lindungi Koperasi Anda Sekarang</h2>
-          <p className="text-xl text-blue-100 mb-8">Bergabunglah bersama Pruviu untuk melindungi koperasi seluruh Indonesia</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/coming-soon" className="px-8 py-4 bg-white text-navy-700 rounded-lg hover:bg-gray-100 transition-colors font-medium text-lg">
-              Daftar Sekarang
-            </Link>
-            <Link href="/coming-soon" className="px-8 py-4 bg-navy-700 text-white rounded-lg hover:bg-navy-800 transition-colors font-medium text-lg border-2 border-white">
-              Kontak Pruviu
-            </Link>
-          </div>
-        </div>
-      </section> */}
-      {/* Footer */}
-      <SiteFooter complaintHref="#pengaduan" />
       </main>
     </div>
   );

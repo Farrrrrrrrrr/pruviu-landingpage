@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     images: ["/pruviu-logo-redblue.png"],
   },
   icons: {
-    icon: "/pruviu-logo-redblue.png",
-    apple: "/pruviu-logo-redblue.png",
+    icon: "/icon.ico",
+    apple: "/icon.ico",
   },
 };
 

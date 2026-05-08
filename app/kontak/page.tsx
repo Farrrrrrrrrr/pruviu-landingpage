@@ -51,7 +51,7 @@ export default function Kontak() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">WhatsApp Business</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">WhatsApp</h3>
                   <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">Chat langsung dengan tim kami melalui WhatsApp Business</p>
                 </div>
                 <a

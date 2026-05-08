@@ -35,7 +35,7 @@ yarn-error.log*
 
 # vercel
 .vercel
-
+public/ratecard-pruviu.pdf
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -5,7 +5,7 @@ type SiteFooterProps = {
   complaintHref?: string;
 };
 
-export function SiteFooter({ complaintHref = "/#pengaduan" }: SiteFooterProps) {
+export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) {
   return (
     <footer className="bg-navy-700 text-white/80 py-8 md:py-12">
       <div className="container mx-auto px-4 md:px-6">
@@ -38,9 +38,9 @@ export function SiteFooter({ complaintHref = "/#pengaduan" }: SiteFooterProps) {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors text-sm md:text-base">
+                <Link href="/harga" className="hover:text-white transition-colors text-sm md:text-base">
                   Harga
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors text-sm md:text-base">
@@ -91,11 +91,6 @@ export function SiteFooter({ complaintHref = "/#pengaduan" }: SiteFooterProps) {
                   Dokumentasi
                 </a>
               </li>
-              <li>
-                <Link href="/privacy-policy" className="hover:text-white transition-colors text-sm md:text-base">
-                  Kebijakan Privasi
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
@@ -103,12 +98,21 @@ export function SiteFooter({ complaintHref = "/#pengaduan" }: SiteFooterProps) {
           <p className="text-sm md:text-base">
             &copy; 2026 PT Pruden Visi Utama. Hak Cipta Dilindungi.
           </p>
-          <div className="mt-2 flex flex-wrap justify-center gap-2 text-sm md:text-base">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+          <div className="mt-2 flex flex-wrap justify-center gap-4 text-sm md:text-base">
+            <a
+              href="/Privacy-Policy-Pruviu.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
               Kebijakan Privasi
-            </Link>
-            <span>•</span>
-            <a href="#" className="hover:text-white transition-colors">
+            </a>
+            <a
+              href="/General-Terms-and-Conditions-Pruviu%20.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
               Syarat & Ketentuan
             </a>
           </div>
