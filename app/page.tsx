@@ -334,23 +334,30 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-8 overflow-hidden">
-                <Image
-                  src="/ImageContent - Hero.png"
-                  alt="Pruviu dashboard preview"
-                  width={1080}
-                  height={1080}
-                  className="h-auto w-full md:hidden"
-                  priority
-                />
-                <Image
-                  src="/dashboard-example.png"
-                  alt="Pruviu dashboard preview"
-                  width={1512}
-                  height={800}
-                  className="h-auto w-full hidden md:block"
-                  priority
-                />
+              <div className="relative mt-8">
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+                  <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8fc2ff]/40 blur-3xl md:h-80 md:w-[34rem] md:bg-[#9ec9ff]/35" />
+                  <div className="absolute left-1/2 top-1/2 h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-2xl md:h-56 md:w-[30rem] md:bg-white/15" />
+                </div>
+
+                <div className="relative overflow-hidden">
+                  <Image
+                    src="/ImageContent - Hero.png"
+                    alt="Pruviu dashboard preview"
+                    width={1080}
+                    height={1080}
+                    className="h-auto w-full md:hidden"
+                    priority
+                  />
+                  <Image
+                    src="/dashboard-example.png"
+                    alt="Pruviu dashboard preview"
+                    width={1512}
+                    height={800}
+                    className="hidden h-auto w-full md:block"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </section>

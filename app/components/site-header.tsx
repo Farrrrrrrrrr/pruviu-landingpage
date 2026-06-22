@@ -14,14 +14,26 @@ function getNavClass(isActive: boolean) {
     : "text-navy-700 font-bold hover:text-navy-600 transition-colors";
 }
 
+function getHomeNavClass(isActive: boolean) {
+  return isActive
+    ? "text-white font-bold transition-colors"
+    : "text-white/85 font-bold hover:text-white transition-colors";
+}
+
 export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isHome = currentPath === "/";
   const homeHref = isHome ? "#beranda" : "/#beranda";
   const complianceHref = isHome ? "#compliance" : "/#compliance";
 
+  const headerClassName = isHome
+    ? "bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] border-b border-white/10 shadow-[0_2px_18px_rgba(18,21,58,0.22)]"
+    : "bg-white shadow-sm";
+
+  const navClass = isHome ? getHomeNavClass : getNavClass;
+
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className={`sticky top-0 z-50 ${headerClassName}`}>
       <nav
         className="edge-safe-header container mx-auto py-4 md:px-6"
         aria-label="Navigasi utama"
@@ -38,7 +50,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             />
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href={homeHref} className={getNavClass(isHome)}>
+            <Link href={homeHref} className={navClass(isHome)}>
               Beranda
             </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur")}>
@@ -47,23 +59,31 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             {/* <Link href="/harga" className={getNavClass(currentPath === "/harga")}>
               Harga
             </Link> */}
-            <Link href="/kontak" className={getNavClass(currentPath === "/kontak")}>
+            <Link href="/kontak" className={navClass(currentPath === "/kontak")}>
               Kontak
             </Link>
-            <Link href="/tentang-kami" className={getNavClass(currentPath === "/tentang-kami")}>
+            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami")}>
               Tentang Kami
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://app.pruviu.com"
-              className="px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
+              className={
+                isHome
+                  ? "px-6 py-2 text-white/90 hover:text-white transition-colors font-medium"
+                  : "px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium"
+              }
             >
               Masuk
             </Link>
             <Link
               href="https://app.pruviu.com"
-              className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+              className={
+                isHome
+                  ? "px-6 py-2 bg-white text-navy-700 rounded-lg hover:bg-white/90 transition-colors font-medium"
+                  : "px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+              }
             >
               Daftar
             </Link>
@@ -71,7 +91,11 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-navy-700 hover:text-navy-600"
+            className={`md:hidden p-2 transition-colors ${
+              isHome
+                ? "text-white/90 hover:text-white"
+                : "text-navy-700 hover:text-navy-600"
+            }`}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
             aria-controls="site-mobile-menu"
@@ -101,8 +125,15 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
           </button>
         </div>
         {mobileMenuOpen && (
-          <div id="site-mobile-menu" className="md:hidden mt-4 pb-4 space-y-4">
-            <Link href={homeHref} className={getNavClass(isHome) + " block py-2"}>
+          <div
+            id="site-mobile-menu"
+            className={`md:hidden mt-4 pb-4 space-y-4 rounded-xl px-4 py-3 ${
+              isHome
+                ? "bg-navy-800/90 backdrop-blur-sm border border-white/10"
+                : "bg-white"
+            }`}
+          >
+            <Link href={homeHref} className={navClass(isHome) + " block py-2"}>
               Beranda
             </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur") + " block py-2"}>
@@ -111,22 +142,30 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             {/* <Link href="/harga" className={getNavClass(currentPath === "/harga") + " block py-2"}>
               Harga
             </Link> */}
-            <Link href="/kontak" className={getNavClass(currentPath === "/kontak") + " block py-2"}>
+            <Link href="/kontak" className={navClass(currentPath === "/kontak") + " block py-2"}>
               Kontak
             </Link>
-            <Link href="/tentang-kami" className={getNavClass(currentPath === "/tentang-kami") + " block py-2"}>
+            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami") + " block py-2"}>
               Tentang Kami
             </Link>
             <div className="pt-4 space-y-2">
               <Link
                 href="https://app.pruviu.com"
-                className="block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg"
+                className={
+                  isHome
+                    ? "block text-center px-6 py-2 text-white hover:text-white transition-colors font-medium border border-white/30 rounded-lg"
+                    : "block text-center px-6 py-2 text-navy-600 hover:text-navy-700 transition-colors font-medium border border-navy-600 rounded-lg"
+                }
               >
                 Masuk
               </Link>
               <Link
                 href="https://app.pruviu.com"
-                className="block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+                className={
+                  isHome
+                    ? "block text-center px-6 py-2 bg-white text-navy-700 rounded-lg hover:bg-white/90 transition-colors font-medium"
+                    : "block text-center px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors font-medium"
+                }
               >
                 Daftar
               </Link>
