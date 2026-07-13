@@ -324,11 +324,11 @@ export default function Home() {
                     <p className="text-xs text-white/70 md:text-sm">Koperasi User Web</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white md:text-3xl">50K+</p>
+                    <p className="text-2xl font-bold text-white md:text-3xl">1.5jt+</p>
                     <p className="text-xs text-white/70 md:text-sm">Anggota Koperasi</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white md:text-3xl">75K+</p>
+                    <p className="text-2xl font-bold text-white md:text-3xl">5K+</p>
                     <p className="text-xs text-white/70 md:text-sm">Masyarakat Umum</p>
                   </div>
                 </div>
