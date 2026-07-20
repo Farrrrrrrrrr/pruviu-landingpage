@@ -24,7 +24,6 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isHome = currentPath === "/";
   const homeHref = isHome ? "#beranda" : "/#beranda";
-  const complianceHref = isHome ? "#compliance" : "/#compliance";
 
   const headerClassName = isHome
     ? "bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] border-b border-white/10 shadow-[0_2px_18px_rgba(18,21,58,0.22)]"
@@ -96,7 +95,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
                 ? "text-white/90 hover:text-white"
                 : "text-navy-700 hover:text-navy-600"
             }`}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? "Tutup menu" : "Buka menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="site-mobile-menu"
           >
@@ -105,6 +104,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               {mobileMenuOpen ? (
                 <path

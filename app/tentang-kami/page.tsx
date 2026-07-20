@@ -3,9 +3,12 @@ import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 
 export const metadata: Metadata = {
-  title: "Tentang Kami | Pruviu",
+  title: "Tentang Kami",
   description:
     "Profil perusahaan PT Pruden Visi Utama (Pruviu) yang dapat dibaca online dan diunduh.",
+  alternates: {
+    canonical: "/tentang-kami",
+  },
 };
 
 const companyProfilePath = "/PRUVIU_Company_Profile-2026-04-10.pdf";
@@ -58,10 +61,11 @@ export default function TentangKamiPage() {
             &quot;Buka PDF di Tab Baru&quot; atau &quot;Download Company Profile&quot;.
           </p>
         </section>
-        <div className="mt-12 -mx-4 md:-mx-6">
-          <SiteFooter />
-        </div>
       </main>
+
+      <div className="mt-12">
+        <SiteFooter />
+      </div>
     </div>
   );
 }

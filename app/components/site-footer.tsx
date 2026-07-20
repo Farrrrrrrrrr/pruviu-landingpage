@@ -28,9 +28,9 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+            <h2 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
               Produk
-            </h4>
+            </h2>
             <ul className="space-y-2">
               <li>
                 <Link href="/fitur" className="hover:text-white transition-colors text-sm md:text-base">
@@ -50,9 +50,9 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+            <h2 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
               Perusahaan
-            </h4>
+            </h2>
             <ul className="space-y-2">
               <li>
                 <Link href="/tentang-kami" className="hover:text-white transition-colors text-sm md:text-base">
@@ -72,9 +72,9 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
+            <h2 className="font-bold text-white mb-3 md:mb-4 text-sm md:text-base">
               Dukungan
-            </h4>
+            </h2>
             <ul className="space-y-2">
               <li>
                 <Link href="/kontak" className="hover:text-white transition-colors text-sm md:text-base">
@@ -106,6 +106,7 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
               className="hover:text-white transition-colors"
             >
               Kebijakan Privasi
+              <span className="sr-only"> (buka di tab baru)</span>
             </a>
             <a
               href="/General-Terms-and-Conditions-Pruviu%20.pdf"
@@ -114,6 +115,7 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
               className="hover:text-white transition-colors"
             >
               Syarat & Ketentuan
+              <span className="sr-only"> (buka di tab baru)</span>
             </a>
           </div>
         </div>

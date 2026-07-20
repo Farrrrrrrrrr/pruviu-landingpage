@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
+
+export const metadata: Metadata = {
+  title: "Kebijakan Privasi",
+  description:
+    "Kebijakan privasi Pruviu: bagaimana PT Pruden Visi Utama mengumpulkan, menggunakan, dan melindungi data pengguna platform verifikasi kredit dan mitigasi risiko koperasi.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+};
 
 export default function PrivacyPolicyPage() {
   return (
@@ -36,7 +46,7 @@ export default function PrivacyPolicyPage() {
                   teks, gambar, foto, grafik, pemrograman, perangkat lunak,
                   layanan aplikasi (termasuk namun tidak terbatas pada, setiap
                   layanan aplikasi mobile) atau materi lainnya yang tersedia
-                  melalui situs atau layanan terkait ("Layanan") yang telah
+                  melalui situs atau layanan terkait (&ldquo;Layanan&rdquo;) yang telah
                   terdaftar di Kementerian Komunikasi dan Digital sebagai
                   Penyelenggara Sistem Elektronik (PSE) atas nama PT Pruden Visi
                   Utama.
@@ -870,9 +880,9 @@ export default function PrivacyPolicyPage() {
           </Link>
         </div>
       </div>
+      </main>
 
       <SiteFooter />
-      </main>
     </div>
   );
 }

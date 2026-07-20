@@ -38,7 +38,7 @@ function FeaturePointer({ children }: { children: ReactNode }) {
   );
 }
 
-const SECTION_IDS = ["beranda", "web", "mobile", "compliance"] as const;
+const SECTION_IDS = ["beranda", "web", "mobile", "telco", "compliance"] as const;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -186,7 +186,10 @@ export default function Home() {
 
   const handleTouchEnd = useCallback(
     (event: TouchEvent<HTMLElement>) => {
-      if (touchStartYRef.current === null || isTransitioningRef.current) {
+      const startY = touchStartYRef.current;
+      touchStartYRef.current = null;
+
+      if (startY === null || isTransitioningRef.current) {
         return;
       }
 
@@ -195,20 +198,82 @@ export default function Home() {
         return;
       }
 
-      const delta = touchStartYRef.current - endY;
+      const delta = startY - endY;
       if (Math.abs(delta) < 45) {
         return;
       }
 
+      // Panel-to-panel movement is left entirely to native touch scrolling +
+      // CSS scroll-snap (mandatory, scroll-snap-stop: always) - it already
+      // guarantees one section per gesture with proper momentum, and layering
+      // a JS scrollIntoView on top of it fought the native snap and produced
+      // stutter. The one thing CSS can't do is hand off to the footer, which
+      // opts out of snapping, so that boundary case still needs JS.
       if (delta > 0 && activeSectionRef.current === SECTION_IDS.length - 1) {
         scrollToFooter();
+      }
+    },
+    [scrollToFooter],
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT" ||
+        target?.isContentEditable
+      ) {
+        return;
+      }
+      if (event.ctrlKey || event.metaKey || event.altKey) {
         return;
       }
 
-      moveSection(delta > 0 ? 1 : -1);
-    },
-    [moveSection, scrollToFooter],
-  );
+      const stage = stageRef.current;
+      const footer = footerRef.current;
+      const footerStart = footer?.offsetTop ?? Number.POSITIVE_INFINITY;
+      const isInFooter = stage ? stage.scrollTop >= footerStart - 24 : false;
+
+      switch (event.key) {
+        case "ArrowDown":
+        case "PageDown":
+          if (isInFooter) {
+            return;
+          }
+          event.preventDefault();
+          if (activeSectionRef.current === SECTION_IDS.length - 1) {
+            scrollToFooter();
+          } else {
+            moveSection(1);
+          }
+          break;
+        case "ArrowUp":
+        case "PageUp":
+          if (isInFooter) {
+            return;
+          }
+          event.preventDefault();
+          moveSection(-1);
+          break;
+        case "Home":
+          event.preventDefault();
+          scrollToSection(0);
+          break;
+        case "End":
+          event.preventDefault();
+          scrollToFooter();
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [moveSection, scrollToFooter, scrollToSection]);
 
   const mobileImages = [
     { src: "/Onboarding.png", alt: "Pruviu Mobile Onboarding" },
@@ -248,6 +313,85 @@ export default function Home() {
       subtitle: "Sertifikasi ISO 27001:2022",
       width: 136,
       height: 38,
+    },
+  ];
+
+  const telcoFeatures = [
+    {
+      name: "Telco Score",
+      description:
+        "Skor risiko tambahan berbasis pola penggunaan dan riwayat operator seluler.",
+      icon: (
+        <svg
+          className="h-2/3 w-2/3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.75}
+            d="M4.5 15.5a7.5 7.5 0 0 1 15 0M12 15.5V11m0 0 3-2.5"
+          />
+          <circle cx="12" cy="15.5" r="0.75" fill="currentColor" stroke="none" />
+        </svg>
+      ),
+    },
+    {
+      name: "Deteksi Judol",
+      description:
+        "Identifikasi indikasi transaksi judi online untuk memperkuat mitigasi risiko.",
+      icon: (
+        <svg
+          className="h-2/3 w-2/3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.75}
+            d="M12 3.5 5 6.5v5c0 4.5 3 7 7 8.5 4-1.5 7-4 7-8.5v-5L12 3.5Z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.75}
+            d="M12 9v3.5M12 15.25h.01"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Prediksi Pendapatan",
+      description:
+        "Estimasi pendapatan berbasis data untuk melengkapi analisis kemampuan bayar.",
+      icon: (
+        <svg
+          className="h-2/3 w-2/3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.75}
+            d="M4 19V9m5 10V5m5 14v-7m5 7V11"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.75}
+            d="M4 9 9 5l5 3.5L19 4"
+          />
+        </svg>
+      ),
     },
   ];
 
@@ -350,7 +494,7 @@ export default function Home() {
                     priority
                   />
                   <Image
-                    src="/dashboard-example.png"
+                    src="/dashboard-example-pascabayar.png"
                     alt="Pruviu dashboard preview"
                     width={1512}
                     height={800}
@@ -395,13 +539,54 @@ export default function Home() {
                   kehati-hatian, know-your-customer, dan mitigasi risiko
                   pinjaman bermasalah.
                 </p>
-                <div className="space-y-3 italic">
-                  <FeaturePointer>
-                    Didukung sumber data serta analitik lengkap dan terpercaya
-                  </FeaturePointer>
-                  <FeaturePointer>
-                    Dilengkapi fitur konfigurasi pengaturan Pruviu Mobile
-                  </FeaturePointer>
+                <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 lg:justify-start">
+                  {[
+                    {
+                      top: "SLIK",
+                      bottom: "OJK",
+                      topGradient: null,
+                      textGradient: "from-red-500 to-red-700",
+                    },
+                    {
+                      top: "SLIK",
+                      bottom: "Koperasi",
+                      topGradient: null,
+                      textGradient: "from-navy-500 to-navy-700",
+                    },
+                    {
+                      top: "Full",
+                      bottom: "Check",
+                      topGradient: "from-navy-600 to-red-600",
+                      textGradient: "from-navy-600 to-red-600",
+                    },
+                  ].map((badge) => (
+                    <div
+                      key={badge.bottom}
+                      className="w-28 rounded-2xl bg-gradient-to-br from-navy-300 to-navy-500 p-[2px] shadow-sm sm:w-32 md:w-40"
+                    >
+                      <div className="flex h-20 w-full flex-col items-center justify-center gap-1 rounded-[calc(1rem-2px)] bg-white px-3 sm:h-24 md:h-28">
+                        <span
+                          className={
+                            badge.topGradient
+                              ? `bg-gradient-to-br bg-clip-text text-center text-lg font-extrabold uppercase leading-tight text-transparent sm:text-xl md:text-2xl ${badge.topGradient}`
+                              : "text-center text-lg font-extrabold uppercase leading-tight text-white sm:text-xl md:text-2xl"
+                          }
+                          style={
+                            badge.topGradient
+                              ? undefined
+                              : { WebkitTextStroke: "1.25px #273b93" }
+                          }
+                        >
+                          {badge.top}
+                        </span>
+                        <span
+                          className={`bg-gradient-to-br bg-clip-text text-center text-lg font-extrabold uppercase leading-tight text-transparent sm:text-xl md:text-2xl ${badge.textGradient}`}
+                        >
+                          {badge.bottom}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -528,12 +713,68 @@ export default function Home() {
           </section>
 
           <section
-            id="compliance"
+            id="telco"
             ref={(element) => {
               sectionRefs.current[3] = element;
             }}
-            className={`snap-panel bg-[linear-gradient(135deg,_#1f1d52,_#273b93_55%,_#ee3042)] ${
+            className={`snap-panel relative overflow-hidden bg-[radial-gradient(150%_120%_at_20%_-15%,_#1f1d52_0%,_#273b93_55%,_#336ab3_100%)] ${
               activeSection === 3 ? "panel-active" : ""
+            }`}
+            aria-labelledby="telco-title"
+          >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[#8fc2ff]/25 blur-3xl md:h-96 md:w-[36rem]" />
+            </div>
+
+            <div className="panel-reveal edge-safe-x container mx-auto w-full max-w-6xl md:px-6">
+              <div className="text-center">
+                <h2
+                  id="telco-title"
+                  className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
+                >
+                  Lengkapi mitigasi risiko dengan{" "}
+                  <span className="text-red-400">scoring telco</span>
+                </h2>
+                <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
+Perkuat mitigasi risiko dengan insight berbasis data telco yang membantu menghasilkan penilaian kemampuan bayar secara lebih akurat, mulai dari Telco Score, deteksi indikasi judi online, hingga prediksi pendapatan.</p> </div>
+
+              <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 md:mt-12 md:gap-8">
+                {telcoFeatures.map((feature) => (
+                  <div
+                    key={feature.name}
+                    className="group flex flex-col items-center text-center"
+                  >
+                    <div className="relative aspect-square w-full max-w-[15rem]">
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-2 rounded-3xl bg-[linear-gradient(135deg,_#5b8def_0%,_#a45e98_60%,_#ee3042_100%)] opacity-50 blur-2xl transition-opacity duration-300 group-hover:opacity-70"
+                      />
+                      <div className="relative flex h-full w-full flex-col items-center justify-center gap-3 rounded-3xl bg-[linear-gradient(135deg,_#5b8def_0%,_#a45e98_60%,_#ee3042_100%)] px-6 text-white shadow-xl ring-1 ring-white/20 transition duration-300 group-hover:-translate-y-1">
+                        <div className="flex h-20 w-20 items-center justify-center sm:h-24 sm:w-24 md:h-28 md:w-28">
+                          {feature.icon}
+                        </div>
+                        <div className="h-px w-10 bg-white/40" />
+                        <h3 className="text-base font-semibold leading-snug sm:text-lg">
+                          {feature.name}
+                        </h3>
+                      </div>
+                    </div>
+                    <p className="mt-5 max-w-[15rem] text-sm leading-relaxed text-white/70 md:text-base">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="compliance"
+            ref={(element) => {
+              sectionRefs.current[4] = element;
+            }}
+            className={`snap-panel bg-[linear-gradient(135deg,_#1f1d52,_#273b93_55%,_#ee3042)] ${
+              activeSection === 4 ? "panel-active" : ""
             }`}
             aria-labelledby="compliance-title"
           >

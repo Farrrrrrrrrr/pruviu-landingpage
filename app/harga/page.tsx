@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
+
+export const metadata: Metadata = {
+  title: "Harga",
+  description:
+    "Struktur harga Pruviu untuk layanan SLIK OJK, SLIK Koperasi, dan Full Check - dirancang agar koperasi mendapatkan verifikasi dan mitigasi risiko yang presisi dan terjangkau.",
+  alternates: {
+    canonical: "/harga",
+  },
+};
 
 const valuePoints = [
   "Biaya lebih terjangkau (kolektif)",

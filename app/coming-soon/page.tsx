@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
+
+export const metadata: Metadata = {
+  title: "Segera Hadir",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function ComingSoon() {
   return (
@@ -52,7 +61,7 @@ export default function ComingSoon() {
           {/* CTA */}
           <div className="pt-8">
             <div className="inline-flex items-center space-x-2 px-8 py-4 bg-navy-600 text-white rounded-lg shadow-lg">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="font-semibold text-lg">Nantikan Peluncuran Kami</span>
@@ -62,7 +71,7 @@ export default function ComingSoon() {
           {/* Reminder Box */}
           <div className="mt-12 p-6 bg-white rounded-xl shadow-md border-2 border-blue-100">
             <div className="flex items-start space-x-4">
-              <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div className="text-left">
@@ -81,7 +90,7 @@ export default function ComingSoon() {
               href="/" 
               className="inline-flex items-center space-x-2 text-navy-600 hover:text-navy-700 font-medium transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               <span>Kembali ke Beranda</span>
