@@ -396,7 +396,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="h-dvh overflow-hidden bg-gray-50">
+    <div className="h-dvh overflow-clip bg-gray-50">
       <SiteHeader currentPath="/" />
 
       <main id="main-content" className="relative">

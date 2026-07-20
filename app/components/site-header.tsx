@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type SiteHeaderProps = {
   currentPath?: "/" | "/fitur" | "/harga" | "/kontak" | "/tentang-kami" | string;
@@ -22,6 +22,7 @@ function getHomeNavClass(isActive: boolean) {
 
 export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
   const isHome = currentPath === "/";
   const homeHref = isHome ? "#beranda" : "/#beranda";
 
@@ -31,8 +32,28 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
 
   const navClass = isHome ? getHomeNavClass : getNavClass;
 
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) {
+      return;
+    }
+
+    const setOffset = () => {
+      document.documentElement.style.setProperty(
+        "--header-offset",
+        `${header.offsetHeight}px`,
+      );
+    };
+
+    setOffset();
+
+    const observer = new ResizeObserver(setOffset);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className={`sticky top-0 z-50 ${headerClassName}`}>
+    <header ref={headerRef} className={`sticky top-0 z-50 ${headerClassName}`}>
       <nav
         className="edge-safe-header container mx-auto py-4 md:px-6"
         aria-label="Navigasi utama"
