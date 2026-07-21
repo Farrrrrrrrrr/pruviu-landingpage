@@ -86,9 +86,15 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Compare visible pixel height rather than intersectionRatio - a
+        // ratio-based threshold can never be crossed by a panel whose
+        // content is taller than (viewport height / threshold), which
+        // silently left tall panels (e.g. telco) permanently invisible on
+        // short mobile viewports since their .panel-reveal opacity never
+        // got triggered.
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          .sort((a, b) => b.intersectionRect.height - a.intersectionRect.height)[0];
 
         if (!visible) {
           return;
@@ -103,7 +109,7 @@ export default function Home() {
         }
       },
       {
-        threshold: [0.55, 0.7],
+        threshold: [0, 0.15, 0.3, 0.45, 0.55, 0.7],
       },
     );
 
@@ -429,68 +435,68 @@ export default function Home() {
             ref={(element) => {
               sectionRefs.current[0] = element;
             }}
-            className={`snap-panel overflow-hidden items-start bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] ${
+            className={`snap-panel h-[calc(100svh-var(--header-offset))] overflow-hidden items-start bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] ${
               activeSection === 0 ? "panel-active" : ""
             }`}
             aria-labelledby="hero-title"
           >
-            <div className="panel-reveal edge-safe-x mx-auto w-full max-w-5xl pb-0 pt-8 sm:pt-10 md:px-8">
-              <div className="text-center">
+            <div className="panel-reveal edge-safe-x mx-auto flex h-full w-full max-w-5xl flex-col pb-3 pt-4 sm:pb-6 sm:pt-10 md:px-8">
+              <div className="flex-shrink-0 text-center">
                 <h1
                   id="hero-title"
-                  className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-2xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
                 >
                   Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu
                   <span className="text-red-400"> Pertama di Indonesia</span>
                 </h1>
-                <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+                <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-lg">
                   Platform digital dengan informasi perkreditan terpercaya dan
                   analitik cerdas untuk koperasi, anggota koperasi, dan
                   masyarakat umum.
                 </p>
-                <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                <div className="mt-3 flex flex-col justify-center gap-2 sm:mt-6 sm:flex-row sm:gap-3">
                   <Link
                     href="https://app.pruviu.com"
-                    className="rounded-lg bg-white px-6 py-3 text-center text-base font-semibold text-navy-700 shadow-lg transition hover:bg-white/90"
+                    className="rounded-lg bg-white px-6 py-2 text-center text-sm font-semibold text-navy-700 shadow-lg transition hover:bg-white/90 sm:py-3 sm:text-base"
                   >
                     Daftar
                   </Link>
                   <Link
                     href="https://app.pruviu.com"
-                    className="rounded-lg border-2 border-white/40 px-6 py-3 text-center text-base font-medium text-white transition hover:bg-white/10"
+                    className="rounded-lg border-2 border-white/40 px-6 py-2 text-center text-sm font-medium text-white transition hover:bg-white/10 sm:py-3 sm:text-base"
                   >
                     Masuk
                   </Link>
                 </div>
-                <div className="mt-6 flex justify-center gap-8 text-center sm:gap-16">
+                <div className="mt-3 flex justify-center gap-8 text-center sm:mt-6 sm:gap-16">
                   <div>
-                    <p className="text-2xl font-bold text-white md:text-3xl">500+</p>
+                    <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">500+</p>
                     <p className="text-xs text-white/70 md:text-sm">Koperasi User Web</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white md:text-3xl">1.5jt+</p>
+                    <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">1.5jt+</p>
                     <p className="text-xs text-white/70 md:text-sm">Anggota Koperasi</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white md:text-3xl">5K+</p>
+                    <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">5K+</p>
                     <p className="text-xs text-white/70 md:text-sm">Masyarakat Umum</p>
                   </div>
                 </div>
               </div>
 
-              <div className="relative mt-8">
+              <div className="relative mt-3 min-h-0 flex-1 sm:mt-6">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                   <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8fc2ff]/40 blur-3xl md:h-80 md:w-[34rem] md:bg-[#9ec9ff]/35" />
                   <div className="absolute left-1/2 top-1/2 h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-2xl md:h-56 md:w-[30rem] md:bg-white/15" />
                 </div>
 
-                <div className="relative overflow-hidden">
+                <div className="relative flex h-full items-center justify-center overflow-hidden">
                   <Image
                     src="/ImageContent - Hero.png"
                     alt="Pruviu dashboard preview"
                     width={1080}
                     height={1080}
-                    className="h-auto w-full md:hidden"
+                    className="h-full max-h-full w-auto object-contain md:hidden"
                     priority
                   />
                   <Image
@@ -498,7 +504,7 @@ export default function Home() {
                     alt="Pruviu dashboard preview"
                     width={1512}
                     height={800}
-                    className="hidden h-auto w-full md:block"
+                    className="hidden h-full max-h-full w-auto object-contain md:block"
                     priority
                   />
                 </div>
