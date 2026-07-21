@@ -84,28 +84,47 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Compare visible pixel height rather than intersectionRatio - a
+    // ratio-based threshold can never be crossed by a panel whose content
+    // is taller than (viewport height / threshold), which silently left
+    // tall panels (e.g. telco) permanently invisible on short mobile
+    // viewports since their .panel-reveal opacity never got triggered.
+    //
+    // Each IntersectionObserver callback only reports entries that CROSSED
+    // a threshold since the last callback, not a full snapshot of every
+    // observed element. During a fast scroll, the final callback in the
+    // sequence can contain only the outgoing section (mid-fade-out), so
+    // picking the "most visible" section from that one batch alone can
+    // wrongly resurrect a section that's actually scrolled out of view.
+    // Track every section's last-known visible height across callbacks
+    // instead, so "most visible" is always computed from complete,
+    // up-to-date knowledge of all sections, not just the latest batch.
+    const visibleHeights = new Map<Element, number>();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Compare visible pixel height rather than intersectionRatio - a
-        // ratio-based threshold can never be crossed by a panel whose
-        // content is taller than (viewport height / threshold), which
-        // silently left tall panels (e.g. telco) permanently invisible on
-        // short mobile viewports since their .panel-reveal opacity never
-        // got triggered.
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRect.height - a.intersectionRect.height)[0];
+        entries.forEach((entry) => {
+          visibleHeights.set(
+            entry.target,
+            entry.isIntersecting ? entry.intersectionRect.height : 0,
+          );
+        });
 
-        if (!visible) {
-          return;
-        }
+        let bestIndex = -1;
+        let bestHeight = 0;
+        sectionRefs.current.forEach((section, index) => {
+          if (!section) {
+            return;
+          }
+          const height = visibleHeights.get(section) ?? 0;
+          if (height > bestHeight) {
+            bestHeight = height;
+            bestIndex = index;
+          }
+        });
 
-        const index = sectionRefs.current.findIndex(
-          (section) => section === visible.target,
-        );
-
-        if (index >= 0) {
-          setActiveSection(index);
+        if (bestIndex >= 0) {
+          setActiveSection(bestIndex);
         }
       },
       {
@@ -440,7 +459,7 @@ export default function Home() {
             }`}
             aria-labelledby="hero-title"
           >
-            <div className="panel-reveal edge-safe-x mx-auto flex h-full w-full max-w-5xl flex-col pb-3 pt-4 sm:pb-6 sm:pt-10 md:px-8">
+            <div className="panel-reveal edge-safe-x mx-auto flex h-full w-full max-w-5xl flex-col pb-2 pt-4 sm:pb-3 sm:pt-6 md:px-8">
               <div className="flex-shrink-0 text-center">
                 <h1
                   id="hero-title"
@@ -449,26 +468,26 @@ export default function Home() {
                   Sistem Monitoring dan Mitigasi Risiko Keuangan Terpadu
                   <span className="text-red-400"> Pertama di Indonesia</span>
                 </h1>
-                <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-lg">
+                <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-3 sm:text-lg">
                   Platform digital dengan informasi perkreditan terpercaya dan
                   analitik cerdas untuk koperasi, anggota koperasi, dan
                   masyarakat umum.
                 </p>
-                <div className="mt-3 flex flex-col justify-center gap-2 sm:mt-6 sm:flex-row sm:gap-3">
+                <div className="mt-3 flex flex-col justify-center gap-2 sm:mt-4 sm:flex-row sm:gap-3">
                   <Link
                     href="https://app.pruviu.com"
-                    className="rounded-lg bg-white px-6 py-2 text-center text-sm font-semibold text-navy-700 shadow-lg transition hover:bg-white/90 sm:py-3 sm:text-base"
+                    className="rounded-lg bg-white px-6 py-2 text-center text-sm font-semibold text-navy-700 shadow-lg transition hover:bg-white/90 sm:py-2.5 sm:text-base"
                   >
                     Daftar
                   </Link>
                   <Link
                     href="https://app.pruviu.com"
-                    className="rounded-lg border-2 border-white/40 px-6 py-2 text-center text-sm font-medium text-white transition hover:bg-white/10 sm:py-3 sm:text-base"
+                    className="rounded-lg border-2 border-white/40 px-6 py-2 text-center text-sm font-medium text-white transition hover:bg-white/10 sm:py-2.5 sm:text-base"
                   >
                     Masuk
                   </Link>
                 </div>
-                <div className="mt-3 flex justify-center gap-8 text-center sm:mt-6 sm:gap-16">
+                <div className="mt-3 flex justify-center gap-8 text-center sm:mt-4 sm:gap-16">
                   <div>
                     <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">500+</p>
                     <p className="text-xs text-white/70 md:text-sm">Koperasi User Web</p>
@@ -484,7 +503,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative mt-3 min-h-0 flex-1 sm:mt-6">
+              <div className="relative mt-3 min-h-0 flex-1 sm:mt-4">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                   <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8fc2ff]/40 blur-3xl md:h-80 md:w-[34rem] md:bg-[#9ec9ff]/35" />
                   <div className="absolute left-1/2 top-1/2 h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-2xl md:h-56 md:w-[30rem] md:bg-white/15" />
