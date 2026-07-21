@@ -9,7 +9,6 @@ import {
   useEffect,
   useRef,
   useState,
-  WheelEvent,
 } from "react";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
@@ -171,7 +170,7 @@ export default function Home() {
   }, []);
 
   const handleWheel = useCallback(
-    (event: WheelEvent<HTMLElement>) => {
+    (event: globalThis.WheelEvent) => {
       if (Math.abs(event.deltaY) < 25) {
         return;
       }
@@ -194,6 +193,27 @@ export default function Home() {
         return;
       }
 
+      // Most panels are exactly one viewport tall, but the hero panel is now
+      // allowed to grow taller to fit a full-size image. If the active panel
+      // has more of itself left to reveal in the wheel direction, let the
+      // wheel scroll it natively instead of jumping straight to the next/
+      // previous section - only hijack once its edge is actually reached.
+      const activeElement = sectionRefs.current[activeSectionRef.current];
+      if (stage && activeElement) {
+        const sectionTop = activeElement.offsetTop;
+        const sectionBottom = sectionTop + activeElement.offsetHeight;
+        const viewTop = stage.scrollTop;
+        const viewBottom = viewTop + stage.clientHeight;
+        const EPSILON = 2;
+
+        if (event.deltaY > 0 && sectionBottom - viewBottom > EPSILON) {
+          return;
+        }
+        if (event.deltaY < 0 && viewTop - sectionTop > EPSILON) {
+          return;
+        }
+      }
+
       event.preventDefault();
 
       if (isTransitioningRef.current) {
@@ -204,6 +224,23 @@ export default function Home() {
     },
     [moveSection, scrollToFooter],
   );
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) {
+      return;
+    }
+
+    // React attaches onWheel as a passive listener by default (for scroll
+    // performance), which silently makes event.preventDefault() inside it a
+    // no-op - the browser scrolls natively regardless. That was invisible
+    // while every panel was exactly one viewport tall, but breaks the
+    // "let this taller panel scroll internally before jumping sections"
+    // logic in handleWheel outright. A real DOM listener with
+    // passive: false is required for preventDefault to actually work.
+    stage.addEventListener("wheel", handleWheel, { passive: false });
+    return () => stage.removeEventListener("wheel", handleWheel);
+  }, [handleWheel]);
 
   const handleTouchStart = useCallback((event: TouchEvent<HTMLElement>) => {
     touchStartYRef.current = event.touches[0]?.clientY ?? null;
@@ -445,7 +482,6 @@ export default function Home() {
         <div
           className="snap-stage"
           ref={stageRef}
-          onWheel={handleWheel}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -454,13 +490,13 @@ export default function Home() {
             ref={(element) => {
               sectionRefs.current[0] = element;
             }}
-            className={`snap-panel h-[calc(100svh-var(--header-offset))] overflow-hidden items-start bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] ${
+            className={`snap-panel overflow-hidden items-start bg-[linear-gradient(155deg,_#1f1d52_0%,_#273b93_52%,_#336ab3_100%)] ${
               activeSection === 0 ? "panel-active" : ""
             }`}
             aria-labelledby="hero-title"
           >
-            <div className="panel-reveal edge-safe-x mx-auto flex h-full w-full max-w-5xl flex-col pb-2 pt-4 sm:pb-3 sm:pt-6 md:px-8">
-              <div className="flex-shrink-0 text-center">
+            <div className="panel-reveal edge-safe-x mx-auto w-full max-w-5xl pb-8 pt-4 sm:pb-10 sm:pt-6 md:px-8">
+              <div className="text-center">
                 <h1
                   id="hero-title"
                   className="text-2xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
@@ -503,19 +539,19 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative mt-3 min-h-0 flex-1 sm:mt-4">
+              <div className="relative mt-6 sm:mt-8">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                   <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8fc2ff]/40 blur-3xl md:h-80 md:w-[34rem] md:bg-[#9ec9ff]/35" />
                   <div className="absolute left-1/2 top-1/2 h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-2xl md:h-56 md:w-[30rem] md:bg-white/15" />
                 </div>
 
-                <div className="relative flex h-full items-center justify-center overflow-hidden">
+                <div className="relative overflow-hidden">
                   <Image
                     src="/ImageContent - Hero.png"
                     alt="Pruviu dashboard preview"
                     width={1080}
                     height={1080}
-                    className="h-full max-h-full w-auto object-contain md:hidden"
+                    className="h-auto w-full md:hidden"
                     priority
                   />
                   <Image
@@ -523,7 +559,7 @@ export default function Home() {
                     alt="Pruviu dashboard preview"
                     width={1512}
                     height={800}
-                    className="hidden h-full max-h-full w-auto object-contain md:block"
+                    className="hidden h-auto w-full md:block"
                     priority
                   />
                 </div>
