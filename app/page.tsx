@@ -605,19 +605,16 @@ export default function Home() {
                     {
                       top: "SLIK",
                       bottom: "OJK",
-                      topGradient: null,
                       textGradient: "from-red-500 to-red-700",
                     },
                     {
                       top: "SLIK",
                       bottom: "Koperasi",
-                      topGradient: null,
                       textGradient: "from-navy-500 to-navy-700",
                     },
                     {
                       top: "Full",
                       bottom: "Check",
-                      topGradient: "from-navy-600 to-red-600",
                       textGradient: "from-navy-600 to-red-600",
                     },
                   ].map((badge) => (
@@ -627,16 +624,7 @@ export default function Home() {
                     >
                       <div className="flex h-20 w-full flex-col items-center justify-center gap-1 rounded-[calc(1rem-2px)] bg-white px-3 sm:h-24 md:h-28">
                         <span
-                          className={
-                            badge.topGradient
-                              ? `bg-gradient-to-br bg-clip-text text-center text-lg font-extrabold uppercase leading-tight text-transparent sm:text-xl md:text-2xl ${badge.topGradient}`
-                              : "text-center text-lg font-extrabold uppercase leading-tight text-white sm:text-xl md:text-2xl"
-                          }
-                          style={
-                            badge.topGradient
-                              ? undefined
-                              : { WebkitTextStroke: "1.25px #273b93" }
-                          }
+                          className={`bg-gradient-to-br bg-clip-text text-center text-lg font-extrabold uppercase leading-tight text-transparent sm:text-xl md:text-2xl ${badge.textGradient}`}
                         >
                           {badge.top}
                         </span>

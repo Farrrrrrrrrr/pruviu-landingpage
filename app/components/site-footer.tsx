@@ -59,11 +59,11 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
                   Tentang Kami
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="https://www.linkedin.com/company/pt-pruden-visi-utama/jobs/" className="hover:text-white transition-colors text-sm md:text-base">
                   Karir
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="https://www.linkedin.com/company/pt-pruden-visi-utama/posts/?feedView=all" className="hover:text-white transition-colors text-sm md:text-base">
                   Blog
