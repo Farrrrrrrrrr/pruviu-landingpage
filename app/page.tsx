@@ -376,6 +376,22 @@ export default function Home() {
       width: 136,
       height: 38,
     },
+    {
+      src: "/logo_kemenkop.png",
+      alt: "Logo Kemenkop",
+      title: "Kemenkop",
+      subtitle: "Kementerian Koperasi",
+      width: 136,
+      height: 38,
+    },
+    {
+      src: "/cropped-dekopin_logo_small.png",
+      alt: "Dekopin partnership badge",
+      title: "Dekopin",
+      subtitle: "Dewan Koperasi Indonesia",
+      width: 136,
+      height: 38,
+    },
   ];
 
   const telcoFeatures = [
@@ -429,7 +445,7 @@ export default function Home() {
       ),
     },
     {
-      name: "Prediksi Pendapatan",
+      name: "Prediksi Penghasilan",
       description:
         "Memprediksi penghasilan bulanan berdasarkan data konsumsi telekomunikasi, tipe device, aktivitas e-commerce, lending apps, dan internet banking dari calon anggota/debitur.",
       icon: (
@@ -505,9 +521,7 @@ export default function Home() {
                   <span className="text-red-400"> Pertama di Indonesia</span>
                 </h1>
                 <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-3 sm:text-lg">
-                  Platform digital dengan informasi perkreditan terpercaya dan
-                  analitik cerdas untuk koperasi, anggota koperasi, dan
-                  masyarakat umum.
+                  Pruviu merupakan &apos;Mall Layanan Informasi Keuangan&apos; yang menyediakan layanan skor tradisional (SLIK OJK, SLIK Koperasi), skor alternatif (Telco Score, Deteksi Judol, Prediksi Penghasilan), serta layanan penunjang jasa keuangan lainnya dalam satu platform digital terintegrasi.
                 </p>
                 <div className="mt-3 flex flex-col justify-center gap-2 sm:mt-4 sm:flex-row sm:gap-3">
                   <Link
@@ -596,11 +610,17 @@ export default function Home() {
                   Tingkatkan Kualitas Pinjaman Koperasi Anda
                 </h3>
                 <p className="text-base leading-relaxed text-navy-700 md:text-lg">
-                  Dirancang untuk koperasi sektor jasa keuangan dengan prinsip
+                  Dirancang untuk koperasi jasa keuangan menerapkan prinsip
                   kehati-hatian, know-your-customer, dan mitigasi risiko
                   pinjaman bermasalah.
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 lg:justify-start">
+                <div className="space-y-3 italic">
+                  <FeaturePointer>Didukung sumber data serta analitik lengkap dan terpercaya</FeaturePointer>
+                  <FeaturePointer>
+                    Dilengkapi fitur konfigurasi pengaturan Pruviu Mobile
+                  </FeaturePointer>
+                </div>
+                {/* <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 lg:justify-start">
                   {[
                     {
                       top: "SLIK",
@@ -636,7 +656,7 @@ export default function Home() {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
           </section>
@@ -782,10 +802,10 @@ export default function Home() {
                   className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
                 >
                   Lengkapi mitigasi risiko dengan{" "}
-                  <span className="text-red-400">scoring telco</span>
+                  <span className="text-red-400">Skor Alternatif</span>
                 </h2>
                 <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
-Perkuat mitigasi risiko dengan insight berbasis data telco yang membantu menghasilkan penilaian kemampuan bayar secara lebih akurat, mulai dari Telco Score, deteksi indikasi judi online, hingga prediksi pendapatan.</p> </div>
+Perkuat mitigasi risiko dengan insight berbasis data telekomunikasi yang membantu menghasilkan penilaian kemampuan bayar secara lebih akurat, mulai dari Telco Score, deteksi judi online, hingga prediksi penghasilan calon debitur.</p> </div>
 
               <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 md:mt-12 md:gap-8">
                 {telcoFeatures.map((feature) => (
@@ -833,24 +853,25 @@ Perkuat mitigasi risiko dengan insight berbasis data telco yang membantu menghas
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
                     Trust • Compliance • Security
                   </p>
+                     <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
+                    Komitmen tata kelola data dan keamanan Pruviu diperkuat melalui
+                    afiliasi global, sertifikasi internasional, dan registrasi
+                    sistem elektronik di Indonesia.
+                  </p>
                   <h2
                     id="compliance-title"
                     className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
                   >
-                    Dipercaya karena terhubung, terdaftar, dan tersertifikasi
+                    Terhubung, Terdaftar, dan Tersertifikasi:
                   </h2>
-                  <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
-                    Komitmen tata kelola data dan keamanan diperkuat melalui
-                    afiliasi global, sertifikasi internasional, dan registrasi
-                    sistem elektronik di Indonesia.
-                  </p>
+               
                 </div>
 
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="flex flex-wrap justify-center gap-3">
                   {trustBadges.map((badge) => (
                     <div
                       key={badge.title}
-                      className="rounded-xl border border-white/20 bg-white/95 px-3 py-3.5 text-center text-navy-800 shadow-lg"
+                      className="w-full rounded-xl border border-white/20 bg-white/95 px-3 py-3.5 text-center text-navy-800 shadow-lg sm:w-[calc(50%-0.375rem)] lg:w-[calc(25%-0.5625rem)]"
                     >
                       <Image
                         src={badge.src}
