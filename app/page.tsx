@@ -605,12 +605,12 @@ export default function Home() {
                     {
                       top: "SLIK",
                       bottom: "OJK",
-                      textGradient: "from-red-500 to-red-700",
+                      textGradient: "from-navy-600 to-red-600",
                     },
                     {
                       top: "SLIK",
                       bottom: "Koperasi",
-                      textGradient: "from-navy-500 to-navy-700",
+                      textGradient: "from-navy-600 to-red-600",
                     },
                     {
                       top: "Full",
