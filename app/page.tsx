@@ -382,7 +382,7 @@ export default function Home() {
     {
       name: "Telco Score",
       description:
-        "Skor risiko tambahan berbasis pola penggunaan dan riwayat operator seluler.",
+        "Mengecek skor kelayakan kredit calon anggota/debitur berdasarkan nomor telepon dan data telekommunikasi 3 provider utama di Indonesia (Telkosel, Indosat, XL).",
       icon: (
         <svg
           className="h-2/3 w-2/3"
@@ -404,7 +404,7 @@ export default function Home() {
     {
       name: "Deteksi Judol",
       description:
-        "Identifikasi indikasi transaksi judi online untuk memperkuat mitigasi risiko.",
+        "Mendeteksi aktivitas calon anggota/debitur pada website atau aplikasi yang berisiko, terutama yang berkaitan dengan judi online dan sumber-sumber ilegal lainnya.",
       icon: (
         <svg
           className="h-2/3 w-2/3"
@@ -431,7 +431,7 @@ export default function Home() {
     {
       name: "Prediksi Pendapatan",
       description:
-        "Estimasi pendapatan berbasis data untuk melengkapi analisis kemampuan bayar.",
+        "Memprediksi penghasilan bulanan berdasarkan data konsumsi telekomunikasi, tipe device, aktivitas e-commerce, lending apps, dan internet banking dari calon anggota/debitur.",
       icon: (
         <svg
           className="h-2/3 w-2/3"
@@ -620,7 +620,7 @@ export default function Home() {
                   ].map((badge) => (
                     <div
                       key={badge.bottom}
-                      className="w-28 rounded-2xl bg-gradient-to-br from-navy-300 to-navy-500 p-[2px] shadow-sm sm:w-32 md:w-40"
+                      className={`w-28 rounded-2xl bg-gradient-to-br p-[2px] shadow-sm sm:w-32 md:w-40 ${badge.textGradient}`}
                     >
                       <div className="flex h-20 w-full flex-col items-center justify-center gap-1 rounded-[calc(1rem-2px)] bg-white px-3 sm:h-24 md:h-28">
                         <span

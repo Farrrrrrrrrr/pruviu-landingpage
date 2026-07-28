@@ -64,7 +64,7 @@ const pricingItems = [
     name: "Pengecekan via Pruviu Mobile",
     description:
       "Anggota membeli kuota pengecekan ke koperasi melalui akun Pruviu Mobile.",
-    price: "Tidak ada batas harga maksimal",
+    price: "Fleksibel Sesuai Kebutuhan Anda",
     cardClass: "bg-gradient-to-br from-red-700 to-red-600",
     priceClass: "bg-red-700",
   },
@@ -134,9 +134,9 @@ export default function HargaPage() {
                 {pricingItems.map((item) => (
                   <article
                     key={item.name}
-                    className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm"
+                    className="flex h-full flex-col rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm"
                   >
-                    <div className={item.cardClass + " min-h-52 p-6 text-white"}>
+                    <div className={item.cardClass + " min-h-52 flex-1 p-6 text-white"}>
                       <h3 className="text-2xl font-bold leading-tight mb-3">{item.name}</h3>
                       <div className="h-px bg-white/35 mb-3" />
                       <p className="text-sm md:text-base text-white/90 leading-relaxed">
