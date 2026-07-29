@@ -767,8 +767,7 @@ export default function Home() {
                   Monitor Risiko Keuangan Keluarga Anda
                 </h3>
                 <p className="text-base leading-relaxed text-navy-700 md:text-lg">
-                  Menjembatani interaksi koperasi dengan anggota melalui akses
-                  pemantauan risiko keuangan pribadi dan keluarga secara cepat.
+                  Dirancang untuk menjembatani interaksi antara koperasi dengan anggota. Memungkinkan anggota memonitor risiko keuangan pribadi dan keluarga melalui akses konsultasi dengan koperasi tempat bernaung.
                 </p>
                 <div className="space-y-3 italic">
                   <FeaturePointer>Khusus untuk anggota koperasi</FeaturePointer>
