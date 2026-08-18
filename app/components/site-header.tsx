@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 type SiteHeaderProps = {
-  currentPath?: "/" | "/fitur" | "/harga" | "/kontak" | "/tentang-kami" | string;
+  currentPath?: "/" | "/fitur" | "/kontak" | "/tentang-kami" | string;
 };
 
 function getNavClass(isActive: boolean) {
@@ -91,9 +91,6 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur")}>
               Fitur
             </Link> */}
-            {/* <Link href="/harga" className={getNavClass(currentPath === "/harga")}>
-              Harga
-            </Link> */}
             <Link href="/kontak" className={navClass(currentPath === "/kontak")} aria-current={currentPath === "/kontak" ? "page" : undefined}>
               Kontak
             </Link>
@@ -174,9 +171,6 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur") + " block py-2"}>
               Fitur
-            </Link> */}
-            {/* <Link href="/harga" className={getNavClass(currentPath === "/harga") + " block py-2"}>
-              Harga
             </Link> */}
             <Link href="/kontak" className={navClass(currentPath === "/kontak") + " block py-2"} aria-current={currentPath === "/kontak" ? "page" : undefined}>
               Kontak

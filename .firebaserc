@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "pruviu-landingpage"
+  },
+  "targets": {
+    "pruviu-landingpage": {
+      "hosting": {
+        "production": [
+          "pruviu-landingpage"
+        ],
+        "staging": [
+          "pruviu-landingpage-staging"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -37,11 +37,6 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
                   Fitur
                 </Link>
               </li>
-              {/* <li>
-                <Link href="/harga" className="hover:text-white transition-colors text-sm md:text-base">
-                  Harga
-                </Link>
-              </li> */}
               <li>
                 <Link href="/#compliance" className="hover:text-white transition-colors text-sm md:text-base">
                   Keamanan
