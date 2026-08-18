@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "pruviu-landingpage"
+    "default": "pruviu-497408"
   },
   "targets": {
-    "pruviu-landingpage": {
+    "pruviu-497408": {
       "hosting": {
         "production": [
-          "pruviu-landingpage"
+          "pruviu-lp"
         ],
         "staging": [
-          "pruviu-landingpage-staging"
+          "pruviu-lp-staging"
         ]
       }
     }
