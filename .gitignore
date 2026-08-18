@@ -36,8 +36,7 @@ CLAUDE.md
 
 # vercel
 .vercel
-public/ratecard-pruviu.pdf
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/public/dashboard-preview.png

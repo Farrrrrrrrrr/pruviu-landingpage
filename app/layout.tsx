@@ -18,11 +18,21 @@ const siteUrl = "https://pruviu.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Pruviu - Sistem Mitigasi Risiko Terpadu Pertama di Indonesia",
+    default: "Pruviu - SLIK Koperasi & Mitigasi Risiko Kredit Koperasi",
     template: "%s | Pruviu",
   },
-  description: "Platform lengkap untuk verifikasi kredit dan pengecekan riwayat keuangan anggota koperasi. Koperasi Checking, SLIK OJK, dan Credit Scoring dalam satu sistem.",
-  keywords: ["koperasi", "credit scoring", "SLIK OJK", "anti fraud", "koperasi checking", "verifikasi kredit"],
+  description: "Cek SLIK OJK dan SLIK Koperasi, credit scoring, serta deteksi fraud untuk menyaring calon peminjam koperasi. Sistem mitigasi risiko keuangan terpadu pertama di Indonesia.",
+  keywords: [
+    "SLIK Koperasi",
+    "cek SLIK koperasi",
+    "mitigasi risiko koperasi",
+    "mitigasi risiko kredit",
+    "koperasi checking",
+    "SLIK OJK",
+    "credit scoring koperasi",
+    "anti fraud koperasi",
+    "verifikasi kredit koperasi",
+  ],
   alternates: {
     canonical: "/",
   },
@@ -66,6 +76,7 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   name: "PT Pruden Visi Utama (Pruviu)",
   alternateName: "Pruviu",
   url: siteUrl,
@@ -73,6 +84,11 @@ const organizationJsonLd = {
   description:
     "Platform digital verifikasi kredit dan mitigasi risiko keuangan untuk koperasi, anggota koperasi, dan masyarakat umum di Indonesia.",
   email: "support@pruviu.com",
+  sameAs: [
+    "https://www.linkedin.com/company/pt-pruden-visi-utama/",
+    "https://www.instagram.com/pruviu.id/",
+    "https://www.tiktok.com/@pruviu.id",
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -92,6 +108,38 @@ const organizationJsonLd = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Pruviu",
+  url: siteUrl,
+  inLanguage: "id-ID",
+  publisher: { "@id": `${siteUrl}/#organization` },
+};
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Pruviu Web",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Web",
+  url: "https://app.pruviu.com",
+  inLanguage: "id-ID",
+  description:
+    "Platform verifikasi kredit dan mitigasi risiko untuk koperasi: pengecekan SLIK OJK dan SLIK Koperasi, credit scoring, deteksi fraud, serta skor alternatif berbasis data telekomunikasi.",
+  featureList: [
+    "Koperasi Checking",
+    "Pengecekan SLIK OJK",
+    "Pengecekan SLIK Koperasi",
+    "Credit Scoring",
+    "Anti Fraud",
+    "Telco Score",
+    "Deteksi Judi Online",
+    "Prediksi Penghasilan",
+  ],
+  publisher: { "@id": `${siteUrl}/#organization` },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -102,7 +150,13 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              organizationJsonLd,
+              websiteJsonLd,
+              softwareJsonLd,
+            ]),
+          }}
         />
       </head>
       <body

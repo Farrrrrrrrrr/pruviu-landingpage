@@ -338,9 +338,9 @@ export default function Home() {
   }, [moveSection, scrollToFooter, scrollToSection]);
 
   const mobileImages = [
-    { src: "/Onboarding.png", alt: "Pruviu Mobile Onboarding" },
-    { src: "/SelamatDatang.png", alt: "Pruviu Mobile Welcome" },
-    { src: "/Homepage.png", alt: "Pruviu Mobile Homepage" },
+    { src: "/Onboarding.webp", alt: "Pruviu Mobile Onboarding" },
+    { src: "/SelamatDatang.webp", alt: "Pruviu Mobile Welcome" },
+    { src: "/Homepage.webp", alt: "Pruviu Mobile Homepage" },
   ];
 
   const trustBadges = [
@@ -353,7 +353,7 @@ export default function Home() {
       height: 46,
     },
     {
-      src: "/logo-pse-small.png",
+      src: "/logo-pse-small.webp",
       alt: "PSE registration badge",
       title: "PSE",
       subtitle: "Penyelenggara Sistem Elektronik",
@@ -361,7 +361,7 @@ export default function Home() {
       height: 38,
     },
     {
-      src: "/logo-komdigi.png",
+      src: "/logo-komdigi.webp",
       alt: "Komdigi partnership badge",
       title: "Komdigi",
       subtitle: "Konektivitas Ekosistem Komdigi",
@@ -377,7 +377,7 @@ export default function Home() {
       height: 38,
     },
     {
-      src: "/logo_kemenkop.png",
+      src: "/logo_kemenkop.webp",
       alt: "Logo Kemenkop",
       title: "Kemenkop",
       subtitle: "Kementerian Koperasi",
@@ -385,7 +385,7 @@ export default function Home() {
       height: 38,
     },
     {
-      src: "/cropped-dekopin_logo_small.png",
+      src: "/cropped-dekopin_logo_small.webp",
       alt: "Dekopin partnership badge",
       title: "Dekopin",
       subtitle: "Dewan Koperasi Indonesia",
@@ -447,7 +447,7 @@ export default function Home() {
     {
       name: "Prediksi Penghasilan",
       description:
-        "Memprediksi penghasilan bulanan berdasarkan data konsumsi telekomunikasi, tipe device, aktivitas e-commerce, lending apps, dan internet banking dari calon anggota/debitur.",
+        "Memprediksi penghasilan bulanan berdasarkan data konsumsi telekomunikasi, tipe perangkat, aktivitas belanja online, pinjaman online,, dan internet banking dari calon debitur.",
       icon: (
         <svg
           className="h-2/3 w-2/3"
@@ -540,15 +540,15 @@ export default function Home() {
                 <div className="mt-3 flex justify-center gap-8 text-center sm:mt-4 sm:gap-16">
                   <div>
                     <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">500+</p>
-                    <p className="text-xs text-white/70 md:text-sm">Koperasi User Web</p>
+                    <p className="text-xs text-white/90 md:text-sm">Koperasi User Web</p>
                   </div>
                   <div>
                     <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">1.5jt+</p>
-                    <p className="text-xs text-white/70 md:text-sm">Anggota Koperasi</p>
+                    <p className="text-xs text-white/90 md:text-sm">Anggota Koperasi</p>
                   </div>
                   <div>
                     <p className="text-lg font-bold text-white sm:text-2xl md:text-3xl">5K+</p>
-                    <p className="text-xs text-white/70 md:text-sm">Masyarakat Umum</p>
+                    <p className="text-xs text-white/90 md:text-sm">Masyarakat Umum</p>
                   </div>
                 </div>
               </div>
@@ -561,7 +561,7 @@ export default function Home() {
 
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/ImageContent - Hero.png"
+                    src="/ImageContent - Hero.webp"
                     alt="Pruviu dashboard preview"
                     width={1080}
                     height={1080}
@@ -569,7 +569,7 @@ export default function Home() {
                     priority
                   />
                   <Image
-                    src="/dashboard-example-pascabayar.png"
+                    src="/dashboard-example-pascabayar.webp"
                     alt="Pruviu dashboard preview"
                     width={1512}
                     height={800}
@@ -594,7 +594,7 @@ export default function Home() {
             <div className="panel-reveal edge-safe-x container mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 md:px-6 lg:grid-cols-2 lg:gap-16">
               <div className="mx-auto w-full max-w-2xl">
                 <Image
-                  src="/Laptop - ImageContent.png"
+                  src="/Laptop - ImageContent.webp"
                   alt="Pruviu web dashboard"
                   width={1200}
                   height={675}
@@ -739,7 +739,7 @@ export default function Home() {
 
                   <div
                     className="mt-6 flex justify-center gap-2"
-                    role="tablist"
+                    role="group"
                     aria-label="Navigasi slide aplikasi mobile"
                   >
                     {mobileImages.map((_, index) => (
@@ -751,8 +751,7 @@ export default function Home() {
                           index === currentSlide ? "w-8 bg-navy-600" : "w-2 bg-gray-300"
                         }`}
                         aria-label={`Slide ${index + 1}`}
-                        aria-selected={index === currentSlide}
-                        role="tab"
+                        aria-current={index === currentSlide}
                       />
                     ))}
                   </div>
@@ -827,7 +826,7 @@ Perkuat mitigasi risiko dengan insight berbasis data telekomunikasi yang membant
                         </h3>
                       </div>
                     </div>
-                    <p className="mt-5 max-w-[15rem] text-sm leading-relaxed text-white/70 md:text-base">
+                    <p className="mt-5 max-w-[15rem] text-sm leading-relaxed text-white/90 md:text-base">
                       {feature.description}
                     </p>
                   </div>

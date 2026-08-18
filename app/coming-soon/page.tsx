@@ -75,7 +75,7 @@ export default function ComingSoon() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div className="text-left">
-                <h3 className="font-bold text-navy-700 text-lg mb-2">Jangan Lewatkan Kesempatan Bergabung!</h3>
+                <h2 className="font-bold text-navy-700 text-lg mb-2">Jangan Lewatkan Kesempatan Bergabung!</h2>
                 <p className="text-gray-600">
                   Pastikan untuk kembali ke halaman ini secara rutin agar Anda tidak melewatkan pengumuman peluncuran Pruviu 
                   dan menjadi salah satu pengguna pertama kami.

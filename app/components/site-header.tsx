@@ -52,6 +52,21 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
   return (
     <header ref={headerRef} className={`sticky top-0 z-50 ${headerClassName}`}>
       <nav
@@ -61,7 +76,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3" aria-label="Pruviu beranda">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Pruviu Logo"
               width={150}
               height={79}
@@ -70,7 +85,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             />
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href={homeHref} className={navClass(isHome)}>
+            <Link href={homeHref} className={navClass(isHome)} aria-current={isHome ? "page" : undefined}>
               Beranda
             </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur")}>
@@ -79,10 +94,10 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             {/* <Link href="/harga" className={getNavClass(currentPath === "/harga")}>
               Harga
             </Link> */}
-            <Link href="/kontak" className={navClass(currentPath === "/kontak")}>
+            <Link href="/kontak" className={navClass(currentPath === "/kontak")} aria-current={currentPath === "/kontak" ? "page" : undefined}>
               Kontak
             </Link>
-            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami")}>
+            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami")} aria-current={currentPath === "/tentang-kami" ? "page" : undefined}>
               Tentang Kami
             </Link>
           </div>
@@ -154,7 +169,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
                 : "bg-white"
             }`}
           >
-            <Link href={homeHref} className={navClass(isHome) + " block py-2"}>
+            <Link href={homeHref} className={navClass(isHome) + " block py-2"} aria-current={isHome ? "page" : undefined}>
               Beranda
             </Link>
             {/* <Link href="/fitur" className={getNavClass(currentPath === "/fitur") + " block py-2"}>
@@ -163,10 +178,10 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
             {/* <Link href="/harga" className={getNavClass(currentPath === "/harga") + " block py-2"}>
               Harga
             </Link> */}
-            <Link href="/kontak" className={navClass(currentPath === "/kontak") + " block py-2"}>
+            <Link href="/kontak" className={navClass(currentPath === "/kontak") + " block py-2"} aria-current={currentPath === "/kontak" ? "page" : undefined}>
               Kontak
             </Link>
-            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami") + " block py-2"}>
+            <Link href="/tentang-kami" className={navClass(currentPath === "/tentang-kami") + " block py-2"} aria-current={currentPath === "/tentang-kami" ? "page" : undefined}>
               Tentang Kami
             </Link>
             <div className="pt-4 space-y-2">

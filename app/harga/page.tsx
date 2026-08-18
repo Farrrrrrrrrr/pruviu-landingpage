@@ -1,14 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 
+const title = "Harga";
+const description =
+  "Struktur harga Pruviu untuk layanan SLIK OJK, SLIK Koperasi, dan Full Check - dirancang agar koperasi mendapatkan verifikasi dan mitigasi risiko yang presisi dan terjangkau.";
+
 export const metadata: Metadata = {
-  title: "Harga",
-  description:
-    "Struktur harga Pruviu untuk layanan SLIK OJK, SLIK Koperasi, dan Full Check - dirancang agar koperasi mendapatkan verifikasi dan mitigasi risiko yang presisi dan terjangkau.",
+  title,
+  description,
   alternates: {
     canonical: "/harga",
+  },
+  openGraph: {
+    title: `${title} | Pruviu`,
+    description,
+    url: "https://pruviu.com/harga",
+    type: "website",
+    locale: "id_ID",
+    siteName: "Pruviu",
+    images: [
+      {
+        url: "/pruviu-logo-redblue.png",
+        width: 1200,
+        height: 630,
+        alt: "Pruviu - Platform Anti Fraud Koperasi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${title} | Pruviu`,
+    description,
+    images: ["/pruviu-logo-redblue.png"],
   },
 };
 
@@ -71,6 +97,11 @@ const pricingItems = [
 ];
 
 export default function HargaPage() {
+  // Not linked or listed anywhere yet — kept in the repo for later, disabled
+  // for now via a hard 404 rather than middleware, so this holds regardless
+  // of hosting platform or whether Next.js runs as a server or static export.
+  notFound();
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <SiteHeader currentPath="/harga" />

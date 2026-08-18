@@ -2,12 +2,37 @@ import type { Metadata } from "next";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 
+const title = "Kontak";
+const description =
+  "Hubungi tim Pruviu melalui email, WhatsApp, atau call center untuk pertanyaan seputar verifikasi kredit dan mitigasi risiko koperasi.";
+
 export const metadata: Metadata = {
-  title: "Kontak",
-  description:
-    "Hubungi tim Pruviu melalui email, WhatsApp, atau call center untuk pertanyaan seputar verifikasi kredit dan mitigasi risiko koperasi.",
+  title,
+  description,
   alternates: {
     canonical: "/kontak",
+  },
+  openGraph: {
+    title: `${title} | Pruviu`,
+    description,
+    url: "https://pruviu.com/kontak",
+    type: "website",
+    locale: "id_ID",
+    siteName: "Pruviu",
+    images: [
+      {
+        url: "/pruviu-logo-redblue.png",
+        width: 1200,
+        height: 630,
+        alt: "Pruviu - Platform Anti Fraud Koperasi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${title} | Pruviu`,
+    description,
+    images: ["/pruviu-logo-redblue.png"],
   },
 };
 
@@ -36,7 +61,7 @@ export default function Kontak() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">Email Support</h3>
+                  <h2 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">Email Support</h2>
                   <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">Kirim email kepada kami untuk pertanyaan detail atau bantuan teknis</p>
                 </div>
                 <a 
@@ -60,7 +85,7 @@ export default function Kontak() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">WhatsApp</h3>
+                  <h2 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">WhatsApp</h2>
                   <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">Chat langsung dengan tim kami melalui WhatsApp Business</p>
                 </div>
                 <a
@@ -84,7 +109,7 @@ export default function Kontak() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">Call Center</h3>
+                  <h2 className="text-xl md:text-2xl font-bold text-navy-700 mb-2">Call Center</h2>
                   <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6">Hubungi kami melalui call center untuk bantuan cepat</p>
                 </div>
                 <a
