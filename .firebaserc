@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "pruviu-497408"
+  },
+  "targets": {
+    "pruviu-497408": {
+      "hosting": {
+        "production": [
+          "pruviu-lp"
+        ],
+        "staging": [
+          "pruviu-lp-staging"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

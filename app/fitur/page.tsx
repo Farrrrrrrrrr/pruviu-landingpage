@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
+
+export const metadata: Metadata = {
+  title: "Fitur",
+  description:
+    "Detail fitur Pruviu sedang kami rapikan. Kembali lagi segera untuk melihat lengkap Koperasi Checking, SLIK OJK, Anti Fraud, dan Credit Scoring.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function FeaturesPage() {
   return (

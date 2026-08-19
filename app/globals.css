@@ -71,7 +71,7 @@ html {
 }
 
 :root {
-  --header-offset: 80px;
+  --header-offset: 73px;
 }
 
 :root {
@@ -80,7 +80,7 @@ html {
 
 @media (min-width: 768px) {
   :root {
-    --header-offset: 96px;
+    --header-offset: 79px;
   }
 }
 
@@ -91,6 +91,7 @@ html {
   scroll-behavior: smooth;
   overscroll-behavior-y: contain;
 }
+
 
 .snap-panel {
   min-height: calc(100svh - var(--header-offset));

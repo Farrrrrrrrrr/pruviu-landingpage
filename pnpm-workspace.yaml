@@ -1,0 +1,4 @@
+allowBuilds:
+  # eslint's transitive dependency for fast module resolution; its native
+  # build script isn't required — lint/build/typecheck all pass without it.
+  unrs-resolver: false

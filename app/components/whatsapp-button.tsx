@@ -1,0 +1,15 @@
+export function WhatsAppButton() {
+  return (
+    <a
+      href="https://wa.me/6285600777888"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat via WhatsApp"
+      className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:scale-105 hover:bg-[#20bd5a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] sm:h-14 sm:w-14 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] sm:right-[calc(1.5rem+env(safe-area-inset-right))]"
+    >
+      <svg viewBox="0 0 32 32" className="h-6 w-6 sm:h-7 sm:w-7" fill="currentColor" aria-hidden="true">
+        <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.362.687 4.564 1.872 6.418L4 29l7.78-1.83A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.7a9.65 9.65 0 0 1-4.928-1.35l-.353-.21-4.617 1.086 1.108-4.5-.23-.366A9.66 9.66 0 0 1 5.3 15c0-5.906 4.8-10.7 10.704-10.7 5.905 0 10.7 4.794 10.7 10.7 0 5.906-4.795 10.7-10.7 10.7Zm5.87-8.017c-.322-.161-1.903-.94-2.198-1.047-.295-.108-.51-.161-.724.161-.214.322-.83 1.047-1.018 1.262-.187.214-.375.242-.696.08-.322-.161-1.36-.501-2.591-1.598-.958-.854-1.605-1.909-1.792-2.231-.187-.322-.02-.496.141-.657.145-.144.322-.375.483-.563.161-.187.214-.322.322-.536.107-.214.053-.402-.027-.563-.08-.161-.724-1.745-.992-2.391-.261-.628-.527-.543-.724-.553l-.616-.011c-.214 0-.563.08-.858.402-.295.322-1.126 1.1-1.126 2.684 0 1.584 1.153 3.115 1.313 3.33.161.214 2.269 3.465 5.498 4.86.768.332 1.368.53 1.836.678.771.245 1.473.21 2.028.128.619-.092 1.903-.778 2.171-1.529.268-.751.268-1.395.187-1.53-.08-.134-.294-.214-.616-.375Z" />
+      </svg>
+    </a>
+  );
+}
