@@ -3,15 +3,31 @@
     {
       "target": "production",
       "source": ".",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "headers": [
         {
           "source": "**",
           "headers": [
-            { "key": "X-Content-Type-Options", "value": "nosniff" },
-            { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-            { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-            { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
           ]
         }
       ]
@@ -19,15 +35,31 @@
     {
       "target": "staging",
       "source": ".",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "headers": [
         {
           "source": "**",
           "headers": [
-            { "key": "X-Content-Type-Options", "value": "nosniff" },
-            { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-            { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-            { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
           ]
         }
       ]

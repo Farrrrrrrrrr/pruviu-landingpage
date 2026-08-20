@@ -1,0 +1,32 @@
+# Hand-written to complement the Firebase CLI's auto-generated workflows.
+# The `hosting:github` wizard only sets up one branch/site pairing per run
+# (main -> production, via firebase-hosting-merge.yml); it has no concept
+# of our two-target (production/staging) setup, so this half was missing.
+
+name: Deploy to Firebase Hosting staging on push
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile && pnpm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRUVIU_497408 }}
+          channelId: live
+          target: staging
+          projectId: pruviu-497408
