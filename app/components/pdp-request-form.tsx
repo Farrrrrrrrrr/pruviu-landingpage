@@ -11,6 +11,24 @@ const REQUEST_EMAIL = "personaldata.enquiry@pruviu.com";
  */
 const MAILTO_SAFE_LENGTH = 1900;
 
+/**
+ * Shown as a required checkbox and repeated verbatim inside the email body, so
+ * the acknowledgement travels with the request instead of living only in the
+ * browser session that produced it.
+ */
+const CONSENT_LINES = [
+  "Dengan mengirimkan email ini, saya menyatakan bahwa saya mengetahui dan",
+  "menyetujui hal-hal berikut:",
+  "1. Seluruh isi email ini, termasuk lampiran dan alamat email pengirim, akan",
+  "   dibaca, disimpan, dan diproses oleh PT Pruden Visi Utama beserta petugas",
+  "   yang berwenang menangani permintaan Subjek Data Pribadi.",
+  "2. Permintaan hak Subjek Data Pribadi pada dasarnya tidak dipungut biaya,",
+  "   namun biaya administrasi yang wajar dapat dikenakan untuk permintaan yang",
+  "   berulang, berlebihan, atau memerlukan salinan dalam jumlah besar. Besaran",
+  "   biaya tersebut akan diberitahukan lebih dahulu dan permintaan tidak akan",
+  "   diproses sebelum saya menyetujuinya.",
+];
+
 const RIGHTS: Array<{ id: string; pasal: string; nama: string }> = [
   { id: "informasi", pasal: "Pasal 5", nama: "Hak atas Informasi" },
   { id: "koreksi", pasal: "Pasal 6", nama: "Hak Melengkapi & Memperbaiki" },
@@ -104,13 +122,18 @@ function buildBody(state: FormState, selectedRights: string[]): string {
     "bahwa permintaan dapat ditolak sebagian atau seluruhnya berdasarkan Pasal 15",
     "UU PDP atau kewajiban retensi peraturan perundang-undangan.",
     "",
-    `Dikirim melalui formulir pruviu.com/laporan pada ${new Date().toLocaleDateString("id-ID", { dateStyle: "long" })}.`,
+    "",
+    "G. PERSETUJUAN PENGIRIMAN",
+    ...CONSENT_LINES,
+    "",
+    `Dikirim melalui formulir pruviu.com/laporan/permintaan pada ${new Date().toLocaleDateString("id-ID", { dateStyle: "long" })}.`,
   ].join("\n");
 }
 
 export function PdpRequestForm() {
   const [state, setState] = useState<FormState>(INITIAL_STATE);
   const [selectedRights, setSelectedRights] = useState<string[]>([]);
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [opened, setOpened] = useState(false);
 
@@ -137,6 +160,13 @@ export function PdpRequestForm() {
 
     if (selectedRights.length === 0) {
       setError("Pilih minimal satu hak yang ingin Anda ajukan pada bagian C.");
+      return;
+    }
+
+    if (!consent) {
+      setError(
+        "Mohon centang pernyataan persetujuan pengiriman sebelum melanjutkan.",
+      );
       return;
     }
 
@@ -369,6 +399,41 @@ export function PdpRequestForm() {
             identitas Anda dan permintaan akan kami tolak.
           </p>
         </div>
+
+        {/* Persetujuan pengiriman */}
+        <fieldset className="rounded-lg border-2 border-navy-600 bg-navy-50 p-4 md:p-5">
+          <legend className="px-2 text-lg font-bold text-navy-700">
+            E. Persetujuan Pengiriman
+          </legend>
+          <label className="flex gap-3 items-start cursor-pointer">
+            <input
+              id="pdp-consent"
+              type="checkbox"
+              required
+              className="mt-1 h-5 w-5 shrink-0 rounded border-gray-400 text-navy-600 focus:ring-2 focus:ring-navy-600"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+            />
+            <span className="text-sm md:text-base text-gray-700 leading-relaxed">
+              Saya mengetahui dan menyetujui bahwa{" "}
+              <strong>
+                seluruh isi email ini, termasuk lampiran dan alamat email
+                pengirim, akan dibaca, disimpan, dan diproses
+              </strong>{" "}
+              oleh PT Pruden Visi Utama beserta petugas yang berwenang menangani
+              permintaan Subjek Data Pribadi. Saya juga memahami bahwa permintaan
+              hak Subjek Data Pribadi pada dasarnya tidak dipungut biaya, namun{" "}
+              <strong>biaya administrasi yang wajar dapat dikenakan</strong>{" "}
+              untuk permintaan yang berulang, berlebihan, atau memerlukan salinan
+              dalam jumlah besar &mdash; besarannya akan diberitahukan lebih
+              dahulu dan permintaan tidak diproses sebelum saya menyetujuinya.{" "}
+              <span className="text-red-600">*</span>
+            </span>
+          </label>
+          <p className="mt-3 text-xs text-gray-600 leading-relaxed">
+            Pernyataan ini akan ikut tercantum pada isi email yang Anda kirim.
+          </p>
+        </fieldset>
 
         {error ? (
           <p

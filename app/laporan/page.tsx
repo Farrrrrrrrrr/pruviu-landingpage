@@ -285,7 +285,11 @@ export default function LaporanPage() {
                 4. Cara Mengajukan Permintaan
               </h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Permintaan hak Subjek Data Pribadi tidak dipungut biaya.
+                Permintaan hak Subjek Data Pribadi pada dasarnya tidak
+                dipungut biaya. Biaya administrasi yang wajar hanya dapat
+                dikenakan untuk permintaan yang berulang, berlebihan, atau
+                memerlukan salinan dalam jumlah besar, dan besarannya selalu
+                kami beritahukan lebih dahulu sebelum permintaan diproses.
               </p>
 
               <div className="rounded-lg border-2 border-navy-600 bg-navy-50 p-5 md:p-6 mb-8">
@@ -298,7 +302,7 @@ export default function LaporanPage() {
                   tidak mengirim data ke server kami.
                 </p>
                 <Link
-                  href="/kontak#formulir-pdp"
+                  href="/laporan/permintaan"
                   className="inline-flex items-center justify-center rounded-lg bg-navy-600 px-6 py-3 font-medium text-white shadow-md transition-colors hover:bg-navy-700"
                 >
                   Buka Formulir Permintaan

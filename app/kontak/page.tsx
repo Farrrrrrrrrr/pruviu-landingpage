@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PdpRequestForm } from "../components/pdp-request-form";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 
 const title = "Kontak";
 const description =
-  "Hubungi tim Pruviu melalui email, WhatsApp, atau call center, serta ajukan permintaan hak Subjek Data Pribadi sesuai UU Pelindungan Data Pribadi.";
+  "Hubungi tim Pruviu melalui email, WhatsApp, atau call center untuk pertanyaan seputar verifikasi kredit dan mitigasi risiko koperasi.";
 
 export const metadata: Metadata = {
   title,
@@ -122,37 +120,6 @@ export default function Kontak() {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      {/* Formulir Permintaan Hak Subjek Data Pribadi */}
-      <section
-        id="formulir-pdp"
-        className="container mx-auto px-4 md:px-6 pb-10 md:pb-20 scroll-mt-24"
-        aria-labelledby="pdp-form-title"
-      >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border-2 border-blue-100">
-            <h2
-              id="pdp-form-title"
-              className="text-2xl md:text-3xl font-bold text-navy-700 mb-3"
-            >
-              Permintaan Hak Subjek Data Pribadi
-            </h2>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              Gunakan formulir ini untuk mengajukan hak Anda berdasarkan UU No.
-              27 Tahun 2022 tentang Pelindungan Data Pribadi. Penjelasan lengkap
-              mengenai setiap hak, jangka waktu penanganan, dan batasannya
-              tersedia pada halaman{" "}
-              <Link
-                href="/laporan"
-                className="text-navy-600 underline underline-offset-2 hover:text-navy-700"
-              >
-                Laporan &amp; Hak Data Pribadi
-              </Link>
-              .
-            </p>
-            <PdpRequestForm />
           </div>
         </div>
       </section>
