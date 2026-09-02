@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/kontak", priority: 0.7, changeFrequency: "monthly" },
     { path: "/tentang-kami", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/laporan", priority: 0.5, changeFrequency: "yearly" },
     { path: "/privacy-policy", priority: 0.4, changeFrequency: "yearly" },
   ];
 

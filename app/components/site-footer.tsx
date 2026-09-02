@@ -5,7 +5,7 @@ type SiteFooterProps = {
   complaintHref?: string;
 };
 
-export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) {
+export function SiteFooter({ complaintHref = "/laporan" }: SiteFooterProps) {
   return (
     <footer className="bg-navy-700 text-white/80 py-8 md:py-12">
       <div className="container mx-auto px-4 md:px-6">
@@ -78,7 +78,7 @@ export function SiteFooter({ complaintHref = "/#compliance" }: SiteFooterProps) 
               </li>
               <li>
                 <Link href={complaintHref} className="hover:text-white transition-colors text-sm md:text-base">
-                  Pengaduan
+                  Pengaduan &amp; Hak Data
                 </Link>
               </li>
               <li>
