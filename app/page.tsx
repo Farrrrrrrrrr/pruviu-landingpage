@@ -398,7 +398,7 @@ export default function Home() {
     {
       name: "Telco Score",
       description:
-        "Mengecek skor kelayakan kredit calon anggota/debitur berdasarkan nomor telepon dan data telekommunikasi 3 provider utama di Indonesia (Telkosel, Indosat, XL).",
+        "Mengecek skor kelayakan kredit calon anggota/debitur berdasarkan nomor telepon dan data telekommunikasi 3 provider utama di Indonesia (Telkomsel, Indosat, XL).",
       icon: (
         <svg
           className="h-2/3 w-2/3"
